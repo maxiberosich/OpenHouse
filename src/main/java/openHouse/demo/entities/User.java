@@ -1,4 +1,3 @@
-
 package openHouse.demo.entities;
 
 
