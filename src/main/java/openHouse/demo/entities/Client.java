@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Data
 
 public class Client extends User {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -26,7 +26,7 @@ public class Client extends User {
     @ManyToOne
     private Reservation reservaActiva;
     
-    
+
     @ManyToOne
     private List<Property> propiedades;
 }

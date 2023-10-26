@@ -1,11 +1,26 @@
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Data
 public class Comment {
 
     @Id
-    private String Id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
+    private String cuerpo;
+    private Double valoracion;
+    @OneToMany
+    private Image imagen;
+    @ManyToOne
+    private Property propiedad;
+
 }
