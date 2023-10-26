@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +28,12 @@ public abstract class User {
     private String password;
     private String Dni;
     private String phone;
+    
+    private String email;
+    
+    @Temporal(TemporalType.DATE)
     private Date birthdate;
+    
     private boolean state;
     
     @OneToOne
