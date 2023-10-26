@@ -1,16 +1,15 @@
-
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import openHouse.demo.Enum.Rol;
+import openHouse.demo.enums.Rol;
+
 import org.hibernate.annotations.GenericGenerator;
-
-
 
 @Entity
 @Data
@@ -29,6 +28,8 @@ public abstract class User {
     private String phone;
     private Date birthdate;
     private boolean state;
+    
+    @OneToOne
     private Image image;
 
 }
