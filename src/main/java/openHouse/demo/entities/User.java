@@ -8,7 +8,8 @@ import jakarta.persistence.OneToOne;
 import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import openHouse.demo.Enum.Rol;
+import openHouse.demo.enums.Rol;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
