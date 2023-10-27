@@ -7,10 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Admin extends User {
-
-    @Id
-    private String Id;
 
 }
