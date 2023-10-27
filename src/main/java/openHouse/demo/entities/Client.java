@@ -11,7 +11,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
-
 public class Client extends User {
 
     @Id
