@@ -7,6 +7,7 @@ import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Image;
 import openHouse.demo.entities.Property;
 import openHouse.demo.enums.Rol;
+import openHouse.demo.exception.MiException;
 import openHouse.demo.repositories.ClientRepository;
 import openHouse.demo.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ClientService {
     
     @Transactional
     public void createClient(String name, String password, String password2, String email, String dni, String phone,
-            Date birthdate,MultipartFile archivo){
+            Date birthdate,MultipartFile archivo) throws MiException {
         
         Client cliente = new Client();
         
