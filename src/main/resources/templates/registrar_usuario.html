@@ -1,0 +1,38 @@
+
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Registrar Usuario</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href = "https://bootswatch.com/5/minty/bootstrap.min.css " />
+    </head>
+    <body>
+        <nav th:replace="/fragments/NavBar :: nav"></nav>
+
+
+
+        <form th:action="@{/registro}" method="POST">
+
+            <h1>Formulario de registro</h1>
+            <lebel for="email "> Correo Electronico:</lebel>
+            <input type="email" id="email" name="email" placeholder="Ingrese email" required=><br> 
+            <small id="emailHelp" class="form-text text-muted" style="align-items: center" >We'll never share your email with anyone else.</small>
+
+            <lebel for="nombre"required=><br><br> Nombre:</lebel>
+            <input type="text" id="nombre" name="nombre"  placeholder="Nombre y Apellido" required=><br><br>
+
+            <lebel for="contrasena">Contraseña:</lebel>
+            <input type="password" id="contrasena" name="contrasena"  placeholder="Contraseña" required=><br><br>
+
+            <lebel for="contrasena">Confirmar Contraseña:</lebel>
+            <input type="password" id="contrasena" placeholder="Repetir Contraseña"  name="contrasena" required=><br><br>
+
+            <button type="submit" class="btn btn-primary text-black">Registrarse</button>
+            <a href="/" type="submit" class="btn btn-danger text-black">Cancelar</a>
+
+        </form>
+
+
+
+    </body>
+</html>
