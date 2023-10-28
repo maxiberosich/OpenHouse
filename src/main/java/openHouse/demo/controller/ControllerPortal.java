@@ -10,6 +10,6 @@ public class ControllerPortal {
     
     @GetMapping("/")
     public String inicio(){
-        return "index.html";
+        return "inicio.html";
     }
 }
