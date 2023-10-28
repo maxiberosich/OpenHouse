@@ -28,7 +28,7 @@ public class ControllerPortal {
 
     @GetMapping("/")
     public String inicio() {
-        return "index.html";
+        return "ingresar.html";
     }
 
     @GetMapping("/registrarCliente")

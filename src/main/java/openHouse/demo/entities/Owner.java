@@ -1,26 +1,41 @@
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Data
-
 public class Owner extends User{
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String Id;
-    
     private String cbu;
     
-    @ManyToOne
+    @OneToMany
     private List<Property> propiedades;
+
+    public Owner() {
+        super();
+    }
+
+    public String getCbu() {
+        return cbu;
+    }
+
+    public void setCbu(String cbu) {
+        this.cbu = cbu;
+    }
+
+    public List<Property> getPropiedades() {
+        return propiedades;
+    }
+
+    public void setPropiedades(List<Property> propiedades) {
+        this.propiedades = propiedades;
+    }
+
+    @Override
+    public String toString() {
+        return "Owner{" + "cbu=" + cbu + ", propiedades=" + propiedades + '}';
+    }
     
 }

@@ -4,9 +4,10 @@ import openHouse.demo.entities.Property;
 import openHouse.demo.exception.MiException;
 import openHouse.demo.repositories.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Service
 public class PropertyService {
     
     @Autowired

@@ -12,6 +12,6 @@ public interface OwnerRepository extends JpaRepository<Owner, String> {
     @Query("SELECT e FROM Owner e WHERE e.email = :email")
     public Owner buscarPorEmail (@Param("email" )String email);
     
-    @Query("SELECT e FROM Owner e WHERE e.nombre = :nombre")
-    public Owner buscarPorNombre (@Param("nombre") String nombre); 
+    @Query("SELECT e FROM Owner e WHERE e.name = :name")
+    public Owner buscarPorNombre (@Param("name") String name); 
 }
