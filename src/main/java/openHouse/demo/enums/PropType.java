@@ -4,10 +4,6 @@
  */
 package openHouse.demo.enums;
 
-/**
- *
- * @author USUARIO
- */
 public enum PropType {
-    
+    CASA, QUINTA, QUINCHO
 }
