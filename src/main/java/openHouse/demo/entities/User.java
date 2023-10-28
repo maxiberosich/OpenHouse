@@ -1,6 +1,8 @@
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -8,22 +10,22 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import openHouse.demo.enums.Rol;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
-@NoArgsConstructor
-public abstract class User {
+public class User {
     
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
     
+    @Enumerated(EnumType.STRING)
     private Rol rol;
+    
     private String name;
     private String password;
     private String Dni;

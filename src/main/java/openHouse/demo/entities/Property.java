@@ -25,15 +25,16 @@ public class Property {
 
     @OneToOne
     private Prestation prestaciones;
-    @OneToOne
-    private List<Image> imagenes;
     @OneToMany
+    private List<Image> imagenes;
+    
+    @ManyToOne
     private Owner propietario;
     
     @Enumerated(EnumType.STRING)
     private City ciudad;
 
-    @ManyToOne
+    @OneToMany
     private List<Comment> comentarios;
 
     @Enumerated(EnumType.STRING)
@@ -45,7 +46,6 @@ public class Property {
     private String descripcion;
     private Double valoracion;
     private Boolean alta;
-    
     
     //CALENDARIO
     //@Temporal(TemporalType.DATE)
