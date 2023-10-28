@@ -3,8 +3,7 @@ package openHouse.demo.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,9 +17,11 @@ public class Comment {
     private String id;
     private String cuerpo;
     private Double valoracion;
-    @OneToMany
+    
+    @OneToOne
     private Image imagen;
-    @ManyToOne
+    
+    @OneToOne
     private Property propiedad;
 
 }
