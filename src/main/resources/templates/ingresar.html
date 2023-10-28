@@ -1,38 +1,83 @@
 
 <html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Registrar Usuario</title>
+        <title>Ingresar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href = "https://bootswatch.com/5/minty/bootstrap.min.css " />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="../static/registrostyle.css">
     </head>
     <body>
         <nav th:replace="/fragments/NavBar :: nav"></nav>
 
+        <div class="container-form sign-up">
+            <div class="welcome-back">
+                <div class="message">
+                    <h2>Bienvenido a Open-House</h2>
+                    <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
+                    <button class="sign-up-btn">Iniciar Sesion</button>
+                </div>
+            </div>
 
+            <form class="formulario"  th:action="@{/registro}" method="POST">
+                <h2 class="create-account">Crear una cuenta</h2>
 
-        <form th:action="@{/registro}" method="POST">
+                <div class="iconos">
+                    <div class="border-icon">
+                        <i class='bx bxl-instagram'></i>
+                    </div>
+                    <div class="border-icon">
+                        <i class='bx bxl-linkedin' ></i>
+                    </div>
+                    <div class="border-icon">
+                        <i class='bx bxl-facebook-circle' ></i>
+                    </div>
+                </div>
 
-            <h1>Formulario de registro</h1>
-            <lebel for="email "> Correo Electronico:</lebel>
-            <input type="email" id="email" name="email" placeholder="Ingrese email" required=><br> 
-            <small id="emailHelp" class="form-text text-muted" style="align-items: center" >We'll never share your email with anyone else.</small>
+                <p class="cuenta-gratis">Crear una cuenta gratis</p>
+                <input type="text" placeholder="Nombre">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Contraseña">
+                <input type="button" value="Registrarse">
+            </form>
+        </div>
 
-            <lebel for="nombre"required=><br><br> Nombre:</lebel>
-            <input type="text" id="nombre" name="nombre"  placeholder="Nombre y Apellido" required=><br><br>
+        <div class="container-form sign-in">
+            <form class="formulario"  th:action="@{/login}" method="POST">
+                <h2 class="create-account">Iniciar Sesion</h2>
+                <div class="iconos">
 
-            <lebel for="contrasena">Contraseña:</lebel>
-            <input type="password" id="contrasena" name="contrasena"  placeholder="Contraseña" required=><br><br>
+                    <div class="border-icon">
+                        <i class='bx bxl-instagram'></i>
+                    </div>
 
-            <lebel for="contrasena">Confirmar Contraseña:</lebel>
-            <input type="password" id="contrasena" placeholder="Repetir Contraseña"  name="contrasena" required=><br><br>
+                    <div class="border-icon">
+                        <i class='bx bxl-linkedin' ></i>
+                    </div>
 
-            <button type="submit" class="btn btn-primary text-black">Registrarse</button>
-            <a href="/" type="submit" class="btn btn-danger text-black">Cancelar</a>
+                    <div class="border-icon">
+                        <i class='bx bxl-facebook-circle' ></i>
+                    </div>
+                </div>
 
-        </form>
+                <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p>
+                <input type="email"  th:value="${email}" placeholder="Email">
+                <input type="password" th:value="${password}" placeholder="Contraseña" >
+                <input type="button" value="Iniciar Sesion">
+            </form>
 
+            <div class="welcome-back">
+                <div class="message">
+                    <h2>Bienvenido de nuevo</h2>
+                    <p>Si aun no tienes una cuenta por favor registrese aqui</p>
+                    <button class="sign-in-btn">Registrarse</button>
+                </div>
+            </div>
+        </div>
 
-
+        <script src="script.js"></script>
     </body>
 </html>
