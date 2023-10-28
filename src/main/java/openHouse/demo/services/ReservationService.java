@@ -24,7 +24,7 @@ public class ReservationService {
     public void crearReservacion(Date fechaInicio, Date fechaFin, Client cliente,
     Double precioFinal, Integer cantPersonas, Property propiedad ) throws MiException{
         //validar
-        
+                
         Reservation reservation = new Reservation();
         
         
@@ -36,10 +36,9 @@ public class ReservationService {
         reservation.setPropiedad(propiedad);
         
         
-        
-        
+            
     }
-    
+     
     //que no sea nulo el id de cliente ni de propiedad
     public void Validar( Date fechaInicio, Date fechaFin, Client cliente,
     Double precioFinal, Integer cantPersonas, Property propiedad ) throws MiException{
@@ -48,8 +47,8 @@ public class ReservationService {
         }
         if (fechaFin == null) {
             throw new MiException("Seleccione una fecha de fin de la reserva");
-        }
-        if (fechaInicio == null) {
+        }  
+         if (fechaInicio == null) {
             throw new MiException("Seleccione una fecha de inicio");
         }
         if (cantPersonas == null || cantPersonas == 0) {
