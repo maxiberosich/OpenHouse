@@ -1,6 +1,8 @@
 package openHouse.demo.services;
 
 import openHouse.demo.entities.Property;
+import openHouse.demo.enums.City;
+import openHouse.demo.enums.PropType;
 import openHouse.demo.exception.MiException;
 import openHouse.demo.repositories.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,8 @@ public class PropertyService {
         propiedad.setDescripcion(descripcion);
         propiedad.setDireccion(direccion);
         propiedad.setAlta(Boolean.TRUE);
+        propiedad.setCiudad(City.CORDOBA);
+        propiedad.setTipo(PropType.CASA);
         //propiedad.setPrestaciones(prestaciones);
         //propiedad.setPropietario(propietario);
         //me falta cargar el roll city;

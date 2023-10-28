@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.util.List;
 import lombok.Data;
 import openHouse.demo.enums.City;
@@ -16,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
+@Table(name = "propiedad")
 public class Property {
 
     @Id
@@ -25,6 +27,7 @@ public class Property {
 
     @OneToOne
     private Prestation prestaciones;
+    
     @OneToMany
     private List<Image> imagenes;
     
