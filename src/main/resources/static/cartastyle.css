@@ -1,0 +1,61 @@
+.parrafo{
+    padding: 0%;
+}
+
+.container{
+    background-color: transparent;
+}
+.card-body{
+    background: aliceblue;
+}
+.no-subrayado{
+    text-decoration: none;
+    color: black;
+}
+.comment {
+    display: none; /* Oculta el comentario por defecto */
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    max-width: 80%; /* Ancho máximo del comentario */
+    z-index: 1; /* Para que el comentario esté por encima del contenido */
+}
+
+.cell-with-comment:hover .comment {
+    display: block; /* Muestra el comentario al pasar el mouse sobre la celda */
+}
+
+.carta{
+    border-end-end-radius: 10%;
+    border-end-start-radius:10% ; /* Ajusta el valor según el radio de curvatura deseado */
+    background-color: whitesmoke; /* Cambia el color de fondo según tus preferencias */
+    padding: 20px; /* Añade relleno (padding) para el contenido del cuadro */
+    width: 100%; /* Ajusta el ancho del cuadro según tus necesidades */
+    height: 100%;
+}
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.table td, .table th {
+    border: null;
+    padding: 0.5%;
+    text-align: left;
+    background-color: aliceblue;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+}
+.text-body-secondary{
+    text-align: right;
+}
+.swiper-container {
+    max-width: 100%; /* Limita el ancho del carrusel al ancho del contenedor padre */
+    overflow: hidden; /* Oculta el contenido que excede el cuadro */
+}
+.swiper-slide img {
+    max-width: 100%; /* Limita el ancho de la imagen al ancho del carrusel */
+    max-height: 100%; /* Limita la altura de la imagen a la altura del carrusel */
+    object-fit: contain; /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
+}
+
