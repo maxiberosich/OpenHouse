@@ -26,7 +26,7 @@ public class OwnerService {
     public void crearPropietario(String name, String password, String password2, String email, String dni, String phone,
             Date birthdate, String cbu, MultipartFile archivo) throws MiException {
         
-        validar(name, password, password2, email, dni, phone, birthdate);
+        validar(name, password, password2, email, dni, phone, birthdate,cbu);
         Owner propietario = new Owner();
         propietario.setName(name);
         propietario.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -48,7 +48,7 @@ public class OwnerService {
     public void modificarPropietario(String name, String password, String password2, String email, String dni, String phone,
             Date birthdate, String cbu, MultipartFile archivo, String idPropietario) throws MiException {
         
-        validar(name, password, password2, email, dni, phone, birthdate);
+        validar(name, password, password2, email, dni, phone, birthdate,cbu);
         Optional<Owner> respuesta = propietarioRepositorio.findById(idPropietario);
         
         if (respuesta.isPresent()) {
@@ -68,7 +68,7 @@ public class OwnerService {
     }
     
     public void validar(String name, String password, String password2, String email, String dni, String phone,
-            Date birthdate) throws MiException {
+            Date birthdate, String cbu) throws MiException {
         
         if (name == null) {
             throw new MiException("Por favor indicar el nombre!");
@@ -82,14 +82,23 @@ public class OwnerService {
         if (email == null) {
             throw new MiException("Por favor debe insertar un email.");
         }
-        if (dni == null) {
+        if (dni == null || dni.isEmpty()) {
             throw new MiException("Tiene que indicar el DNI, por favor.");
         }
-        if (phone == null) {
+        if (dni.length() != 8) {
+            throw new MiException("El dni debe contener 8 digitos.");
+        }
+        if (phone == null || phone.isEmpty()) {
             throw new MiException("Tiene que indicar el numero de telefono , por favor.");
+        }
+        if (phone.length() < 10) {
+            throw new MiException("El telefono debe contener al menos 10 numeros.");
         }
         if (birthdate == null) {
             throw new MiException("Por favor debe indicar su fecha de nacimiento!.");
+        }
+        if (cbu == null || cbu.isEmpty() || cbu.length() != 22) {
+            throw new MiException("El cbu debe contener 22 numeros.");
         }
     }
     

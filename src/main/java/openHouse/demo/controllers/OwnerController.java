@@ -36,6 +36,11 @@ public class OwnerController {
             return "inicio.html";
         } catch (MiException ex) {
             model.put("error", ex.getMessage());
+            model.put("name",name);
+            model.put("email",email);
+            model.put("dni",dni);
+            model.put("phone",phone);
+            model.put("cbu",cbu);
             return "registrar_propietario.html"; //completar con html para registrar propiedad
         }
     }
