@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import openHouse.demo.entities.Image;
+import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public Image save(MultipartFile file) {
+    public Image save(MultipartFile file) throws MiException {
         if (file != null) {
             try {
                 Image image = new Image();
@@ -31,7 +32,7 @@ public class ImageService {
         return null;
     }
 
-    public Image update(MultipartFile file, String idImage) {
+    public Image update(MultipartFile file, String idImage) throws MiException {
         if (file != null) {
             try {
                 Image image = new Image();

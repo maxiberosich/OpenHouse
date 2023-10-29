@@ -1,4 +1,4 @@
-package openHouse.demo.exception;
+package openHouse.demo.exceptions;
 
 public class MiException extends Exception{
 
