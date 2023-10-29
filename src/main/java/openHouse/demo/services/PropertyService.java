@@ -3,7 +3,7 @@ package openHouse.demo.services;
 import openHouse.demo.entities.Property;
 import openHouse.demo.enums.City;
 import openHouse.demo.enums.PropType;
-import openHouse.demo.exception.MiException;
+import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

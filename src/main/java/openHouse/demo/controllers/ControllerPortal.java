@@ -3,7 +3,7 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import openHouse.demo.entities.User;
-import openHouse.demo.exception.MiException;
+import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.ClientService;
 import openHouse.demo.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class ControllerPortal {
     @PostMapping("/registroCliente")
     public String registroCliente(@RequestParam String name, @RequestParam String password, String password2,
             @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
-            @RequestParam Date birthdate, MultipartFile archivo, ModelMap model) {
+            @RequestParam Date birthdate, MultipartFile archivo, ModelMap model)  {
         try {
 
             clientService.createClient(name, password, password2, email, dni, phone, birthdate, archivo);
@@ -68,7 +68,7 @@ public class ControllerPortal {
             return "index.html";
         } catch (MiException ex) {
             model.put("error", ex.getMessage());
-            return ""; //completar con html para registrar propiedad
+            return "inicio.html"; //completar con html para registrar propiedad
         }
     }
     
