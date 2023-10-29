@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class ControllerPortal {
     
-    @GetMapping("/")
+    @GetMapping("/inicio")
     public String inicio(){
         return "inicio.html";
     }
