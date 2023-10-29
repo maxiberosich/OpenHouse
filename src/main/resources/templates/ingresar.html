@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-    <div th:replace="/fragments/head :: div"></div>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -10,14 +12,15 @@
     <link rel="stylesheet" href="/registrostyle.css">
 </head>
     <body>
-        <!--<nav th:replace="/fragments/NavBar :: nav"></nav>-->
+        <!--Lo usamos sin navbar, mas vale le agregamos un boton de volver</nav>-->
 
         <div class="container-form sign-up">
             <div class="welcome-back">
                 <div class="message">
                     <h2>Bienvenido a Open-House</h2>
                     <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
-                    <button class="sign-up-btn">Iniciar Sesion</button>
+                    <a th:href="@{/registrarCliente}"><button class="sign-up-btn">Alquilar</button></a>
+                    <a th:href="@{/registrarPropietario}"><button class="sign-up-btn">Propietario</button></a>
                 </div>
             </div>
 
@@ -76,6 +79,10 @@
                 </div>
             </div>
         </div>
+        
+           
+                    <a th:href="@{/}"><button class="sign-in-btn">Volver</button></a>
+            
 
         <script src="script.js"></script>
     </body>
