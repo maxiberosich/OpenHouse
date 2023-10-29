@@ -31,7 +31,7 @@ public class ClientService {
         validate(name, password, password2, email, dni, phone);
 
         Client cliente = new Client();
-
+        
         cliente.setRol(Rol.CLIENTE);
         cliente.setName(name);
         cliente.setEmail(email);
@@ -39,9 +39,9 @@ public class ClientService {
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setDni(dni);
         cliente.setPhone(phone);
-
+        cliente.setAlta(true);
         Image imagen = imageService.save(archivo);
-
+        
         cliente.setImage(imagen);
 
         clientRepo.save(cliente);

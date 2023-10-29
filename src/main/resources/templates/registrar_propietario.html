@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  lang="es">
+  <head>
+    <title>Registro propietario</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous" />
+  </head>
+
+  <body>
+    <h1>Registro del propietario</h1>
+    <div th:replace ="/fragments/errores" > </div>
+    <div class="container mt-5">
+      <form method="POST" enctype="multipart/form-data" th:action="@{/propietario/registroPropietario}">
+        <div class="form-group">
+          <label >Nombre:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            placeholder="Ingresa el nombre del cliente"
+            required />
+        </div>
+        <div class="form-group">
+          <label >Correo Electrónico:</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            placeholder="Ingresa el correo electrónico"
+            required />
+        </div>
+        <div class="form-group">
+          <label >Contraseña:</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Contraseña"
+            required />
+        </div>
+        <div class="form-group">
+          <label >Repetir Contraseña:</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password2"
+            placeholder="Ingrese nuevamente la Contraseña"
+            required />
+        </div>
+        <div class="form-group">
+          <label >Teléfono:</label>
+          <input
+            type="tel"
+            class="form-control"
+            name="phone"
+            placeholder="Ingresa el número de teléfono"
+            required />
+        </div>
+        <div class="form-group">
+          <label >DNI:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dni"
+            placeholder="Ingresa el número de dni"
+            required />
+        </div>
+        <div class="form-group">
+          <label >Fecha de Nacimiento:</label>
+          <input type="date" class="form-control" name="birthdate" required />
+        </div>
+        <div class="form-group">
+          <label >CBU:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="cbu"
+            placeholder="Ingresa el número de CBU"
+            required />
+        </div>
+        <div class="form-group">
+          <label >Foto de perfil:</label>
+          <input
+            type="file"
+            class="form-control"
+            name="archivo"
+            placeholder="Ingresa el número de CBU"
+            required />
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </form>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+  </body>
+</html>

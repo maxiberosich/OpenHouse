@@ -36,6 +36,7 @@ public class OwnerService {
         propietario.setBirthdate(birthdate);
         propietario.setCbu(cbu);
         propietario.setRol(Rol.PROPIETARIO);
+        propietario.setAlta(Boolean.TRUE);
         Image imagen = imageService.save(archivo);
         
         propietario.setImage(imagen);

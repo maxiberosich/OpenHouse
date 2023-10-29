@@ -1,6 +1,8 @@
+
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -40,5 +42,10 @@ public abstract class User {
     
     @OneToOne
     private Image image;
+<<<<<<< HEAD
     
+=======
+
+
+>>>>>>> developer
 }
