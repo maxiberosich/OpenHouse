@@ -28,7 +28,7 @@ public class ControllerPortal {
 
     @GetMapping("/")
     public String inicio() {
-        return "index.html";
+        return "inicio.html";
     }
 
     @GetMapping("/registrarCliente")
@@ -54,7 +54,7 @@ public class ControllerPortal {
     
     @GetMapping("/registrarPropietario")
     public String registrarProp(){
-        return ""; //completar con html para registrar propiedad
+        return "registro_propietario"; //completar con html para registrar propiedad
     }
     
     @PostMapping("/registroPropietario")
@@ -79,7 +79,7 @@ public class ControllerPortal {
             modelo.put("error", "Usuario o contraseña invalidos.");
         }
         
-        return "login.html";
+        return "ingresar.html";
     }
     
     @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_PROPIETARIO') or hasRole('ROLE_ADMIN')")
