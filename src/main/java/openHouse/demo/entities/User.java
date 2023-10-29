@@ -1,24 +1,8 @@
-<<<<<<< HEAD
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
 
-/**
- *
- * @author laura
- */
-@Entity
-public class User {
-    private String nombre; 
-    
-=======
-package openHouse.demo.entities;
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -59,5 +43,5 @@ public abstract class User {
     @OneToOne
     private Image image;
 
->>>>>>> developer
+
 }

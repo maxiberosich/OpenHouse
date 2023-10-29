@@ -31,7 +31,7 @@ public class ClientService {
         validate(name, password, password2, email, dni, phone);
 
         Client cliente = new Client();
-
+        
         cliente.setRol(Rol.CLIENTE);
         cliente.setName(name);
         cliente.setEmail(email);
