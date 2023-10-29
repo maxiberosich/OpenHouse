@@ -7,7 +7,7 @@ import java.util.Optional;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Image;
 import openHouse.demo.enums.Rol;
-import openHouse.demo.exception.MiException;
+import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
