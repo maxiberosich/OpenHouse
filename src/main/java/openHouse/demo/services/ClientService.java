@@ -39,9 +39,9 @@ public class ClientService {
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setDni(dni);
         cliente.setPhone(phone);
-
+        cliente.setAlta(true);
         Image imagen = imageService.save(archivo);
-
+        
         cliente.setImage(imagen);
 
         clientRepo.save(cliente);

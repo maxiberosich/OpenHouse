@@ -17,11 +17,11 @@
 
   <body>
     <h1>Registro del cliente</h1>
-
+    <div th:replace ="/fragments/errores" > </div>
     <div class="container mt-5">
-      <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" th:action="@{/cliente/registroCliente}">
         <div class="form-group">
-          <label for="nombre">Nombre:</label>
+          <label >Nombre:</label>
           <input
             type="text"
             class="form-control"
@@ -30,7 +30,7 @@
             required />
         </div>
         <div class="form-group">
-          <label for="email">Correo Electrónico:</label>
+          <label >Correo Electrónico:</label>
           <input
             type="email"
             class="form-control"
@@ -39,7 +39,7 @@
             required />
         </div>
         <div class="form-group">
-          <label for="nombre">Contraseña:</label>
+          <label >Contraseña:</label>
           <input
             type="password"
             class="form-control"
@@ -48,7 +48,7 @@
             required />
         </div>
         <div class="form-group">
-          <label for="nombre">Repetir Contraseña:</label>
+          <label >Repetir Contraseña:</label>
           <input
             type="password"
             class="form-control"
@@ -57,16 +57,16 @@
             required />
         </div>
         <div class="form-group">
-          <label for="telefono">Teléfono:</label>
+          <label >Teléfono:</label>
           <input
             type="tel"
             class="form-control"
-            name="telefono"
+            name="phone"
             placeholder="Ingresa el número de teléfono"
             required />
         </div>
         <div class="form-group">
-          <label for="telefono">DNI:</label>
+          <label >DNI:</label>
           <input
             type="text"
             class="form-control"
@@ -75,12 +75,12 @@
             required />
         </div>
         <div class="form-group">
-          <label for="telefono">Fecha de Nacimiento:</label>
-          <input type="date" class="form-control" name="birthday" required />
+          <label >Fecha de Nacimiento:</label>
+          <input type="date" class="form-control" name="birthdate" required/>
         </div>
         
         <div class="form-group">
-          <label for="telefono">Foto de perfil:</label>
+          <label >Foto de perfil:</label>
           <input
             type="file"
             class="form-control"
