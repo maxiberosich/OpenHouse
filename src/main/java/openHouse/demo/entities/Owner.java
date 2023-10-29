@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
-import lombok.Data;
+
 
 @Entity
 @Table(name = "propietario")
