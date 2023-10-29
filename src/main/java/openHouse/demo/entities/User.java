@@ -40,5 +40,5 @@ public abstract class User {
     
     @OneToOne
     private Image image;
-
+    
 }
