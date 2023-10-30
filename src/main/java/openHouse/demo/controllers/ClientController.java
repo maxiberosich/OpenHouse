@@ -39,6 +39,10 @@ public class ClientController {
         } catch (MiException ex) {
 
             model.put("error", ex.getMessage());
+            model.put("name",name);
+            model.put("email",email);
+            model.put("dni",dni);
+            model.put("phone",phone);
             return "registrar_cliente.html";
         }
     }
