@@ -27,10 +27,6 @@ public class ControllerPortal {
         return "inicio.html";
     }
 
-    
-    
-    
-    
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
         
