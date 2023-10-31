@@ -5,5 +5,5 @@
 package openHouse.demo.enums;
 
 public enum PropType {
-    CASA, QUINTA, QUINCHO
+    CASA, QUINTA, QUINCHO;
 }

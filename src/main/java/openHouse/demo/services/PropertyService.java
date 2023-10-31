@@ -1,5 +1,9 @@
 package openHouse.demo.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+import java.util.Optional;
 import openHouse.demo.entities.Property;
 import openHouse.demo.enums.City;
 import openHouse.demo.enums.PropType;
@@ -25,8 +29,8 @@ public class PropertyService {
     */
     
     @Transactional
-    public void crearProperty(String idPrestaciones, String idImagenes,String idPropietario,String idComentario,Double precioBase,
-            String codigoPostal,String direccion,String descripcion , Double valoracion) throws MiException{
+    public void crearProperty(Double precioBase,
+            String codigoPostal,String direccion,String descripcion) throws MiException{
         
         validar(precioBase, codigoPostal, direccion, descripcion);
         //Owner propietario =owerRepositoryfindById(idPropietario).get();
@@ -44,7 +48,15 @@ public class PropertyService {
         //propiedad.setPropietario(propietario);
         //me falta cargar el roll city;
         //prototype
+        propertyRepository.save(propiedad);
         
+    }
+    
+    @Transactional
+    public List<Property> buscarPorCodigoPostal(String cp){
+        List<Property> propiedades = new ArrayList<>();
+        propiedades = propertyRepository.buscarPorCodigoPostal(cp);
+        return propiedades;
     }
          
     
@@ -67,5 +79,41 @@ public class PropertyService {
        
     }
     
+    public void bajaPropiedad(String id){
+        Optional<Property> respuesta=propertyRepository.findById(id);
+        if (respuesta.isPresent()) {
+            Property propiedad=respuesta.get();
+            propiedad.setAlta(Boolean.FALSE);
+        }
+    }
+    
+    public void eliminarPropiedad(String id){
+        Optional<Property> respuesta=propertyRepository.findById(id);
+        if (respuesta.isPresent()) {
+            Property propiedad=respuesta.get();
+            propertyRepository.delete(propiedad);
+        }
+    }
+    
+    public Property getOne(String id){
+        return propertyRepository.getById(id);
+    }
    
+    public List<Property> listaPropietarios(){
+        List<Property> listaPropiedades=new ArrayList();
+        listaPropiedades= propertyRepository.findAll();
+        return listaPropiedades;
+    }
+    ///revisar el calulo de los date!
+    public Double precio(Date alta,Date baja, String id){
+        Optional<Property> respuesta = propertyRepository.findById(id);
+        if (respuesta.isPresent()) {
+            Property propiedad=new Property();
+            //faltaria poner precios individuales a la lista de prestaciones 
+            Double precio= propiedad.getPrecioBase();
+            //calcular los dias x precio !!!!
+           return precio;
+        }
+        return null;
+    }
 }
