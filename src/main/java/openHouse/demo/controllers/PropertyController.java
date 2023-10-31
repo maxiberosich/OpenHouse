@@ -26,9 +26,20 @@ public class PropertyController {
     
     @GetMapping("/buscarPorCiudad")
     public String buscarPorCiudad(@RequestParam String ciudad, ModelMap modelo){
+        
         List<Property> propiedadesCiudad = propertyService.buscarPorCiudad(ciudad);
         
         modelo.addAttribute("propiedadesCiudad", propiedadesCiudad);
+        
+        return "busqueda.html";
+    }
+    
+    @GetMapping("/buscarSegunPrecio")
+    public String buscarSegunPrecio(@RequestParam String minimo, String maximo, ModelMap modelo){
+        
+        List<Property> propiedadesSegunPrecio = propertyService.buscarSegunPrecio(minimo, maximo);
+        
+        modelo.addAttribute("propiedadesSegunPrecio", propiedadesSegunPrecio);
         
         return "busqueda.html";
     }
