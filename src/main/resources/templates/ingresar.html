@@ -1,59 +1,112 @@
+
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Ingresa a tu Cuenta</title>
+        <title>Registrar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="/registrostyle.css">
+        <link rel="stylesheet" href="/registroStyle.css">
     </head>
     <body>
-        <!--Lo usamos sin navbar, mas vale le agregamos un boton de volver</nav>-->
+
 
         <div class="container-form sign-up">
             <div class="welcome-back">
                 <div class="message">
                     <h2>Bienvenido a Open-House</h2>
-                    <p>Registrate para poder hacer tus reservas o publicar tus propiedades!</p>
-                    <a th:href="@{/cliente/registrarCliente}"><button class="sign-up-btn">Cliente</button></a>
-                    <a th:href="@{/propietario/registrarPropietario}"><button class="sign-up-btn">Propietario</button></a>
+                    <p>Si eres Locador registrate aqui</p>
+                    <button class="sign-up-btn">Registrar Locador</button>
                 </div>
             </div>
 
-            <form class="formulario"  th:action="@{/logincheck}" method="POST">
-                <h2 class="create-account">Ingresa a tu cuenta</h2>
+            <div class="container">
+                <form class="formulario"  method="POST" enctype="multipart/form-data" th:action="@{/cliente/registroCliente}">
+                    <h2 class="create-account">Crear una cuenta</h2>
+
+                    <div class="iconos">
+                        <div class="border-icon">
+                            <a href="https://www.instagram.com" target="_blank">
+                                <i class='bx bxl-instagram'></i>    
+                            </a>
+                        </div>
+                        <div class="border-icon">
+                            <a href="https://www.linkedin.com" target="_blank">
+                                <i class='bx bxl-linkedin' ></i>
+                            </a>
+                        </div>
+                        <div class="border-icon">
+                            <a href="https://www.facebook.com" target="_blank">
+                                <i class='bx bxl-facebook-circle' ></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <p class="cuenta-gratis">Crear una cuenta gratis</p>
+                    <input class="color-input"   name="name" type="text" placeholder="Nombre">
+                    <input type="email"  name="email" placeholder="Email">
+                    <input type="password"  name="password" placeholder="Contraseña">
+                    <input type="password"  name="password2" placeholder="Repita Contraseña">
+                    <input type="text" name="dni" placeholder="DNI">
+                    <input type="text" name="phone" placeholder="Celular">
+                    <input type="date" id="birthday" name="birthdate" placeholder="Fecha de nacimiento">
+                    <input type="file" name="archivo" placeholder="Cargar archivo">
+                    <input class="formulario input" type="submit" value="Registrarse">
+
+                </form>
+            </div>
+        </div>
+
+        <div class="container-form sign-in">
+            <form class="formulario"  method="POST" enctype="multipart/form-data" th:action="@{/propietario/registroPropietario}">
+                <h2 class="create-account">Crear una cuenta</h2>
 
                 <div class="iconos">
                     <div class="border-icon">
-                        <i class='bx bxl-instagram'></i>
+                        <a href="https://www.instagram.com" target="_blank">
+                            <i class='bx bxl-instagram'></i>    
+                        </a>
                     </div>
                     <div class="border-icon">
-                        <i class='bx bxl-linkedin' ></i>
+                        <a href="https://www.linkedin.com" target="_blank">
+                            <i class='bx bxl-linkedin' ></i>
+                        </a>
                     </div>
                     <div class="border-icon">
-                        <i class='bx bxl-facebook-circle' ></i>
+                        <a href="https://www.facebook.com" target="_blank">
+                            <i class='bx bxl-facebook-circle' ></i>
+                        </a>
                     </div>
                 </div>
-                <br>
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Contraseña">
-                <button type="submit" class="btn btn-primary mt-3 botones">Ingresar!</button>
-            </form>
-        </div>
 
-        <section class=" text-center container">
-            <div class="row mt-3">
-                <div class="divVolver">
-                    <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                <p class="cuenta-gratis">Crear una cuenta Locador</p>
+                <input class="color-input"   name="name" type="text" placeholder="Nombre">
+                <input type="email"  name="email" placeholder="Email">
+                <input type="password"  name="password" placeholder="Contraseña">
+                <input type="password"  name="password2" placeholder="Repita Contraseña">
+                <input type="text" name="cbu" placeholder="CBU">
+                <input type="text" name="dni" placeholder="DNI">
+                <input type="text" name="phone" placeholder="Celular">
+                <input type="date" id="birthday" name="birthdate" placeholder="Fecha de nacimiento">
+                <input type="file" name="archivo" placeholder="Cargar archivo">
+                <input class="formulario input" type="submit" value="Registrarse">
+
+            </form>
+            
+            
+            <div class="welcome-back">
+                <div class="message">
+                    <h2>Bienvenido a Open-House</h2>
+                    <p>Registrarse como Cliente</p>
+                    <button class="sign-in-btn">Registrarse</button>
                 </div>
             </div>
-        </section>
+        </div>
 
-
-        <script src="script.js"></script>
+        <script src="/script.js"></script>
     </body>
 
 </html>
