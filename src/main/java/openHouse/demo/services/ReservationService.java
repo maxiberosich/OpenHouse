@@ -65,6 +65,8 @@ public class ReservationService {
         Double precioFinal=precio(fechaFin, fechaFin, idPropiedad);
         reservation.setPrecioFinal(precioFinal);
         reservation.setCliente(clientService.getOne(cliente.getId()));
+        
+        reservationRepository.save(reservation);
     }
      
     //que no sea nulo el id de cliente ni de propiedad
