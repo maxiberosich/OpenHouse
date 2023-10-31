@@ -71,11 +71,28 @@ public class PropertyService {
         propiedades = propertyRepository.buscarPorCodigoPostal(cp);
         return propiedades;
     }
-
-    public void validar(Double precioBase,
-            String codigoPostal, String direccion, String descripcion) throws MiException {
-
-        if (precioBase == null) {
+    
+    @Transactional
+    public List<Property> buscarPorCiudad(String ciudad){
+        List<Property> propiedadesCiudad = new ArrayList();
+        propiedadesCiudad = propertyRepository.buscarPorCiudad(ciudad);
+        return propiedadesCiudad;
+    }
+    
+    @Transactional
+    public List<Property> buscarSegunPrecio(String precioMinimo, String precioMaximo){
+        List<Property> propiedadesSegunPrecio = new ArrayList();
+        
+        propiedadesSegunPrecio = propertyRepository.buscarSegunPrecio(precioMinimo, precioMaximo);
+        
+        return propiedadesSegunPrecio;
+    }
+         
+    public void validar (Double precioBase,
+            String codigoPostal,String direccion,String descripcion ) throws MiException{
+       
+        
+        if (precioBase==null) {
             throw new MiException("Por favor indicar el precio base por noche!Se podra modificar mas adelante !");
         }
         if (codigoPostal == null) {

@@ -25,7 +25,7 @@ public class OwnerService {
     private ImageService imageService;
     
     @Transactional
-    public void crearPropietario(String name, String password, String password2, String email, String dni, String phone,
+    public  Owner crearPropietario(String name, String password, String password2, String email, String dni, String phone,
             Date birthdate, String cbu, MultipartFile archivo) throws MiException {
         
         validar(name, password, password2, email, dni, phone, birthdate,cbu);
@@ -43,7 +43,7 @@ public class OwnerService {
         
         propietario.setImage(imagen);
         
-        propietarioRepositorio.save(propietario);
+        return propietarioRepositorio.save(propietario);
     }
     
     @Transactional
