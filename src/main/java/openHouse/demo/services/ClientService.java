@@ -93,7 +93,24 @@ public class ClientService {
         clientes = clientRepo.findAll();
         return clientes;
     }
-
+    
+    public void elimnarClient(String id){
+        Optional<Client> respuesta =clientRepo.findById(id);
+        
+        if (respuesta.isPresent()) {
+            Client cliente = respuesta.get();
+            clientRepo.delete(cliente);
+        }
+    }
+    
+    public void bajaCliente (String id){
+        Optional<Client> respuesta =clientRepo.findById(id);
+        
+        if (respuesta.isPresent()) {
+            Client cliente = respuesta.get();
+            cliente.setAlta(Boolean.FALSE);
+        }
+    }
     public void validate(String name, String password, String password2, String email, String dni, String phone, Date birthdate)
             throws MiException {
         if (name.isEmpty() || name == null) {
