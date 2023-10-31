@@ -13,4 +13,7 @@ public interface PropertyRepository extends JpaRepository<Property, String> {
     @Query("SELECT p FROM Property p WHERE p.codigoPostal = :codigoPostal")
     public List<Property> buscarPorCodigoPostal(@Param("codigoPostal") String codigoPostal);
     
+    @Query("SELECT p FROM Property p WHERE p.ciudad LIKE '%:ciudad%'")
+    public List<Property> buscarPorCiudad(@Param("ciudad") String ciudad);
+    
 }
