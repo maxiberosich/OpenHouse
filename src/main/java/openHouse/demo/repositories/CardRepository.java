@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CardRepository extends JpaRepository<Card, String> {
 
-    @Query("SELECT c FROM Card c WHERE c.number = :number")
+    @Query("SELECT c FROM Card c WHERE c.numero = :number")
     public Card buscarPorNumTarjeta(@Param("number") Integer number);
 
 }
