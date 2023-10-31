@@ -35,7 +35,7 @@
               <a class="nav-link" th:href="@{/login}" th:if="${session.usersession == null}">Iniciar sesion</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/login}" th:if="${session.usersession == null}">Crear cuenta</a>
+              <a class="nav-link" th:href="@{/ingresar}" th:if="${session.usersession == null}">Crear cuenta</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout" th:if="${session.usersession != null}" >Cerrar Sesión</a>
