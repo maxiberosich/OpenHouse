@@ -23,4 +23,7 @@ public interface PropertyRepository extends JpaRepository<Property, String> {
 //    @Query("SELECT p FROM Property p WHERE p.alta = :alta")
 //    public List<Property> buscarPorDisponibilidad(@Param("alta") Boolean alta);
 
+    @Query("SELECT p FROM Property p WHERE p.precioBase BETWEEN :minimo AND :maximo")
+    public List<Property> buscarSegunPrecio(@Param("minimo") String minimo, @Param("maximo") String maximo);
+    
 }
