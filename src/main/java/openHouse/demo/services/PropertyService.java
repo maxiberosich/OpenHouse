@@ -58,8 +58,14 @@ public class PropertyService {
         propiedades = propertyRepository.buscarPorCodigoPostal(cp);
         return propiedades;
     }
-         
     
+    @Transactional
+    public List<Property> buscarPorCiudad(String ciudad){
+        List<Property> propiedadesCiudad = new ArrayList();
+        propiedadesCiudad = propertyRepository.buscarPorCiudad(ciudad);
+        return propiedadesCiudad;
+    }
+         
     public void validar (Double precioBase,
             String codigoPostal,String direccion,String descripcion ) throws MiException{
        

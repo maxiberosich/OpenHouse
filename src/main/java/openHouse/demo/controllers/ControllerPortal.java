@@ -64,11 +64,4 @@ public class ControllerPortal {
         
         return "inicio.html";
     }
-    
-    @GetMapping("/buscar")
-    public String buscar(@RequestParam String codigoPostal, ModelMap modelo){
-        List<Property> propiedadesCP = propertyService.buscarPorCodigoPostal(codigoPostal);
-        modelo.addAttribute("propiedadesCP",propiedadesCP);
-        return "busqueda.html";
-    }
 }
