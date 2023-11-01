@@ -10,20 +10,36 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             lang="es"></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="/modificar_cliente.css">
     </head>
     <body>
-        <div>
-            <p class="cuenta-gratis">Modificar Usuario</p>
-            <input class="color-input"   name="name" type="text" placeholder="Nombre">
-            <input type="email"  name="email" placeholder="Email">
-            <input type="password"  name="password" placeholder="Contraseña">
-            <input type="password"  name="password2" placeholder="Repita Contraseña">
-            <input type="text" name="dni" placeholder="DNI">
-            <input type="text" name="phone" placeholder="Celular">
-            <input type="date" id="birthday" name="birthdate" placeholder="Fecha de nacimiento">
-            <input type="file" name="archivo" placeholder="Cargar archivo">
-            <input class="formulario input" type="submit" value="Registrarse">
-
-        </div>
+        <div class="form-container">
+        <h1>Modificar Cliente</h1>
+        <form action="procesar_modificacion_cliente.php" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar Cambios">
+            </div>
+        </form>
+    </div>
     </body>
 </html>
