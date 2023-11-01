@@ -3,28 +3,23 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-
 }
-html{
-    height: 100%;
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-image: url(img/fondoplaya.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
 }
-body {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-
-}
 
 .container-form {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90vh;
     display: flex;
     justify-content: space-around;
     transition:  all .5s ease-out;
@@ -72,7 +67,7 @@ body {
 }
 
 .create-account {
-    padding: 2rem;
+    padding: 2.7rem 0;
     font-size: 1.7rem;
 }
 
@@ -111,7 +106,7 @@ body {
     margin: auto;
     margin-bottom: 2rem;
     background-color: transparent;
-    border:  #ac2f2f;
+    border: none;
     border-bottom: white thin solid;
     text-align: center;
     outline: none;
@@ -120,16 +115,15 @@ body {
     color: white;
 }
 
-.formulario input[type="submit"],[type="button"] {
-    
+.formulario input[type="button"] {
     width: 60%;
     margin: auto;
-    border: solid thin #4a4aee;
+    border: solid thin white;
     padding: .7rem;
     border-radius: 2rem;
     background-color: white;
     font-weight: 600;
-    margin-top: 1rem;
+    margin-top: 3rem;
     font-size: .8rem;
     cursor: pointer;
     color: #222;
@@ -149,9 +143,4 @@ body {
 .sign-up.active {
     opacity: 0;
     visibility: hidden;
-}
-
-.color-input{
-   color: red!important;
-   font-weight: 600;
 }
