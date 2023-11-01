@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="/registroStyle.css">
     </head>
     <body>
-        <form class="formulario"  th:action="@{/login}" method="POST">
+        <form class="formulario"  th:action="@{/logincheck}" method="POST">
             <h2 class="create-account">Iniciar Sesion</h2>
 
             <div class="iconos">
@@ -38,8 +38,9 @@
             </div>
 
             <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p>
-            <input type="email"  th:value="${email}" placeholder="Email">
-            <input type="password" th:value="${password}" placeholder="Contraseña" >
+            <input type="email"  th:value="${email}" name="email" placeholder="Email">
+            <input type="password" th:value="${password}" name="password" placeholder="Contraseña" >
+            
             <input type="submit" value="Iniciar Sesion">
 
             <a  style="text-decoration: none;" href="/"> <button type="button">Cancelar </button></a>
