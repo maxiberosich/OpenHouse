@@ -1,0 +1,72 @@
+.carta {
+    display: flex;
+
+    float: none;
+    align-content: center;
+    text-align: center;
+    max-width: 100%;
+    border: 1px solid #ccc;
+   
+}
+
+.carta-image {
+    flex: 1;
+    max-width: 25%; /* 1/4 del ancho total */
+    position: relative;
+}
+
+.carta-content {
+    flex: 3;
+    max-width: 75%; /* 3/4 del ancho total */
+    padding: 10px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.swiper-container {
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    cursor: pointer;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+.items-list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    border: 1px solid #ccc;
+}
+
+.item {
+    width: calc(25% - 10px); /* 25% - margin */
+    margin: 5px;
+    border: none;
+    text-align: center;
+    padding: 10px;
+}
+
+.espaciado{
+    padding-top: 5%;
+}        
+
+
+

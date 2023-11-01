@@ -1,8 +1,13 @@
 package openHouse.demo.controllers;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import openHouse.demo.enums.City;
+import openHouse.demo.enums.PropType;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.OwnerService;
+import openHouse.demo.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -20,9 +25,12 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
     
+    @Autowired
+    private PropertyService propertyService;
+    
     @GetMapping("/registrarPropietario")
     public String registrarProp(){
-        return "registrar_propietario.html"; //completar con html para registrar propiedad
+        return "ingresar.html"; //completar con html para registrar propiedad
     }
     
     @PostMapping("/registroPropietario")
@@ -41,7 +49,25 @@ public class OwnerController {
             model.put("dni",dni);
             model.put("phone",phone);
             model.put("cbu",cbu);
-            return "registrar_propietario.html"; //completar con html para registrar propiedad
+            return "inicio.html"; //completar con html para registrar propiedad
+        }
+    }
+    
+    @GetMapping("/registrarPropiedad")
+    public String registrarPropiedad(){
+        return "registrar_propiedad.html";
+    }
+    
+    @PostMapping("/registroPropiedad")
+    public String  registroPropiedad(@RequestParam Double precioBase, @RequestParam String codigoPostal, 
+            @RequestParam String direccion, @RequestParam String descripcion, ModelMap modelo,MultipartFile archivo,City ciudad, PropType tipoPropiedad){
+        
+        try {
+            propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, direccion, archivo, ciudad, tipoPropiedad);
+            return "registrar_propiedad.html";
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            return "registrar_propiedad.html";
         }
     }
     

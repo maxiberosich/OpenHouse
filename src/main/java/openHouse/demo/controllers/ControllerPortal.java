@@ -1,9 +1,12 @@
 package openHouse.demo.controllers;
 
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.services.ClientService;
 import openHouse.demo.services.OwnerService;
+import openHouse.demo.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,9 @@ public class ControllerPortal {
     
     @Autowired
     private OwnerService ownerService;
+    
+    @Autowired
+    private PropertyService propertyService;
 
     @GetMapping("/")
     public String inicio() {
@@ -29,6 +35,15 @@ public class ControllerPortal {
     
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+        
+        if (error != null) {
+            modelo.put("error", "Usuario o contraseña invalidos.");
+        }
+        
+        return "login.html";
+    }
+        @GetMapping("/registrar")
+    public String registrar(@RequestParam(required = false) String error, ModelMap modelo) {
         
         if (error != null) {
             modelo.put("error", "Usuario o contraseña invalidos.");
