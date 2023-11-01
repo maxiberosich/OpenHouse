@@ -42,7 +42,8 @@ public class ControllerPortal {
         
         return "login.html";
     }
-        @GetMapping("/registrar")
+    
+    @GetMapping("/registrar")
     public String registrar(@RequestParam(required = false) String error, ModelMap modelo) {
         
         if (error != null) {
