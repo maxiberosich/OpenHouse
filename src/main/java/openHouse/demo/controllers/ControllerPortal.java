@@ -44,12 +44,7 @@ public class ControllerPortal {
     }
     
     @GetMapping("/registrar")
-    public String registrar(@RequestParam(required = false) String error, ModelMap modelo) {
-        
-        if (error != null) {
-            modelo.put("error", "Usuario o contraseña invalidos.");
-        }
-        
+    public String registrar() {
         return "ingresar.html";
     }
     
