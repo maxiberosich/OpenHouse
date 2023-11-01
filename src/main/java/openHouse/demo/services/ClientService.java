@@ -7,7 +7,7 @@ import java.util.Optional;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Image;
 import openHouse.demo.enums.Rol;
-import openHouse.demo.exception.MiException;
+import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,10 +28,10 @@ public class ClientService {
     public void createClient(String name, String password, String password2, String email, String dni, String phone,
             Date birthdate, MultipartFile archivo) throws MiException {
 
-        validate(name, password, password2, email, dni, phone);
+        validate(name, password, password2, email, dni, phone, birthdate);
 
         Client cliente = new Client();
-
+        
         cliente.setRol(Rol.CLIENTE);
         cliente.setName(name);
         cliente.setEmail(email);
@@ -39,9 +39,9 @@ public class ClientService {
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setDni(dni);
         cliente.setPhone(phone);
-
+        cliente.setAlta(true);
         Image imagen = imageService.save(archivo);
-
+        
         cliente.setImage(imagen);
 
         clientRepo.save(cliente);
@@ -50,7 +50,7 @@ public class ClientService {
     public void update(String name, String password, String password2, String email, String dni, String phone,
             Date birthdate, MultipartFile archivo, String idClient) throws MiException {
 
-        validate(name, password, password2, email, dni, phone);
+        validate(name, password, password2, email, dni, phone, birthdate);
 
         Optional<Client> respuesta = clientRepo.findById(idClient);
 
@@ -94,7 +94,7 @@ public class ClientService {
         return clientes;
     }
 
-    public void validate(String name, String password, String password2, String email, String dni, String phone)
+    public void validate(String name, String password, String password2, String email, String dni, String phone, Date birthdate)
             throws MiException {
         if (name.isEmpty() || name == null) {
             throw new MiException("El nombre no puede ser nulo o estar vacio.");
@@ -114,8 +114,17 @@ public class ClientService {
         if (dni.isEmpty() || dni == null) {
             throw new MiException("El dni no puede ser nulo o estar vacio.");
         }
+        if (dni.length() != 8) {
+            throw new MiException("El dni debe contener 8 digitos.");
+        }
         if (phone.isEmpty() || phone == null) {
             throw new MiException("El telefono no puede ser nulo o estar vacio.");
+        }
+        if (phone.length() < 10) {
+            throw new MiException("El telefono debe contener al menos 10 numeros.");
+        }
+        if (birthdate == null) {
+            throw new MiException("Por favor debe indicar su fecha de nacimiento!.");
         }
     }
 

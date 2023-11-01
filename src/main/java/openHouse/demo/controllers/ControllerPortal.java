@@ -1,9 +1,7 @@
 package openHouse.demo.controllers;
 
 import jakarta.servlet.http.HttpSession;
-import java.util.Date;
 import openHouse.demo.entities.User;
-import openHouse.demo.exception.MiException;
 import openHouse.demo.services.ClientService;
 import openHouse.demo.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/")
@@ -28,50 +24,9 @@ public class ControllerPortal {
 
     @GetMapping("/")
     public String inicio() {
-        return "index.html";
+        return "inicio.html";
     }
 
-    @GetMapping("/registrarCliente")
-    public String registrarCliente() {
-        return "registrar_usuario.html";
-    }
-
-    @PostMapping("/registroCliente")
-    public String registroCliente(@RequestParam String name, @RequestParam String password, String password2,
-            @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
-            @RequestParam Date birthdate, MultipartFile archivo, ModelMap model) {
-        try {
-
-            clientService.createClient(name, password, password2, email, dni, phone, birthdate, archivo);
-            model.put("exito", "Cliente registrado correctamente!");
-            return "index.html";
-        } catch (MiException ex) {
-
-            model.put("error", ex.getMessage());
-            return "registrar_usuario.html";
-        }
-    }
-    
-    @GetMapping("/registrarPropietario")
-    public String registrarProp(){
-        return ""; //completar con html para registrar propiedad
-    }
-    
-    @PostMapping("/registroPropietario")
-    public String registroPropietario(@RequestParam String name, @RequestParam String password, String password2,
-            @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
-            @RequestParam Date birthdate,@RequestParam String cbu, MultipartFile archivo, ModelMap model){
-        
-        try {
-            ownerService.crearPropietario(name,password,password2,email,dni,phone,birthdate,cbu,archivo);
-            model.put("exito", "Propietario creado correctamente!");
-            return "index.html";
-        } catch (MiException ex) {
-            model.put("error", ex.getMessage());
-            return ""; //completar con html para registrar propiedad
-        }
-    }
-    
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
         
@@ -79,7 +34,7 @@ public class ControllerPortal {
             modelo.put("error", "Usuario o contraseña invalidos.");
         }
         
-        return "login.html";
+        return "ingresar.html";
     }
     
     @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_PROPIETARIO') or hasRole('ROLE_ADMIN')")

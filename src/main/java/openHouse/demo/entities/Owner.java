@@ -4,13 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
-import lombok.Data;
+
 
 @Entity
 @Table(name = "propietario")
 public class Owner extends User{
 
     private String cbu;
+    private Boolean alta;
     
     @OneToMany
     private List<Property> propiedades;
@@ -33,6 +34,14 @@ public class Owner extends User{
 
     public void setPropiedades(List<Property> propiedades) {
         this.propiedades = propiedades;
+    }
+
+    public Boolean getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
     }
 
     @Override

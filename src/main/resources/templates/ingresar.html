@@ -1,30 +1,30 @@
-
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Ingresar</title>
+        <title>Ingresa a tu Cuenta</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="../static/registrostyle.css">
+        <link rel="stylesheet" href="/registrostyle.css">
     </head>
     <body>
-        <nav th:replace="/fragments/NavBar :: nav"></nav>
+        <!--Lo usamos sin navbar, mas vale le agregamos un boton de volver</nav>-->
 
         <div class="container-form sign-up">
             <div class="welcome-back">
                 <div class="message">
                     <h2>Bienvenido a Open-House</h2>
-                    <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
-                    <button class="sign-up-btn">Iniciar Sesion</button>
+                    <p>Registrate para poder hacer tus reservas o publicar tus propiedades!</p>
+                    <a th:href="@{/cliente/registrarCliente}"><button class="sign-up-btn">Cliente</button></a>
+                    <a th:href="@{/propietario/registrarPropietario}"><button class="sign-up-btn">Propietario</button></a>
                 </div>
             </div>
 
-            <form class="formulario"  th:action="@{/registro}" method="POST">
-                <h2 class="create-account">Crear una cuenta</h2>
+            <form class="formulario"  th:action="@{/logincheck}" method="POST">
+                <h2 class="create-account">Ingresa a tu cuenta</h2>
 
                 <div class="iconos">
                     <div class="border-icon">
@@ -37,47 +37,21 @@
                         <i class='bx bxl-facebook-circle' ></i>
                     </div>
                 </div>
-
-                <p class="cuenta-gratis">Crear una cuenta gratis</p>
-                <input type="text" placeholder="Nombre">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Contraseña">
-                <input type="button" value="Registrarse">
+                <br>
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Contraseña">
+                <button type="submit" class="btn btn-primary mt-3 botones">Ingresar!</button>
             </form>
         </div>
 
-        <div class="container-form sign-in">
-            <form class="formulario"  th:action="@{/login}" method="POST">
-                <h2 class="create-account">Iniciar Sesion</h2>
-                <div class="iconos">
-
-                    <div class="border-icon">
-                        <i class='bx bxl-instagram'></i>
-                    </div>
-
-                    <div class="border-icon">
-                        <i class='bx bxl-linkedin' ></i>
-                    </div>
-
-                    <div class="border-icon">
-                        <i class='bx bxl-facebook-circle' ></i>
-                    </div>
-                </div>
-
-                <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p>
-                <input type="email"  th:value="${email}" placeholder="Email">
-                <input type="password" th:value="${password}" placeholder="Contraseña" >
-                <input type="button" value="Iniciar Sesion">
-            </form>
-
-            <div class="welcome-back">
-                <div class="message">
-                    <h2>Bienvenido de nuevo</h2>
-                    <p>Si aun no tienes una cuenta por favor registrese aqui</p>
-                    <button class="sign-in-btn">Registrarse</button>
+        <section class=" text-center container">
+            <div class="row mt-3">
+                <div class="divVolver">
+                    <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                 </div>
             </div>
-        </div>
+        </section>
+
 
         <script src="script.js"></script>
     </body>

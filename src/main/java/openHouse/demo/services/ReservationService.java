@@ -5,7 +5,7 @@ import java.util.Date;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.Reservation;
-import openHouse.demo.exception.MiException;
+import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
