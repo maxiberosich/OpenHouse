@@ -1,121 +1,44 @@
-
 /*navbar*/
 .iconoyaz{
     
-        width: 200px; 
-        height: 200px; 
+        width: 100px; 
+        height: 100px; 
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
     
     
 }
-.navbar{
-    padding: 0.5rem;
-    background-color: rgb(104, 202, 232);
-    height: 120px;
-    
-   
-}
+
 .navbar-collapse{
     align-items: center;
     justify-content: space-between;
 }
+/*dropdown*/
+.imagen-drop {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .btn-secondary{
+    background-color: gray;
+    border-color: black;
+  }
+ 
+  
 
-/*estilos generales*/
-section{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-h1{
-    font-size: 3rem;
-    font-family: 'Rubik Dirt',cursive;
-    background-color: azure;
+/*carrousel*/
+.carrousel{
+
 
 }
-/*hero*/
-.hero{
-    /*background-color: rgb(135, 134, 132);*/
-    min-height: 450px;
-    text-align: center;
-    background-image: url(https://i.pinimg.com/564x/b8/12/b1/b812b1455c2721809b7792e1543ab0ff.jpg);
-   /* background-image:url(https://i.pinimg.com/564x/96/89/8e/96898e0da427b22d2e14db7bc3d71595.jpg)*/
-}
-.hero-principal{
-    padding: 1rem;
-}
-.hero-imagen{
-    background-color: black;
-    border-color: brown;
-}
-.hero-principal h2{
-    font-size: 1.5rem;
-    color: rgb(234, 240, 238);
-    background-color: black;
-}
-.hero-inferior-imagen{
-   /* padding-top: 60px;
-    margin-bottom: 40px;*/
-    border-radius: 10px;
-    display: block;
-    /*transition: all 0.2 ease;*/
-}
-.overlay{
-    transition: all 0.2s ease;
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-.overlay p{
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 0;
-}
-.hero-inferior{
-    position: relative;
-}
-.hero-inferior:hover img{
-    opacity: 0.2;
-}
-.hero-inferior:hover .overlay{
-    opacity: 1;
-}
-
-.overlay .iconos-contenedor{
-    display: flex;
-}
-.overlay i{
-   color: black;
-   font-size: 80px;
-   margin: 20px;
-}
-.container{
-    background-color: white;
-    font-size: 20px;
-    
-   
-    
-}
-.nav-item{
-    color: aliceblue;
-}
+.carousel-item img{
+width: 80%;
+height: 70%;
+object-fit: cover;
+padding: 2%;
+height: 500px; /*  la altura  imágenes */
+object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor*/
 
 
 
-
-/*responsivo*/
-@media screen and (max-width:767){
-    .navar-brand{
-        display: none;
-    }
-}
-
-@media screen and (min-width: 700px){
-    .hero-inferior-imagen{
-        max-width: 600px;
-    }
 }

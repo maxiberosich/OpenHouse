@@ -1,17 +1,10 @@
-<nav class="navbar navbar-expand-md navbar-light">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbar-toggler"
-          aria-controls="navbarTogglerDemo01"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Open-House</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Navegación de palanca">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar-toggler">
+        <div class="collapse navbar-collapse" id="navbarColor02">
           <a class="navbar-brand" href="#">
             <!-- cambiar icon -->
             <img src="/img/iconoyaz.png" class="iconoyaz"
@@ -19,36 +12,30 @@
               alt="Logo de la pagina web"
             />
           </a>
-
-          <ul
-            class="navbar-nav d-flex justify-content-center aling-intem-center"
-          >
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >OpenHouse</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Alquileres</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/login}" th:if="${session.usersession == null}">Iniciar sesion</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/registrar}" th:if="${session.usersession == null}">Crear cuenta</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/propiedad/registrarPropiedad}" th:if="${session.usersession != null}" >Cargar Propiedad</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout" th:if="${session.usersession != null}" >Cerrar Sesión</a>
-            </li>
-            
-
-
-
-          </ul>
-
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Hogar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Precios</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        Opciones
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Iniciar Sesion</a>
+                        <a class="dropdown-item" href="#">Crear Cuenta</a>
+                        <a class="dropdown-item" href="#">Modificar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Cargar Propiedad</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-sm-2" type="search" placeholder="Buscar">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>

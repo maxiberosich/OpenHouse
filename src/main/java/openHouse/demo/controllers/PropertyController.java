@@ -3,6 +3,7 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import openHouse.demo.entities.Comment;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.enums.City;
@@ -26,9 +27,7 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
-    
-    
-    
+  
     @GetMapping("/registrarPropiedad")
     public String registrarPropiedad(ModelMap modelo, HttpSession session){
         User user = (User) session.getAttribute("usersession");
@@ -57,6 +56,17 @@ public class PropertyController {
             return "registrar_propiedad.html";
         }
     }
+
+    @PostMapping("/detalles/{id}")
+    public String mostrarPropiedad(@PathVariable String id, ModelMap modelo){
+        Property propiedad = propertyService.getOne(id);
+        List<Comment> comentarios = propiedad.getComentarios();
+        modelo.put("comentarios", comentarios);
+        modelo.put("propiedad", propiedad);
+        return "propiedad_detalles.html";
+    }
+    
+
     
     
     @GetMapping("/buscarPorCP")
