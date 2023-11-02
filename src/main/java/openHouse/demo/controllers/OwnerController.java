@@ -70,6 +70,7 @@ public class OwnerController {
         
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, id, archivo, ciudad, tipoPropiedad);
+            modelo.put("exito", "Propiedad cargada correctamente");
             return "registrar_propiedad.html";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());

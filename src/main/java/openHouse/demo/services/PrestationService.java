@@ -41,7 +41,9 @@ public class PrestationService {
         prestacion.setTv(tv);
         prestacion.setWiFi(wiFi);
 
-        return prestationRepository.save(prestacion);
+        prestationRepository.save(prestacion);
+        
+        return prestacion;
 
     }
 
