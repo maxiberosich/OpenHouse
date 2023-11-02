@@ -1,39 +1,63 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
+    lang="es">
 
     <head>
         <title>Formulario de reserva</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-       
+
     </head> 
-    
+
     <body>
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <h1 class="text-center">Formulario de Reserva</h1>
                     <form action="/crear-reserva" method="post">
-                                   
+
                         <div class="form-group">
                             <label for="cantper">Cantidad de personas</label>
-                            <input placeholder="Cantidad de personas" type="number" class="form-control" id="fecha" name="fecha" required>
+                            <input 
+                                placeholder="Cantidad de personas" 
+                                type="number" class="form-control" 
+                                id="fecha" 
+                                name="fecha" 
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="fechai">Fecha ingreso:</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                id="fecha" 
+                                name="fecha" 
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="fechae">Fecha egreso:</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                id="fecha" 
+                                name="fecha" 
+                                required>
                         </div>
-
+                        <!-- comment 
                         <div class="form-group">
                             <label for="hora">Hora:</label>
-                            <input type="time" class="form-control" id="hora" name="hora" required>
+                            <input 
+                                type="time" 
+                                class="form-control" 
+                                id="hora" 
+                                name="hora" 
+                                required>
                         </div>
+                        -->
                         <button type="submit" class="btn btn-primary">Crear Reserva</button>
                     </form>
                 </div>
@@ -41,27 +65,26 @@
         </div>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <p class="col-md-4 mb-0 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>© 2023 OpenHouse, Inc.</font></font></p>
-        
-            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-             <img src="/img/iconoyaz.png" class="bi me-2" width="200" height="200"  >
-              <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
-            </a>
-        
-            <ul class="nav col-md-1 justify-content-end">
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Hogar</font></font></a></li>
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Características</font></font></a></li>
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Precios</font></font></a></li>
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Preguntas frecuentes</font></font></a></li>
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Acerca de</font></font></a></li>
-            </ul>
-          </footer>
+
+                    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <img src="/img/iconoyaz.png" class="bi me-2" width="200" height="200"  >
+                        <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
+                    </a>
+<ul class="nav col-md-1 justify-content-end">
+<li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Hogar</font></font></a></li>
+<li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Características</font></font></a></li>
+<li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Precios</font></font></a></li>
+<li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Preguntas frecuentes</font></font></a></li>
+<li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Acerca de</font></font></a></li>
+</ul>
+</footer>
 
 
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"
-        ></script>
-    </body>
-</html>
+ <script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+ crossorigin="anonymous"
+></script>
+ </body>
+                                                                                                        

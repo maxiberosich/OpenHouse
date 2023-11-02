@@ -1,8 +1,10 @@
 
 package openHouse.demo.services;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.Reservation;
@@ -103,7 +105,7 @@ public class ReservationService {
         }
     }
     
-    public void elimarReserva(String idReserva){
+    public void eliminarReserva(String idReserva){
         Optional<Reservation> respuesta=reservationRepository.findById(idReserva);
         if (respuesta.isPresent()) {
             Reservation reserva=respuesta.get();
@@ -147,8 +149,13 @@ public class ReservationService {
     
     
     public Integer calcularNoches(Date fechaInicio,Date fechaFin){
-        Integer noches = fechaFin.getDay()-fechaInicio.getDay();
-        return noches;
+            long elapsedms=fechaFin.getTime()-fechaInicio.getTime();
+            long diff = TimeUnit.MINUTES.convert(elapsedms, TimeUnit.MILLISECONDS);
+            diff=(diff/1440);
+            Integer noches;
+            
+            noches = Math.toIntExact(diff);
+            return noches;
     }
     
 }

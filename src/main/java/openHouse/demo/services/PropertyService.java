@@ -1,17 +1,14 @@
 package openHouse.demo.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import openHouse.demo.entities.Owner;
 import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
-import openHouse.demo.enums.City;
-import openHouse.demo.enums.PropType;
 import openHouse.demo.exceptions.MiException;
-import openHouse.demo.repositories.OwnerRepository;
-import openHouse.demo.repositories.PrestationRepository;
 import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,7 @@ public class PropertyService {
     @Transactional
     public void crearProperty(Double precioBase,
             String codigoPostal, String direccion, String descripcion, String idOwner,
-            MultipartFile archivo, City ciudad, PropType tipoPropiedad) throws MiException {
+            MultipartFile archivo, String ciudad, String tipoPropiedad,Date fechaAlta,Date fechaBaja) throws MiException {
 
         validar(precioBase, codigoPostal, direccion, descripcion);
         
@@ -53,6 +50,9 @@ public class PropertyService {
             propiedad.setAlta(Boolean.TRUE);
             propiedad.setCiudad(ciudad);
             propiedad.setTipo(tipoPropiedad);
+            propiedad.setFechaAlta(fechaAlta);
+            propiedad.setFechaBaja(fechaBaja);
+            
 
             User usuario = respuesta.get();
             Owner owner = (Owner) usuario;
