@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
 
-    <head th:replace= "/fragments/head :: head"> </head>
+    <head th:replace="/fragments/head :: head"></head>
 
   <body>
     <!--Barra de navegacion-->
@@ -10,14 +10,16 @@
 
 
 <!--Carrousel-->
-  <section th:replace="/fragments/carrousel :: carrousel"></section>
+  <section th:replace="/fragments/carrousel :: section"></section>
 
 
 
+  <!<!-- agregar Fragments de Cards -->
+  
 
 <!-- Footer -->
 
-<footer th:replace="/fragments/footer :: footer"></footer>
+<section th:replace="/fragments/footer :: section"></section>
   
   
     <script
