@@ -4,7 +4,6 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Navegación de palanca">
             <span class="navbar-toggler-icon"></span>
         </button>
-<<<<<<< HEAD
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
@@ -30,46 +29,6 @@
                 <input class="form-control me-sm-2" type="search" placeholder="Buscar">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
             </form>
-=======
-        <div class="collapse navbar-collapse" id="navbar-toggler">
-          <a class="navbar-brand" href="#">
-            <!-- cambiar icon -->
-            <img src="/img/iconoyaz.png" class="iconoyaz"
-              width="50"
-              alt="Logo de la pagina web"
-            />
-          </a>
-
-          <ul
-            class="navbar-nav d-flex justify-content-center aling-intem-center"
-          >
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >OpenHouse</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Alquileres</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/login}" th:if="${session.usersession == null}">Iniciar sesion</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/registrar}" th:if="${session.usersession == null}">Crear cuenta</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/propietario/registrarPropiedad}" th:if="${session.usersession != null}" >Cargar Propiedad</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout" th:if="${session.usersession != null}" >Cerrar Sesión</a>
-            </li>
-            
-
-
-
-          </ul>
-
->>>>>>> developer
         </div>
     </div>
 </nav>
