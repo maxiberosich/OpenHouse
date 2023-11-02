@@ -1,6 +1,7 @@
 package openHouse.demo.controllers;
 
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
@@ -29,7 +30,10 @@ public class ControllerPortal {
     private PropertyService propertyService;
 
     @GetMapping("/")
-    public String inicio() {
+    public String inicio(ModelMap modelo) {
+        List<Property> propiedades = new ArrayList();
+        propiedades = propertyService.listaPropietarios();
+        modelo.put("propertys", propiedades);
         return "inicio.html";
     }
     
