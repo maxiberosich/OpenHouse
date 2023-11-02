@@ -23,10 +23,7 @@ public class ReservationService {
     
     @Autowired
     ReservationRepository reservationRepository;
-    
-    @Autowired
-    private PropertyService propertyService;
-    
+        
     @Autowired
     private ClientService clientService;
     
