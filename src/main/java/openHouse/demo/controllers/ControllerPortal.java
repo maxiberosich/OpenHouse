@@ -45,7 +45,7 @@ public class ControllerPortal {
     
     @GetMapping("/registrar")
     public String registrar() {
-        return "ingresar.html";
+        return "registrar.html";
     }
     
     @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_PROPIETARIO') or hasRole('ROLE_ADMIN')")
