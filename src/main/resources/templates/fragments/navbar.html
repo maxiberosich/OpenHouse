@@ -38,6 +38,9 @@
               <a class="nav-link" th:href="@{/registrar}" th:if="${session.usersession == null}">Crear cuenta</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" th:href="@{/propietario/registrarPropiedad}" th:if="${session.usersession != null}" >Cargar Propiedad</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/logout" th:if="${session.usersession != null}" >Cerrar Sesión</a>
             </li>
             
