@@ -25,6 +25,9 @@ public class PropertyService {
 
     @Autowired
     private PrestationRepository prestacionesRepository;
+    
+    @Autowired
+    private PrestationService prestationService;
     /*
     @Autowired
     private ImageRepository imageRepository;
@@ -54,9 +57,8 @@ public class PropertyService {
             Owner propietario = respuesta.get();
             propiedad.setPropietario(propietario);
 
-            Prestation prestaciones = new Prestation();
-            prestaciones = selectPrestaciones(Integer.BYTES, Integer.MIN_VALUE, Integer.MIN_VALUE,
-                    Integer.MIN_VALUE, true, true, true, true, true,
+            Prestation prestaciones = prestationService.createPrestation(2, 2, 3,
+                    1, true, true, true, true, true,
                     true, true, true, true, true, true, true);
 
             propiedad.setPrestaciones(prestaciones);
