@@ -1,25 +1,7 @@
-<<<<<<< Updated upstream
-
-
-=======
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="Stylo_Menu.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
-
-</head>
-<body>
->>>>>>> Stashed changes
 
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
+        <!-- Faltan cerrar divs -->
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
                 <div class="card shadow-sm" th:each="propiedad : ${propertys}">
@@ -34,7 +16,7 @@
                         </div>
                         <div class="swiper-pagination"></div> <!-- Opcional: agregar paginación -->
                     </div>
-                    <a href="#" class="no-subrayado">
+                    <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado">
                         <div class="card-body">
                             <div class="content">
                                 <table class="table">
@@ -61,16 +43,6 @@
                             </div>
                         </div>
                 </div>
-<<<<<<< Updated upstream
-                </a>
-=======
-            </div>
-            
-            //Temporal
-                     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-            <script src="img.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
-</html>
 
->>>>>>> Stashed changes
+                </a>
+
