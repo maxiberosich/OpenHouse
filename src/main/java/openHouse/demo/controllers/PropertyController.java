@@ -1,12 +1,15 @@
 package openHouse.demo.controllers;
 
 import java.util.List;
+import openHouse.demo.entities.Comment;
 import openHouse.demo.entities.Property;
 import openHouse.demo.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +19,18 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
+    
+    
+    @PostMapping("/detalles/{id}")
+    public String mostrarPropiedad(@PathVariable String id, ModelMap modelo){
+        Property propiedad = propertyService.getOne(id);
+        List<Comment> comentarios = propiedad.getComentarios();
+        modelo.put("comentarios", comentarios);
+        modelo.put("propiedad", propiedad);
+        return "propiedad_detalles.html";
+    }
+    
+    
     
     @GetMapping("/buscarPorCP")
     public String buscarPorCodigoPostal(@RequestParam String codigoPostal, ModelMap modelo) {
