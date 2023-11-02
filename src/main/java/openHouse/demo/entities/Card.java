@@ -10,34 +10,28 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 import lombok.Data;
-import openHouse.demo.enums.Rol;
+import openHouse.demo.enums.CardCompany;
+import openHouse.demo.enums.CardType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
-public abstract class User {
-        
+public class Card {
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String Id;
-    
+    private String id;
+    private String nombre;
+    private Integer numero;
+    private Integer codSeguridad;
     @Enumerated(EnumType.STRING)
-    private Rol rol;
-    
-    private String name;
-    private String password;
-    private String Dni;
-    private String phone;
-    
-    private String email;
-    
+    private CardType tipoTarjeta;
+    @Enumerated(EnumType.STRING)
+    private CardCompany empresa;
     @Temporal(TemporalType.DATE)
-    private Date birthdate;
-    
-    private boolean state;
-    
+    private Date vencimiento;
     @OneToOne
-    private Image image;
+    private Client cliente;
 
 }

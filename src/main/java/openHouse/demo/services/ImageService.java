@@ -13,10 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ImageService {
-
+    
     @Autowired
     private ImageRepository imageRepository;
-
+    
     public Image save(MultipartFile file) throws MiException {
         if (file != null) {
             try {
@@ -31,7 +31,7 @@ public class ImageService {
         }
         return null;
     }
-
+    
     public Image update(MultipartFile file, String idImage) throws MiException {
         if (file != null) {
             try {
@@ -52,10 +52,14 @@ public class ImageService {
         }
         return null;
     }
-
+    
     @Transactional(readOnly = true)
     public List<Image> list() {
         return imageRepository.findAll();
     }
-
+    
+    public void delete(String id) {
+        imageRepository.deleteById(id);
+    }
+    
 }
