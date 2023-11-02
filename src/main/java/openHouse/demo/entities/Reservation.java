@@ -29,5 +29,5 @@ public class Reservation {
     
     @OneToOne
     private Property propiedad;
-            
+             
 }

@@ -1,53 +1,96 @@
 package openHouse.demo.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import openHouse.demo.entities.Owner;
+import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
+import openHouse.demo.entities.User;
 import openHouse.demo.enums.City;
 import openHouse.demo.enums.PropType;
 import openHouse.demo.exceptions.MiException;
+import openHouse.demo.repositories.OwnerRepository;
+import openHouse.demo.repositories.PrestationRepository;
 import openHouse.demo.repositories.PropertyRepository;
+import openHouse.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PropertyService {
-    
+
     @Autowired
     private PropertyRepository propertyRepository;
     
+    @Autowired
+    private PrestationService prestationService;
     /*
     @Autowired
-    private PrestacionesRepository prestacionesRepository;
-    @Autowired
     private ImageRepository imageRepository;
+     */
     @Autowired
-    private OwnerRepository owerRepository;
-    */
+    private UserRepository userRepository;
+
+    @Transactional
+    public void crearProperty(Double precioBase,
+            String codigoPostal, String direccion, String descripcion, String idOwner,
+            MultipartFile archivo, City ciudad, PropType tipoPropiedad) throws MiException {
+
+        validar(precioBase, codigoPostal, direccion, descripcion);
+        
+        Optional<User> respuesta = userRepository.findById(idOwner);
+
+        if (respuesta.isPresent()) {            
+
+            Property propiedad = new Property();
+            propiedad.setPrecioBase(precioBase);
+            propiedad.setCodigoPostal(codigoPostal);
+            propiedad.setDescripcion(descripcion);
+            propiedad.setDireccion(direccion);
+            propiedad.setAlta(Boolean.TRUE);
+            propiedad.setCiudad(ciudad);
+            propiedad.setTipo(tipoPropiedad);
+
+            User usuario = respuesta.get();
+            Owner owner = (Owner) usuario;
+            propiedad.setPropietario(owner);
+
+            Prestation prestaciones = prestationService.createPrestation(2, 2, 3,
+                    1, true, true, true, true, true,
+                    true, true, true, true, true, true, true);
+
+            propiedad.setPrestaciones(prestaciones);
+
+            propertyRepository.save(propiedad);
+        }
+    }
+
+    @Transactional
+    public List<Property> buscarPorCodigoPostal(String cp) {
+        List<Property> propiedades = new ArrayList<>();
+        propiedades = propertyRepository.buscarPorCodigoPostal(cp);
+        return propiedades;
+    }
     
     @Transactional
-    public void crearProperty(String idPrestaciones, String idImagenes,String idPropietario,String idComentario,Double precioBase,
-            String codigoPostal,String direccion,String descripcion , Double valoracion) throws MiException{
+    public List<Property> buscarPorCiudad(String ciudad){
+        List<Property> propiedadesCiudad = new ArrayList();
+        propiedadesCiudad = propertyRepository.buscarPorCiudad(ciudad);
+        return propiedadesCiudad;
+    }
+    
+    @Transactional
+    public List<Property> buscarSegunPrecio(String precioMinimo, String precioMaximo){
+        List<Property> propiedadesSegunPrecio = new ArrayList();
         
-        validar(precioBase, codigoPostal, direccion, descripcion);
-        //Owner propietario =owerRepositoryfindById(idPropietario).get();
-        //Prestation prestaciones=prestacionesRepositoryfindById(idPrestaciones).get();
+        propiedadesSegunPrecio = propertyRepository.buscarSegunPrecio(precioMinimo, precioMaximo);
         
-        Property propiedad=new Property();
-        propiedad.setPrecioBase(precioBase);
-        propiedad.setCodigoPostal(codigoPostal);
-        propiedad.setDescripcion(descripcion);
-        propiedad.setDireccion(direccion);
-        propiedad.setAlta(Boolean.TRUE);
-        propiedad.setCiudad(City.CORDOBA);
-        propiedad.setTipo(PropType.CASA);
-        //propiedad.setPrestaciones(prestaciones);
-        //propiedad.setPropietario(propietario);
-        //me falta cargar el roll city;
-        //prototype
-        
+        return propiedadesSegunPrecio;
     }
          
-    
     public void validar (Double precioBase,
             String codigoPostal,String direccion,String descripcion ) throws MiException{
        
@@ -55,17 +98,45 @@ public class PropertyService {
         if (precioBase==null) {
             throw new MiException("Por favor indicar el precio base por noche!Se podra modificar mas adelante !");
         }
-        if (codigoPostal==null) {
+        if (codigoPostal == null) {
             throw new MiException("Tiene que indicar el Codigo Postal de la propiedad , por favor.");
         }
-        if (direccion==null) {
+        if (direccion == null) {
             throw new MiException("Tiene que indicar la direccion exacta de la propiedad , por favor.");
         }
-        if ( descripcion==null) {
+        if (descripcion == null) {
             throw new MiException("Por favor debe insertar un comentario, ayudara mucho al cliente a tomar una decision.");
         }
-       
+
     }
+
+    public void bajaPropiedad(String id) {
+        Optional<Property> respuesta = propertyRepository.findById(id);
+        if (respuesta.isPresent()) {
+            Property propiedad = respuesta.get();
+            propiedad.setAlta(Boolean.FALSE);
+        }
+    }
+
+    public void eliminarPropiedad(String id) {
+        Optional<Property> respuesta = propertyRepository.findById(id);
+        if (respuesta.isPresent()) {
+            Property propiedad = respuesta.get();
+            propertyRepository.delete(propiedad);
+        }
+    }
+
+    public Property getOne(String id) {
+        return propertyRepository.getById(id);
+    }
+
+    public List<Property> listaPropietarios() {
+        List<Property> listaPropiedades = new ArrayList();
+        listaPropiedades = propertyRepository.findAll();
+        return listaPropiedades;
+    }
+
     
-   
+    //crear metodo agregaro comentario, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
+    //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
 }
