@@ -67,4 +67,27 @@ img {
 .espaciado{
     padding-top:3%;
 }        
+.contenedor{
+    display: flex;
+    max-width: 100%;
+    border-radius:2% ;
+    border: 1px solid #ccc;
+}
 
+.contenedor-imagen{
+    flex: 1;
+    max-width: 25%;
+    position: relative;
+}
+
+.contenedor-comentario{
+    flex: 3;
+    max-width: 75%;
+}
+
+.input-grande{
+    /* Estilos CSS para hacer que un campo de entrada con la clase "input-grande" sea más grande */
+    width: 75%;
+    height: 100px;
+    font-size: 20px;
+}
