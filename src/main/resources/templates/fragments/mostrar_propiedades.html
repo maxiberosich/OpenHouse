@@ -16,9 +16,10 @@
             <div class="carta-image">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 1"></div> <!--Aqui ira el each -->
+                        <div class="swiper-slide" th:each="foto : ${imagenes}">
+                            <img src="img\Image20231025161308.png" alt="Imagen 1"></div> <!--Aqui ira el each -->
                         <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 2"></div>
-                        <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 3"></div>
+                        
                         <!-- Agrega las imágenes adicionales aquí -->
                     </div>
                     <div class="swiper-button-next"></div>
@@ -27,8 +28,8 @@
             </div>
             <div class="carta-content">
                 <h2>Título de la carta</h2>
-                <p>Descripción de la carta.</p>
-                <p>Precio: $100</p>
+                <p th:text="${propiedad.descripcion}">Descripción de la carta.</p>
+                <p th:text="${propiedad.precio}">Precio: $100</p>
                 <p>Días disponibles: Lunes a Viernes</p>
                 <button type="button" ><a href="#">Alquilar</a></button>
             </div>
@@ -37,6 +38,7 @@
         <!-- Componente items -->
 
         <div class="items-list">
+            <!-- Ver la logica para ver los atributos de la casa -->
             <div class="item">Item 1</div>
             <div class="item">Item 2</div>
             <div class="item">Item 3</div>
