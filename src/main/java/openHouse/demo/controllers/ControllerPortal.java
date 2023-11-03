@@ -31,9 +31,8 @@ public class ControllerPortal {
 
     @GetMapping("/")
     public String inicio(ModelMap modelo) {
-        List<Property> propiedades = new ArrayList();
-        propiedades = propertyService.listaPropietarios();
-        modelo.put("propertys", propiedades);
+        List<Property> propiedades = propertyService.listaPropiedades();
+        modelo.addAttribute("propertys",propiedades);
         return "inicio.html";
     }
     
