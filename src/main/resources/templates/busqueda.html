@@ -16,12 +16,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Descripcion</th>
                     <th>Precio</th>
+                    <th>CP</th>
                 </tr>
-                <tr th:each="propiedad : ${propiedadesCP}">
+                <tr th:each="propiedad : ${propiedadesCP}">                    
                     <td th:text="${propiedad.id}"></td>
+                    <td th:text="${propiedad.propietario.name}"></td>
+                    <td th:text="${propiedad.ciudad}"></td>
                     <td th:text="${propiedad.descripcion}"></td>
-                    <td th:text="${propiedad.precio}"></td>
+                    <td th:text="${propiedad.precioBase}"></td>
+                    <td th:text="${propiedad.codigoPostal}"></td>
                 </tr>
             </table>
         </div>

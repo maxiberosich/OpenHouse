@@ -46,7 +46,7 @@ public class PropertyController {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion,
                     id, archivo, ciudad, tipoPropiedad, fechaAlta, fechaBaja);
             modelo.put("exito", "Propiedad cargada correctamente");
-            return "inicio.html";
+            return "redirect:/";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("precioBase",precioBase);
