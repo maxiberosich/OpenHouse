@@ -1,14 +1,13 @@
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-        <!-- Faltan cerrar divs -->
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
                 <div class="card shadow-sm" th:each="propiedad : ${propertys}">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" >
+                            <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
                                 <!-- Falta logica de como ver la foto -->
-                                <img th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
+                                <img th:each="imagen : ${propiedad.imagenes}" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
                             </div>
 
                             <!-- Agrega más imágenes según sea necesario -->
