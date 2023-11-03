@@ -5,9 +5,9 @@
                 <div class="card shadow-sm" th:each="propiedad : ${propertys}">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" >
+                            <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
                                 <!-- Falta logica de como ver la foto -->
-                                <img th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
+                                <img th:each="imagen : ${propiedad.imagenes}" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
                             </div>
 
                             <!-- Agrega más imágenes según sea necesario -->
