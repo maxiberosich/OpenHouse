@@ -41,7 +41,7 @@ public class SeguridadWeb {
                         .defaultSuccessUrl("/inicio")
                             .permitAll()
                 .and().logout()
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/")
                         .permitAll()
                 .and().csrf()
                 .disable();

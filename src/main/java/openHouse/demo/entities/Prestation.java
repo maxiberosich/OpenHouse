@@ -30,5 +30,5 @@ public class Prestation {
     private boolean aguaCorriente;
     private boolean cocina;
     private boolean heladera;
-    private boolean microondas;    
+    private boolean microondas;
 }

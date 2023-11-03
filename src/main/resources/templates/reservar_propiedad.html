@@ -1,165 +1,67 @@
+<!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
 
-<head>
-    <title>Formulario de reserva</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="./inicio.css">
-    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-
-</head>
-
-<body>
-
-    <div class="propiedad">
-        <div class="card mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="30%" height="100"
-                aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"
-                viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Imagen propiedad a reservar</text>
-
-
-                <div class="album py-5 bg-body-tertiary">
-                    <div class="container">
-                        <!-- Faltan cerrar divs -->
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            <div class="col">
-                                <div class="card shadow-sm" th:each="propiedad : ${propertys}">
-                                    <div class="swiper-container">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <!-- Falta logica de como ver la foto -->
-                                                <img th:src="@{/image/propiedad/__${propiedad.id}__}"
-                                                    alt="Imagen propiedad" />
-                                            </div>
-
-                                            <!-- Agrega más imágenes según sea necesario -->
-                                        </div>
-                                        <div class="swiper-pagination"></div> <!-- Opcional: agregar paginación -->
-                                    </div>
-                                    <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado">
-                                        <div class="card-body">
-                                            <div class="content">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td class="cell-with-comment" th:text="${propiedad.ciudad}">
-                                                            <!-- Puede fallar -->
-
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="comment" th:text="${propiedad.descripcion}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th th:text="${propiedad.direccion}"></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Disponibilidad</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>$</th>
-                                                        <td th:text="${propiedad.precioBase}"></td>
-                                                    </tr>
-                                                </table>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <small class="text-body-secondary">Puntuacion</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                </a>
-                            </div>
+    <head>
+        <title>Formulario de reserva</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+       
+    </head> 
+    
+    <body>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h1 class="text-center">Formulario de Reserva</h1>
+                    <form action="/crear-reserva" method="post">
+                                   
+                        <div class="form-group">
+                            <label for="cantper">Cantidad de personas</label>
+                            <input placeholder="Cantidad de personas" type="number" class="form-control" id="fecha" name="fecha" required>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="fechai">Fecha ingreso:</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechae">Fecha egreso:</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hora">Hora:</label>
+                            <input type="time" class="form-control" id="hora" name="hora" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Crear Reserva</button>
+                    </form>
                 </div>
-            </svg>
-        </div>
-    </div>
-
-
-
-    <div class="reserva">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-
-                <div th:replace="/fragments/errores :: div"></div>
-
-
-                <div class="card border-warning mb-3" style="max-width: 20rem;">
-                    <div class="card-header">
-                        <h2><strong>Formulario de Reserva</strong></h2>
-                    </div>
-                    <div class="card-body">
-                        <form action="/reserva/crearReserva/__${idPropiedad}__/__${user.id}__" method="POST">
-
-                            <input hidden th:value="${user.id}" name="idCliente">
-                            <input hidden th:value="${idPropiedad}" name="idPropiedad">
-
-                            <div class="form-group">
-                                <label for="cantper">Cantidad de personas</label>
-                                <input placeholder="Cantidad de personas" type="number" class="form-control" id="fecha"
-                                    name="fecha" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fechai">Fecha ingreso:</label>
-                                <input type="date" class="form-control" id="fecha" name="fecha" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fechae">Fecha egreso:</label>
-                                <input type="date" class="form-control" id="fecha" name="fecha" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Crear Reserva</button>
-                        </form>
-                    </div>
-                </div>
-
-
             </div>
         </div>
-    </div>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>© 2023 OpenHouse, Inc.</font></font></p>
+        
+            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+             <img src="/img/iconoyaz.png" class="bi me-2" width="200" height="200"  >
+              <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
+            </a>
+        
+            <ul class="nav col-md-1 justify-content-end">
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Hogar</font></font></a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Características</font></font></a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Precios</font></font></a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Preguntas frecuentes</font></font></a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"><font-style="vertical-align: inherit;><font-style="vertical-align: inherit;>Acerca de</font></font></a></li>
+            </ul>
+          </footer>
 
 
 
-
-
-
-
-
-    <section>
-        <div class="b-example-divider"></div>
-
-        <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
-                    <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                        <svg class="bi" width="30" height="24">
-                            <use xlink:href="#bootstrap" />
-                        </svg>
-                        <img src="img/iconoyaz.png" alt="Logo de Open-House" width="50" height="50">
-                    </a>
-                    <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Open-House, Inc</span>
-                </div>
-
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-twitter"></i></a></li>
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-instagram"></i></a></li>
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-facebook"></i></a></li>
-                </ul>
-            </footer>
-        </div>
-    </section>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>                       
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
