@@ -56,13 +56,16 @@ public class PropertyController {
             return "registrar_propiedad.html";
         }
     }
-
-    @PostMapping("/detalles/{id}")
+    
+    @GetMapping("/detalles/{id}")
     public String mostrarPropiedad(@PathVariable String id, ModelMap modelo){
-        Property propiedad = propertyService.getOne(id);
-        List<Comment> comentarios = propiedad.getComentarios();
-        modelo.put("comentarios", comentarios);
-        modelo.put("propiedad", propiedad);
+        modelo.addAttribute("propiedad", propertyService.getOne(id));
+        return "propiedad_detalles.html";
+    }
+    
+    @PostMapping("/detalles/{id}")
+    public String mostrarPropiedad(@PathVariable String id){
+        propertyService.buscarPropiedad(id);
         return "propiedad_detalles.html";
     }
     
