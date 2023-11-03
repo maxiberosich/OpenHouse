@@ -1,6 +1,6 @@
 package openHouse.demo.services;
 
-/*import java.io.IOException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import openHouse.demo.entities.Image;
@@ -63,4 +63,3 @@ public class ImageService {
     }
     
 }
-*/
