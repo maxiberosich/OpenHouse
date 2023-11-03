@@ -15,26 +15,26 @@
 
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" th:href="@{/login}">Iniciar Sesion</a>
+                    <a class="nav-link active" th:if="${session.usersession == null}" th:href="@{/login}">Iniciar Sesion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/registrar}">Crear Cuenta</a>
+                    <a class="nav-link" th:if="${session.usersession == null}" th:href="@{/registrar}">Crear Cuenta</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" th:if="${session.usersession != null}" role="button" aria-haspopup="true" aria-expanded="false">
                         Opciones
                     </a>
                     <div class="dropdown-menu">
-                        <!-- <a class="dropdown-item" th:href="@{/login}">Iniciar Sesion</a> -->
-                        <!-- <a class="dropdown-item" th:href="@{/registrar}">Crear Cuenta</a> -->
+                        <!-- <a class="dropdown-item" th:href="@{/login}">Iniciar Sesion</a> -->                        
                         <a class="dropdown-item" th:href="@{/}">Modificar</a>
+                        <a class="dropdown-item" href="/logout">Cerrar Sesion</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" th:href="@{/propiedad/registrarPropiedad}">Cargar Propiedad</a>
                     </div>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-sm-2" type="search" placeholder="Buscar">
+            <form class="d-flex" th:action="@{/propiedad/buscarPorCP}" method="GET">
+                <input class="form-control me-sm-2" type="search" placeholder="Buscar por CP" name="codigoPostal">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
             </form>
         </div>
