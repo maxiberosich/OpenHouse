@@ -1,8 +1,6 @@
 package openHouse.demo.services;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import openHouse.demo.entities.Image;
 import openHouse.demo.entities.Owner;
@@ -25,7 +23,7 @@ public class OwnerService {
     private ImageService imageService;
     
     @Transactional
-    public  Owner crearPropietario(String name, String password, String password2, String email, String dni, String phone,
+    public void crearPropietario(String name, String password, String password2, String email, String dni, String phone,
             Date birthdate, String cbu, MultipartFile archivo) throws MiException {
         
         validar(name, password, password2, email, dni, phone, birthdate,cbu);
@@ -43,7 +41,7 @@ public class OwnerService {
         
         propietario.setImage(imagen);
         
-        return propietarioRepositorio.save(propietario);
+        propietarioRepositorio.save(propietario);
     }
     
     @Transactional
@@ -104,31 +102,4 @@ public class OwnerService {
         }
     }
     
-    public void eliminarPropietario(String id){
-        Optional<Owner> respuesta =propietarioRepositorio.findById(id);
-        
-        if (respuesta.isPresent()) {
-            Owner propietario = respuesta.get();
-            propietarioRepositorio.delete(propietario);
-        }
-    }
-    
-    public void bajaPropietario(String id){
-        Optional<Owner> respuesta =propietarioRepositorio.findById(id);
-        
-        if (respuesta.isPresent()) {
-            Owner propietario = respuesta.get();
-            propietario.setAlta(Boolean.FALSE);
-        }
-    }
-    
-    public Owner getOne(String id){
-        return propietarioRepositorio.getOne(id);
-    }
-    
-    public List<Owner> listaPropietarios(){
-        List<Owner> listaPropietarios=new ArrayList();
-        listaPropietarios= propietarioRepositorio.findAll();
-        return listaPropietarios;
-    }
 }

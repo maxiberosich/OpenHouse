@@ -1,17 +1,18 @@
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import java.util.Date;
 import java.util.List;
 import lombok.Data;
+import openHouse.demo.enums.City;
+import openHouse.demo.enums.PropType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -33,14 +34,14 @@ public class Property {
     @ManyToOne
     private Owner propietario;
     
-    
-    private String ciudad;
+    @Enumerated(EnumType.STRING)
+    private City ciudad;
 
     @OneToMany
     private List<Comment> comentarios;
 
-    
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private PropType tipo;
 
     private Double precioBase;
     private String codigoPostal;
@@ -50,10 +51,10 @@ public class Property {
     private Boolean alta;
     
     //CALENDARIO
-    @Temporal(TemporalType.DATE)
-    private Date fechaAlta;
+    //@Temporal(TemporalType.DATE)
+    //private Date fechaAlta;
     
-    @Temporal(TemporalType.DATE)
-    private Date fechaBaja;
+    //@Temporal(TemporalType.DATE)
+    //private Date fechaBaja;
     
 }

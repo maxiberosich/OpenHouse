@@ -3,7 +3,6 @@ package openHouse.demo.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,8 +23,5 @@ public class Comment {
     
     @OneToOne
     private Property propiedad;
-    
-    @ManyToOne
-    private Client cliente;
 
 }

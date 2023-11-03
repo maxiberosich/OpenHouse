@@ -1,32 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
 
-    <head th:replace="/fragments/head :: head"></head>
+    <head th:replace= "/fragments/head :: head"> </head>
 
-  <body>
-    <!--Barra de navegacion-->
-    <nav th:replace="/fragments/navbar :: nav"></nav>
-    
+    <body>
+        <!--Barra de navegacion-->
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <!-- Hero -->
+        <section class="hero aling-intem-stretch">
+            <div class="hero-principal d-flex flex-column justify-content-center aling-items-center">
+                <img class="hero-imagen"  src="/img/pile1-transformed.jpg" alt="Foto de portada OpenHouse"/>
+
+                <h1>OpenHouse</h1>
+                <h2>La mejor Pagina para tu juntada</h2> 
+            </div>
 
 
-<!--Carrousel-->
-  <section th:replace="/fragments/carrousel :: section"></section>
+            <div class="hero-inferior">
+                <img class="hero-inferior-imagen img-fluid"
+                     src="/img/tragos1.jpg" alt="iniciar sesion, tragos, pileta">
+                <div class="overlay">
+                    <a th:href="@{/login}" style="text-decoration: none"><p>iniciar sesion</p></a>
+                    <div class="iconos-contenedor">
+                        <a th:href="@{/registrarCliente}" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-sun"></i> 
+                        </a>
+                        <p>Registrate!</p>
+                        <a th:href="@{/registrarPropietario}" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-emoji-sunglasses"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
 
+        </section>
+        <!-- Footer -->
 
-  <!<!-- agregar Fragments de Cards -->
-  <div th:replace="/fragments/Carta :: div"></div>
-  
+        <footer th:replace="fragments/footer :: footer"></footer>
 
-<!-- Footer -->
 
-<section th:each="" th:replace="/fragments/footer :: section"></section>
-  
-  
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
