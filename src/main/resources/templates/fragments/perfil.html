@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace= "/fragments/head :: head" </head>
+    <body>
+        <div class="form-group my-3">
+            <input type="file" class="form-control" name="archivo" th:value="${user.image}">
+        </div>
+    </body>
+</html>
