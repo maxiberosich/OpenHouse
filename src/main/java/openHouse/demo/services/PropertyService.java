@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import openHouse.demo.entities.Image;
 import openHouse.demo.entities.Owner;
 import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
@@ -24,10 +25,10 @@ public class PropertyService {
     
     @Autowired
     private PrestationService prestationService;
-    /*
+    
     @Autowired
-    private ImageRepository imageRepository;
-     */
+    private ImageService imageService;
+    
     @Autowired
     private UserRepository userRepository;
 
@@ -53,6 +54,12 @@ public class PropertyService {
             propiedad.setFechaAlta(fechaAlta);
             propiedad.setFechaBaja(fechaBaja);
             
+            
+            List<Image> listaImagen = new ArrayList();
+            //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
+            listaImagen.add(imageService.save(archivo));
+            
+            propiedad.setImagenes(listaImagen);
 
             User usuario = respuesta.get();
             Owner owner = (Owner) usuario;
@@ -130,9 +137,8 @@ public class PropertyService {
         return propertyRepository.getById(id);
     }
 
-    public List<Property> listaPropietarios() {
-        List<Property> listaPropiedades = new ArrayList();
-        listaPropiedades = propertyRepository.findAll();
+    public List<Property> listaPropiedades() {
+        List<Property> listaPropiedades = propertyRepository.findAll();
         return listaPropiedades;
     }
 

@@ -1,4 +1,3 @@
-
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <!-- Faltan cerrar divs -->
@@ -7,9 +6,9 @@
                 <div class="card shadow-sm" th:each="propiedad : ${propertys}">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" th:each="foto : ${imagenes}">
+                            <div class="swiper-slide" >
                                 <!-- Falta logica de como ver la foto -->
-                                <img src="img\Image20231025161308.png" alt="Imagen 1">
+                                <img th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
                             </div>
 
                             <!-- Agrega más imágenes según sea necesario -->
@@ -20,12 +19,14 @@
                         <div class="card-body">
                             <div class="content">
                                 <table class="table">
-                                    <tr >
                                     <tr>
-                                        <td class="cell-with-comment" th:each="${propiedad.ciudad}"> <!-- Puede fallar -->
-                                            <div class="comment" th:text="${propiedad.descripcion}"></div>
+                                        <td class="cell-with-comment" th:text="${propiedad.ciudad}"> <!-- Puede fallar -->
+
                                         </td>
+
                                     </tr>
+                                    <tr>
+                                        <td class="comment" th:text="${propiedad.descripcion}"></td>
                                     </tr>
                                     <tr>
                                         <th th:text="${propiedad.direccion}"></th>
@@ -34,7 +35,8 @@
                                         <th>Disponibilidad</th>
                                     </tr>
                                     <tr>
-                                        <th th:text="${propiedad.precio}"></th>
+                                        <th>$</th>
+                                        <td th:text="${propiedad.precioBase}"></td>
                                     </tr>
                                 </table>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -45,4 +47,8 @@
                 </div>
 
                 </a>
+            </div>
+        </div>
+    </div>
+</div>
 
