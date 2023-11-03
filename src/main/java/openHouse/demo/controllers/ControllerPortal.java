@@ -1,6 +1,7 @@
 package openHouse.demo.controllers;
 
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
@@ -29,9 +30,13 @@ public class ControllerPortal {
     private PropertyService propertyService;
 
     @GetMapping("/")
-    public String inicio() {
+    public String inicio(ModelMap modelo) {
+        List<Property> propiedades = propertyService.listaPropiedades();
+        modelo.addAttribute("propertys",propiedades);
         return "inicio.html";
     }
+    
+    
     
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
@@ -44,13 +49,8 @@ public class ControllerPortal {
     }
     
     @GetMapping("/registrar")
-    public String registrar(@RequestParam(required = false) String error, ModelMap modelo) {
-        
-        if (error != null) {
-            modelo.put("error", "Usuario o contraseña invalidos.");
-        }
-        
-        return "ingresar.html";
+    public String registrar() {
+        return "registrar.html";
     }
     
     @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_PROPIETARIO') or hasRole('ROLE_ADMIN')")

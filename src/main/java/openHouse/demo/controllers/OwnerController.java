@@ -1,10 +1,6 @@
 package openHouse.demo.controllers;
 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import openHouse.demo.enums.City;
-import openHouse.demo.enums.PropType;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.OwnerService;
 import openHouse.demo.services.PropertyService;
@@ -53,22 +49,6 @@ public class OwnerController {
         }
     }
     
-    @GetMapping("/registrarPropiedad")
-    public String registrarPropiedad(){
-        return "registrar_propiedad.html";
-    }
     
-    @PostMapping("/registroPropiedad")
-    public String  registroPropiedad(@RequestParam Double precioBase, @RequestParam String codigoPostal, 
-            @RequestParam String direccion, @RequestParam String descripcion, ModelMap modelo,MultipartFile archivo,City ciudad, PropType tipoPropiedad){
-        
-        try {
-            propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, direccion, archivo, ciudad, tipoPropiedad);
-            return "registrar_propiedad.html";
-        } catch (MiException ex) {
-            modelo.put("error", ex.getMessage());
-            return "registrar_propiedad.html";
-        }
-    }
     
 }

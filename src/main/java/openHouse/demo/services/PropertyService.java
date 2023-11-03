@@ -1,17 +1,17 @@
 package openHouse.demo.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import openHouse.demo.entities.Image;
 import openHouse.demo.entities.Owner;
 import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
-import openHouse.demo.enums.City;
-import openHouse.demo.enums.PropType;
+import openHouse.demo.entities.User;
 import openHouse.demo.exceptions.MiException;
-import openHouse.demo.repositories.OwnerRepository;
-import openHouse.demo.repositories.PrestationRepository;
 import openHouse.demo.repositories.PropertyRepository;
+import openHouse.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,25 +22,26 @@ public class PropertyService {
 
     @Autowired
     private PropertyRepository propertyRepository;
-
+    
     @Autowired
-    private PrestationRepository prestacionesRepository;
-    /*
+    private PrestationService prestationService;
+    
     @Autowired
-    private ImageRepository imageRepository;
-     */
+    private ImageService imageService;
+    
     @Autowired
-    private OwnerRepository owerRepository;
+    private UserRepository userRepository;
 
     @Transactional
     public void crearProperty(Double precioBase,
             String codigoPostal, String direccion, String descripcion, String idOwner,
-            MultipartFile archivo, City ciudad, PropType tipoPropiedad) throws MiException {
+            MultipartFile archivo, String ciudad, String tipoPropiedad,Date fechaAlta,Date fechaBaja) throws MiException {
 
-        Optional<Owner> respuesta = owerRepository.findById(idOwner);
+        validar(precioBase, codigoPostal, direccion, descripcion);
+        
+        Optional<User> respuesta = userRepository.findById(idOwner);
 
-        if (respuesta.isPresent()) {
-            validar(precioBase, codigoPostal, direccion, descripcion);
+        if (respuesta.isPresent()) {            
 
             Property propiedad = new Property();
             propiedad.setPrecioBase(precioBase);
@@ -50,13 +51,22 @@ public class PropertyService {
             propiedad.setAlta(Boolean.TRUE);
             propiedad.setCiudad(ciudad);
             propiedad.setTipo(tipoPropiedad);
+            propiedad.setFechaAlta(fechaAlta);
+            propiedad.setFechaBaja(fechaBaja);
+            
+            
+            List<Image> listaImagen = new ArrayList();
+            //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
+            listaImagen.add(imageService.save(archivo));
+            
+            propiedad.setImagenes(listaImagen);
 
-            Owner propietario = respuesta.get();
-            propiedad.setPropietario(propietario);
+            User usuario = respuesta.get();
+            Owner owner = (Owner) usuario;
+            propiedad.setPropietario(owner);
 
-            Prestation prestaciones = new Prestation();
-            prestaciones = selectPrestaciones(Integer.BYTES, Integer.MIN_VALUE, Integer.MIN_VALUE,
-                    Integer.MIN_VALUE, true, true, true, true, true,
+            Prestation prestaciones = prestationService.createPrestation(2, 2, 3,
+                    1, true, true, true, true, true,
                     true, true, true, true, true, true, true);
 
             propiedad.setPrestaciones(prestaciones);
@@ -127,37 +137,12 @@ public class PropertyService {
         return propertyRepository.getById(id);
     }
 
-    public List<Property> listaPropietarios() {
-        List<Property> listaPropiedades = new ArrayList();
-        listaPropiedades = propertyRepository.findAll();
+    public List<Property> listaPropiedades() {
+        List<Property> listaPropiedades = propertyRepository.findAll();
         return listaPropiedades;
     }
 
-    //crear metodo de rellenarprestaciones.
-    public Prestation selectPrestaciones(Integer cantiPersonas, Integer cantAuto, Integer cantCuarto, Integer cantBanio, boolean pileta,
-             boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi, boolean tv, boolean barra, boolean seAceptanMascotas,
-            boolean aguaCorreinte, boolean cocina, boolean heladera, boolean microondas) {
-        Prestation prestaciones = new Prestation();
-        prestaciones.setCantidadPers(cantiPersonas);
-        prestaciones.setCantAuto(cantAuto);
-        prestaciones.setCantCuarto(cantCuarto);
-        prestaciones.setCantBanio(cantBanio);
-        prestaciones.setPileta(pileta);
-        prestaciones.setAsador(asador);
-        prestaciones.setCochera(cochera);
-        prestaciones.setAireAcondicionado(aireAcondicionado);
-        prestaciones.setWiFi(wiFi);
-        prestaciones.setTv(tv);
-        prestaciones.setBarra(barra);
-        prestaciones.setSeAceptanMascotas(seAceptanMascotas);
-        prestaciones.setAguaCorriente(aguaCorreinte);
-        prestaciones.setCocina(cocina);
-        prestaciones.setHeladera(heladera);
-        prestaciones.setMicroondas(microondas);
-
-        return prestaciones;
-
-    }
+    
     //crear metodo agregaro comentario, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
 }

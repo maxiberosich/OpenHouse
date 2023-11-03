@@ -1,40 +1,42 @@
-
-
-
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
+        <!-- Faltan cerrar divs -->
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm" th:each="propiedad : ${propertys}">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 1"></div>
-                            <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 2"></div>
-                            <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 3"></div>
+                            <div class="swiper-slide" >
+                                <!-- Falta logica de como ver la foto -->
+                                <img th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
+                            </div>
+
                             <!-- Agrega más imágenes según sea necesario -->
                         </div>
                         <div class="swiper-pagination"></div> <!-- Opcional: agregar paginación -->
                     </div>
-                    <a href="#" class="no-subrayado">
+                    <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado">
                         <div class="card-body">
                             <div class="content">
                                 <table class="table">
-                                    <tr >
                                     <tr>
-                                        <td class="cell-with-comment">Descripicion
-                                            <div class="comment">Este es un comentario largo que no debería salir de la celda.</div>
+                                        <td class="cell-with-comment" th:text="${propiedad.ciudad}"> <!-- Puede fallar -->
+
                                         </td>
-                                    </tr>
+
                                     </tr>
                                     <tr>
-                                        <th>Ubicacion</th>
+                                        <td class="comment" th:text="${propiedad.descripcion}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th th:text="${propiedad.direccion}"></th>
                                     </tr>
                                     <tr>
                                         <th>Disponibilidad</th>
                                     </tr>
                                     <tr>
-                                        <th>Precio por noche</th>
+                                        <th>$</th>
+                                        <td th:text="${propiedad.precioBase}"></td>
                                     </tr>
                                 </table>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -43,4 +45,10 @@
                             </div>
                         </div>
                 </div>
+
                 </a>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -13,8 +13,8 @@
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="/registroStyle.css">
     </head>
-    <body>
-        <form class="formulario"  th:action="@{/login}" method="POST">
+    <body>        
+        <form class="formulario"  th:action="@{/logincheck}" method="POST"> 
             <h2 class="create-account">Iniciar Sesion</h2>
 
             <div class="iconos">
@@ -37,12 +37,15 @@
                 </div>
             </div>
 
-            <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p>
-            <input type="email"  th:value="${email}" placeholder="Email">
-            <input type="password" th:value="${password}" placeholder="Contraseña" >
+            <a style="text-decoration: none;" th:href="@{/registrar}"><p class="cuenta-gratis">¿Aun no tienes una cuenta?</p></a>
+            <input type="email"  th:value="${email}" name="email" placeholder="Email">
+            <input type="password" th:value="${password}" name="password" placeholder="Contraseña" >
+            
             <input type="submit" value="Iniciar Sesion">
 
             <a  style="text-decoration: none;" href="/"> <button type="button">Cancelar </button></a>
+            
+            <div th:replace="/fragments/errores :: div"></div>
 
         </form>
     </body>
