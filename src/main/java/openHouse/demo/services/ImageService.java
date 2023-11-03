@@ -1,6 +1,6 @@
 package openHouse.demo.services;
 
-import java.io.IOException;
+/*import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import openHouse.demo.entities.Image;
@@ -30,7 +30,7 @@ public class ImageService {
             }
         }
         return null;
-    }
+    
     
     public Image update(MultipartFile file, String idImage) throws MiException {
         if (file != null) {
@@ -63,3 +63,4 @@ public class ImageService {
     }
     
 }
+*/
