@@ -4,8 +4,8 @@
             <div class="carta-image">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" th:each="foto : ${imagenes}"> <!-- Parcial -->
-                            <img src="img\Image20231025161308.png" alt="Imagen 1"></div> <!--Aqui ira el each -->
+                        <!-- <div class="swiper-slide" th:each="foto : ${propiedad.imagenes}"> Parcial -->
+                            <img th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen 1"> <!--</div> Aqui ira el each -->
                         <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 2"></div>
                         
                         <!-- Agrega las imágenes adicionales aquí -->
@@ -17,9 +17,9 @@
             <div class="carta-content">
                 <h2 th:text="${propiedad.ciudad}">Título de la carta</h2>
                 <p th:text="${propiedad.descripcion}">Descripción de la carta.</p>
-                <p th:text="${propiedad.precio}">Precio: $100</p>
+                <p th:text="${propiedad.precioBase}">Precio: $100</p>
                 <p>Días disponibles: Lunes a Viernes</p>
-                <button type="button" ><a th:href="#">Alquilar</a></button>
+                <button type="button" ><a th:href="@{/}">Alquilar</a></button>
             </div>
         </div>
 
