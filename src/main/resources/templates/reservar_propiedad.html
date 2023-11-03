@@ -13,8 +13,9 @@
 </head>
 
 <body>
-
+    <!-- comment
     <div class="propiedad">
+         
         <div class="card mb-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="30%" height="100"
                 aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"
@@ -22,24 +23,24 @@
                 <rect width="100%" height="100%" fill="#868e96"></rect>
                 <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Imagen propiedad a reservar</text>
 
-
+                
                 <div class="album py-5 bg-body-tertiary">
                     <div class="container">
-                        <!-- Faltan cerrar divs -->
+                  
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             <div class="col">
                                 <div class="card shadow-sm" th:each="propiedad : ${propertys}">
                                     <div class="swiper-container">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <!-- Falta logica de como ver la foto -->
+                                           
                                                 <img th:src="@{/image/propiedad/__${propiedad.id}__}"
                                                     alt="Imagen propiedad" />
                                             </div>
 
-                                            <!-- Agrega más imágenes según sea necesario -->
+                                          
                                         </div>
-                                        <div class="swiper-pagination"></div> <!-- Opcional: agregar paginación -->
+                                        <div class="swiper-pagination"></div>  Opcional: agregar paginación
                                     </div>
                                     <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado">
                                         <div class="card-body">
@@ -47,7 +48,7 @@
                                                 <table class="table">
                                                     <tr>
                                                         <td class="cell-with-comment" th:text="${propiedad.ciudad}">
-                                                            <!-- Puede fallar -->
+                                                            <!-- Puede fallar 
 
                                                         </td>
 
@@ -80,9 +81,7 @@
                 </div>
             </svg>
         </div>
-    </div>
-
-
+    </div> -->
 
     <div class="reserva">
         <div class="row justify-content-center">
@@ -90,16 +89,15 @@
 
                 <div th:replace="/fragments/errores :: div"></div>
 
-
                 <div class="card border-warning mb-3" style="max-width: 20rem;">
                     <div class="card-header">
                         <h2><strong>Formulario de Reserva</strong></h2>
                     </div>
                     <div class="card-body">
-                        <form action="/reserva/crearReserva/__${idPropiedad}__/__${user.id}__" method="POST">
+                        <form th:action="@{/reserva/crearReserva/__${propiedad.id}__/__${user.id}__}" method="POST">
 
                             <input  th:value="${user.id}" name="idCliente">
-                            <input  th:value="${idPropiedad}" name="idPropiedad">
+                            <input  th:value="${propiedad.id}" name="idPropiedad">
 
                             <div class="form-group">
                                 <label for="cantper">Cantidad de personas</label>
@@ -125,12 +123,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 
 
     <section>
