@@ -4,7 +4,7 @@ package openHouse.demo.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import java.util.Date;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -22,12 +22,13 @@ public class Reservation {
     private Date fechaInicio;
     private Date fechaFin;
     
-    @OneToOne
+    @ManyToOne
     private Client cliente;
+    
     private Double precioFinal;
     private Integer cantPersonas;
     
-    @OneToOne
+    @ManyToOne
     private Property propiedad;
              
 }

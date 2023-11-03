@@ -21,15 +21,15 @@
                     <a class="nav-link" th:if="${session.usersession == null}" th:href="@{/registrar}">Crear Cuenta</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" th:if="${session.usersession != null}" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" th:if="${session.usersession != null}" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         Opciones
                     </a>
                     <div class="dropdown-menu">
                         <!-- <a class="dropdown-item" th:href="@{/login}">Iniciar Sesion</a> -->                        
                         <a class="dropdown-item" th:href="@{/}">Modificar</a>
-                        <a class="dropdown-item" href="/logout">Cerrar Sesion</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/propiedad/registrarPropiedad}">Cargar Propiedad</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_PROPIETARIO')" th:href="@{/propiedad/registrarPropiedad}">Cargar Propiedad</a>
+                        <a class="dropdown-item" href="/logout">Cerrar Sesión</a>
                     </div>
                 </li>
             </ul>

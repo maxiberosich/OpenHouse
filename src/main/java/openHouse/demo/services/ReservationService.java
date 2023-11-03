@@ -134,10 +134,10 @@ public class ReservationService {
         
         Optional<Property> respuesta = propertyRepository.findById(idPropiedad);
         if (respuesta.isPresent()) {
-            Property propiedad=new Property();
+            Property propiedad= respuesta.get();
             //faltaria poner precios individuales a la lista de prestaciones 
-            Integer noches=calcularNoches(baja, baja);
-            Double precio= propiedad.getPrecioBase()*noches;
+            Integer noches=calcularNoches(alta, baja);
+            Double precio= propiedad.getPrecioBase() * noches;
             
            return precio;
         }

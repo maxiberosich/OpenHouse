@@ -38,7 +38,7 @@ public class ClientController {
 
             clienteService.createClient(name, password, password2, email, dni, phone, birthdate, archivo);
             model.put("exito", "Cliente registrado correctamente!");
-            return "inicio.html";
+            return "redirect:/login";
         } catch (MiException ex) {
 
             model.put("error", ex.getMessage());
