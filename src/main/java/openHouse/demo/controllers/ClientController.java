@@ -27,7 +27,7 @@ public class ClientController {
     
     @GetMapping("/registrarCliente")
     public String registrarCliente() {
-        return "registrar_cliente.html";
+        return "registrar.html";
     }
 
     @PostMapping("/registroCliente")
@@ -46,7 +46,7 @@ public class ClientController {
             model.put("email",email);
             model.put("dni",dni);
             model.put("phone",phone);
-            return "registrar_cliente.html";
+            return "registrar.html";
         }
     }
     
