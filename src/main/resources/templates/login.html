@@ -40,13 +40,11 @@
             <a style="text-decoration: none;" th:href="@{/registrar}"><p class="cuenta-gratis">¿Aun no tienes una cuenta?</p></a>
             <input type="email"  th:value="${email}" name="email" placeholder="Email">
             <input type="password" th:value="${password}" name="password" placeholder="Contraseña" >
-            
+
             <input type="submit" value="Iniciar Sesion">
-
-            <a  style="text-decoration: none;" href="/"> <button type="button">Cancelar </button></a>
-            
-            <div th:replace="/fragments/errores :: div"></div>
-
+            <a  style="text-decoration: none;" href="/"> <input type="button" value="Cancelar" ></a>
         </form>
+
+        <div th:replace="/fragments/errores :: div"></div>
     </body>
 </html>
