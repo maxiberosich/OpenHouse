@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace= "/fragments/head :: head" </head>
+    <body>
+        <div class="form-group my-3">
+            <form method="POST" enctype="multipart/form-data" th:action="@{/cliente/perfil}"></form>
+            <h1>Acerca del usuario</h1>
+            <img class="logo" src="/static.img/OPENHOUSE.png">
+            <h3>Nombre</h3>
+            <h4>@usuario</h4>
+            <section>
+                <ul>
+                    <li th:value="${user.email}">correo electrónico: </li>
+                    <li th:value="${user.city}">Ciudad: </li>
+                    <li th:value="${user.phone}">Celular: </li>
+                    <li th:value="${user.dni}">DNI: </li>
+                    <li th:value="${user.birthdate}">fecha de nacimiento: </li>
+                </ul>              
+            </section>
+        </div>
+    </body>
+</html>

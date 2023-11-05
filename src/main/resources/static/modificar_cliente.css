@@ -1,0 +1,62 @@
+html{
+    background: lightgray!important;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+     background: lightgray!important;
+
+}
+.form-container {
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid  #000;
+    border-radius: 8px;
+    background-color: #343a40;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: -275px;
+    margin-left: 40%;
+
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+.form-group input[type="submit"] {
+    background-color: #000000;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.36);
+    margin-top: 10px;
+}
+
+.username-color{
+    color: darkred;
+}
+
+fieldset{
+    padding: 20px!important;
+    max-width: 400px!important;
+    max-height: 300px!important;
+    border-radius: 8px!important;
+    margin-right: 100px!important;
+    background: lightcoral!important;
+    margin-top: 80px!important;
+}
+
+#modificar{
+    color: #f3969a;
+}
