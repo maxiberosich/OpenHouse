@@ -3,6 +3,7 @@ package openHouse.demo.controllers;
 import java.util.Date;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.OwnerService;
+import openHouse.demo.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,12 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
     
+    @Autowired
+    private PropertyService propertyService;
+    
     @GetMapping("/registrarPropietario")
     public String registrarProp(){
-        return "registrar_propietario.html"; //completar con html para registrar propiedad
+        return "registrar.html"; //completar con html para registrar propiedad
     }
     
     @PostMapping("/registroPropietario")
@@ -41,8 +45,10 @@ public class OwnerController {
             model.put("dni",dni);
             model.put("phone",phone);
             model.put("cbu",cbu);
-            return "registrar_propietario.html"; //completar con html para registrar propiedad
+            return "registrar.html"; //completar con html para registrar propiedad
         }
     }
+    
+    
     
 }

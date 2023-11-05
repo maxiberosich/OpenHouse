@@ -1,6 +1,7 @@
 
 package openHouse.demo.services;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -8,55 +9,74 @@ import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.Reservation;
 import openHouse.demo.exceptions.MiException;
+import openHouse.demo.repositories.ClientRepository;
 import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+//FALTAN COSASA COMO :CALCULAR PRECIO FINAL -PRECIO BASE X NOCHE + PRESTACIONES(COMO INGRESO A LOS PRECIOS)+CANTIDAD DE PERSONAS
+//CREO QUE PARA HACER MAS FACIL TODO TENEMOS QUE HACER METODOS : CALCULAR PRECIO /CALCULAR NOCHES/CALCULAR PRESTACIONES /CALCULAR PRESONAS.
 
 @Service
 public class ReservationService {
     
     @Autowired
     ReservationRepository reservationRepository;
+        
+    @Autowired
+    private ClientService clientService;
     
     @Autowired
-    PropertyRepository propertyRepository;
+    private PropertyRepository propertyRepository;
     
-    @Transactional
+    @Autowired
+    private ClientRepository clienteRepository;
+    
     //como calculamos el precio final?
     //traer cliente con el id
     //traer propiedad con id
-    public void crearReservacion(Date fechaInicio, Date fechaFin, Client cliente,
-    Double precioFinal, Integer cantPersonas, Property propiedad ) throws MiException{
-        //validar
+    @Transactional
+    public void crearReservacion(Date fechaInicio, Date fechaFin, String idCliente,
+     Integer cantPersonas, String idPropiedad ) throws MiException{
+        
+        
+        Optional<Property> respuestaPropiedad=propertyRepository.findById(idPropiedad);
+        Optional<Client> respuestaCliente=clienteRepository.findById(idCliente);
+        
+        validar(fechaInicio, fechaFin, cantPersonas);
                 
         Reservation reservation = new Reservation();
         
         
         reservation.setFechaInicio(fechaInicio);
         reservation.setFechaFin(fechaFin);
-        reservation.setCliente(cliente);
-        reservation.setPrecioFinal(precioFinal);
         reservation.setCantPersonas(cantPersonas);
+        reservation.setAlta(true);
+        
+        Client cliente =respuestaCliente.get();
+        reservation.setCliente(cliente);
+        
+        Property propiedad=respuestaPropiedad.get();
         reservation.setPropiedad(propiedad);
         
         
-            
+        Double precioFinal=precio(fechaFin, fechaFin, idPropiedad);
+        reservation.setPrecioFinal(precioFinal);
+        reservation.setCliente(clientService.getOne(cliente.getId()));
+        
+        reservationRepository.save(reservation);
     }
      
     //que no sea nulo el id de cliente ni de propiedad
-    public void Validar( Date fechaInicio, Date fechaFin, Client cliente,
-    Double precioFinal, Integer cantPersonas, Property propiedad ) throws MiException{
+    public void validar( Date fechaInicio, Date fechaFin,
+            Integer cantPersonas ) throws MiException{
         if (fechaInicio == null) {
             throw new MiException("Seleccione una fecha de inicio de la reserva");
         }
         if (fechaFin == null) {
             throw new MiException("Seleccione una fecha de fin de la reserva");
         }  
-         if (fechaInicio == null) {
-            throw new MiException("Seleccione una fecha de inicio");
-        }
         if (cantPersonas == null || cantPersonas == 0) {
             throw new MiException("La cantidad de personas no puede estar vacía o ser 0");
         }
@@ -66,7 +86,7 @@ public class ReservationService {
      Integer cantPersonas, String idPropiedad, String idPropietario,String idReserva) throws MiException{
         
         
-        Validar(fechaInicio, fechaFin, idPropietario, cantPersonas, cantPersonas, idPropiedad);
+        validar(fechaInicio, fechaFin, cantPersonas);
         
         Optional<Reservation> respuestaReserva= reservationRepository.findById(idReserva);
         
