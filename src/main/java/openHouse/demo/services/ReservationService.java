@@ -2,10 +2,13 @@
 package openHouse.demo.services;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.Reservation;
 import openHouse.demo.exceptions.MiException;
+import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ public class ReservationService {
     
     @Autowired
     ReservationRepository reservationRepository;
+    
+    @Autowired
+    PropertyRepository propertyRepository;
     
     @Transactional
     //como calculamos el precio final?
@@ -56,13 +62,11 @@ public class ReservationService {
         }
     }
     
-<<<<<<< HEAD
-=======
     public void modificarReserva(Date fechaInicio, Date fechaFin, 
      Integer cantPersonas, String idPropiedad, String idPropietario,String idReserva) throws MiException{
         
         
-        validar(fechaInicio, fechaFin, cantPersonas);
+        Validar(fechaInicio, fechaFin, idPropietario, cantPersonas, cantPersonas, idPropiedad);
         
         Optional<Reservation> respuestaReserva= reservationRepository.findById(idReserva);
         
@@ -131,5 +135,4 @@ public class ReservationService {
             return noches;
     }
     
->>>>>>> 0c0b9adeb220d1facf2de59d4518a5327ddf5f16
 }
