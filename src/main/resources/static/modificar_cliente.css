@@ -1,11 +1,12 @@
 
+
 /* 
     Created on : 1 nov. 2023, 17:30:01
     Author     : yazminferreyra
 */
 
 html{
-    background: lightgray;
+    background: lightgray!important;
 }
 
 body {
@@ -13,16 +14,18 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
+     background: lightgray!important;
 
 }
 .form-container {
     max-width: 400px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid  #000;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #343a40;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-top: 100px;
+    margin-top: -275px;
+    margin-left: 40%;
 
 }
 .form-group {
@@ -52,14 +55,15 @@ body {
 }
 
 fieldset{
+    padding: 20px!important;
+    max-width: 400px!important;
+    max-height: 300px!important;
+    border-radius: 8px!important;
+    margin-right: 100px!important;
+    background: lightcoral!important;
+    margin-top: 80px!important;
+}
 
-    padding: 20px;
-    max-width: 500px;
-    border-radius: 8px;
-    max-height: 300px;
-    margin-left:  -100px;
-    margin-right: 100px;
-    background: lightcoral;
-    margin-left: -30%;
-    margin-right: 10%;
+#modificar{
+    color: #f3969a;
 }
