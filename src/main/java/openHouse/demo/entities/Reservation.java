@@ -30,5 +30,5 @@ public class Reservation {
     
     @ManyToOne
     private Property propiedad;
-            
+             
 }

@@ -31,6 +31,9 @@ public class ImageService {
         }
         return null;
     }
+    
+    
+    
 
     public Image update(MultipartFile file, String idImage) throws MiException {
         if (file != null) {
@@ -58,4 +61,9 @@ public class ImageService {
         return imageRepository.findAll();
     }
 
+    public void delete(String id) {
+        imageRepository.deleteById(id);
+    }
+
 }
+
