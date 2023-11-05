@@ -47,6 +47,6 @@ public class ControllerPortal {
             return "redirect:/admin/dashboard";
         }
         
-        return "inicio.html";
+        return "redirect:/";
     }
 }

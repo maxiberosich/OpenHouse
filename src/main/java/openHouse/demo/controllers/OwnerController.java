@@ -33,7 +33,7 @@ public class OwnerController {
         try {
             ownerService.crearPropietario(name,password,password2,email,dni,phone,birthdate,cbu,archivo);
             model.put("exito", "Propietario creado correctamente!");
-            return "inicio.html";
+            return "redirect:/login";
         } catch (MiException ex) {
             model.put("error", ex.getMessage());
             model.put("name",name);

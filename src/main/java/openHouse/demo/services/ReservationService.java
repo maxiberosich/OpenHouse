@@ -56,4 +56,80 @@ public class ReservationService {
         }
     }
     
+<<<<<<< HEAD
+=======
+    public void modificarReserva(Date fechaInicio, Date fechaFin, 
+     Integer cantPersonas, String idPropiedad, String idPropietario,String idReserva) throws MiException{
+        
+        
+        validar(fechaInicio, fechaFin, cantPersonas);
+        
+        Optional<Reservation> respuestaReserva= reservationRepository.findById(idReserva);
+        
+        if (respuestaReserva.isPresent()) {
+            Reservation reservation=respuestaReserva.get();
+            reservation.setFechaInicio(fechaInicio);
+            reservation.setFechaFin(fechaFin);
+            reservation.setCantPersonas(cantPersonas);
+            //DEFINIR COMO CALCULAMOS EL PRECIO FINAL !!LO MISMO PARA CALCULAS LOS DIAS QUE LAS NOCHES
+            Double precioNuevo=precio(fechaFin, fechaFin, idPropietario);
+            reservation.setPrecioFinal(precioNuevo);
+            reservationRepository.save(reservation);
+        }
+    }
+    
+    public void eliminarReserva(String idReserva){
+        Optional<Reservation> respuesta=reservationRepository.findById(idReserva);
+        if (respuesta.isPresent()) {
+            Reservation reserva=respuesta.get();
+            reservationRepository.delete(reserva);
+        }
+    }
+    
+    public void bajaReserva(String id){
+        Optional<Reservation> respuesta =reservationRepository.findById(id);
+        
+        if (respuesta.isPresent()) {
+            Reservation reserva = respuesta.get();
+            reserva.setAlta(Boolean.FALSE);
+        }
+    }
+    
+    public void altaReserva(String id){
+        Optional<Reservation> respuesta =reservationRepository.findById(id);
+        
+        if (respuesta.isPresent()) {
+            Reservation reserva = respuesta.get();
+            reserva.setAlta(Boolean.TRUE);
+        }
+    }
+    
+    
+    ///revisar el calulo de los date!ESTO VA EN RESERVACION SERVICE
+    public Double precio(Date alta,Date baja, String idPropiedad){
+        
+        Optional<Property> respuesta = propertyRepository.findById(idPropiedad);
+        if (respuesta.isPresent()) {
+            Property propiedad= respuesta.get();
+            //faltaria poner precios individuales a la lista de prestaciones 
+            Integer noches=calcularNoches(alta, baja);
+            Double precio= propiedad.getPrecioBase() * noches;
+            
+           return precio;
+        }
+        return null;
+    }
+    
+    
+    public Integer calcularNoches(Date fechaInicio,Date fechaFin){
+            long elapsedms=fechaFin.getTime()-fechaInicio.getTime();
+            long diff = TimeUnit.MINUTES.convert(elapsedms, TimeUnit.MILLISECONDS);
+            diff=(diff/1440);
+            Integer noches;
+            
+            noches = Math.toIntExact(diff);
+            return noches;
+    }
+    
+>>>>>>> 0c0b9adeb220d1facf2de59d4518a5327ddf5f16
 }
