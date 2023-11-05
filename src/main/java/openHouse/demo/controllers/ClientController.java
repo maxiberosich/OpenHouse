@@ -3,6 +3,7 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import openHouse.demo.entities.Client;
+import openHouse.demo.entities.User;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,19 +51,19 @@ public class ClientController {
         }
     }
     
-    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_PROPIETARIO')")
     @GetMapping("/modificar")
     public String perfil(ModelMap modelo, HttpSession session){
         
         
-        Client cliente = (Client) session.getAttribute("usersession");
+        User cliente = (User) session.getAttribute("usersession");
         
         modelo.put("cliente", cliente);
         
         return "modificar_cliente.html";
     }
     
-    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_PROPIETARIO')")
     @PostMapping("/modificar/{id}")
     public String modificarCliente(@PathVariable String id,@RequestParam String name,@RequestParam String email,
             @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
