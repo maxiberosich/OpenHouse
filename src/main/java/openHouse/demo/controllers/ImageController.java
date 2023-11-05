@@ -35,22 +35,7 @@ public class ImageController {
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
-    /*
-    @GetMapping("/propiedad/{id}")
-    public ResponseEntity<List<byte[]>> imagenPropiedad(@PathVariable String id) {
-        Property propiedad = propertyService.getOne(id);
-        List<Image> imagenes = propiedad.getImagenes();
-        
-        List<byte[]> imagenBytes = new ArrayList();
-        for(Image imagen : imagenes){
-            imagenBytes.add(imagen.getContent());
-        }
-        
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(imagenBytes, headers, HttpStatus.OK);
-    }
-*/
+    
     @GetMapping("/propiedad/{id}")
     public ResponseEntity<byte[]> imagenPropiedad(@PathVariable String id) {
         Property propiedad = propertyService.getOne(id);
