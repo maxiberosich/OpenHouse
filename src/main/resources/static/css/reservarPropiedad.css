@@ -1,0 +1,23 @@
+
+.box {
+
+  text-align: center;
+  display: flex; 
+  margin: 20px; /* Espacio entre los divs */
+ 
+}
+.box-res{
+    width: 70cm;
+  height: 25cm;;
+ align-content: left;
+ position: relative;
+    left: 350px; 
+
+}
+.box-prop{
+  position: relative;
+    right: 60px; 
+}
+
+
+
