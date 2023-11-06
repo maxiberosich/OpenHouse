@@ -41,11 +41,11 @@ public class ReservationController {
     @PostMapping("/crearReserva/{idPropiedad}/{idCliente}")
     public String creacionReserva(ModelMap modelo,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")
             Date fechaInicio,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")
-            Date fechaFin,@PathVariable String idCliente, @RequestParam Integer cantPersonas,
+            Date fechaFin,@PathVariable String idCliente, @RequestParam String cantPersonas,
             @PathVariable String idPropiedad){
         
         try {
-            reservaServicio.crearReservacion(fechaInicio, fechaFin, idCliente, cantPersonas, idPropiedad);
+            reservaServicio.crearReservacion(fechaInicio, fechaFin, idCliente,Integer.valueOf(cantPersonas) , idPropiedad);
             
             modelo.put("exito", "Reservacion agendada correctamente");
             return "redirect:/";

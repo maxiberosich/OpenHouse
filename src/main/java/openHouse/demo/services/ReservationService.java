@@ -61,7 +61,7 @@ public class ReservationService {
         reservation.setPropiedad(propiedad);
         
         
-        Double precioFinal=precio(fechaFin, fechaFin, idPropiedad);
+        Double precioFinal=precio(fechaInicio, fechaFin, idPropiedad);
         reservation.setPrecioFinal(precioFinal);
         reservation.setCliente(clientService.getOne(cliente.getId()));
         
@@ -147,11 +147,12 @@ public class ReservationService {
     
     public Integer calcularNoches(Date fechaInicio,Date fechaFin){
             long elapsedms=fechaFin.getTime()-fechaInicio.getTime();
-            long diff = TimeUnit.MINUTES.convert(elapsedms, TimeUnit.MILLISECONDS);
-            diff=(diff/1440);
-            Integer noches;
             
+            //long diff = TimeUnit.MINUTES.convert(elapsedms, TimeUnit.MILLISECONDS);
+            long diff=(elapsedms/86400000);
+            Integer noches;
             noches = Math.toIntExact(diff);
+
             return noches;
     }
     
