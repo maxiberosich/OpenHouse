@@ -48,7 +48,7 @@ public class ReservationController {
             reservaServicio.crearReservacion(fechaInicio, fechaFin, idCliente, cantPersonas, idPropiedad);
             
             modelo.put("exito", "Reservacion agendada correctamente");
-            return "inicio.html";
+            return "redirect:/";
         } catch (MiException ex) {
             
             modelo.put("error", ex.getMessage());
