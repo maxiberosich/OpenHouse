@@ -61,8 +61,8 @@ public class ControllerPortal {
         
         if (logeado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
+        }else{
+            return "redirect:/";
         }
-        
-        return "redirect:/";
     }
 }

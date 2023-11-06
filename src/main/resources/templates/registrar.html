@@ -1,4 +1,5 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Registrar</title>
@@ -19,8 +20,8 @@
                     <h2>Bienvenido a Open-House</h2>
                     <p>Si eres Locador registrate aqui</p>
                     <button class="sign-up-btn">Registrar Locador</button>
-                    <a    href="/"> <button class="sign-in-btn" href="/">Volver</button></a>
-                </div>
+                    <a   href="/"> <button class="btn">Volver</button></a>
+                 </div>
             </div>
 
             <div class="container">
@@ -56,14 +57,13 @@
                     <input type="file" name="archivo" placeholder="Cargar archivo">
                     <input class="formulario input" type="submit" value="Registrarse">
 
-
                 </form>
             </div>
         </div>
 
         <div class="container-form sign-in">
             <form class="formulario"  method="POST" enctype="multipart/form-data" th:action="@{/propietario/registroPropietario}">
-                <h2 class="create-account">Crear una cuenta Locador</h2>
+                <h2 class="create-account">Crear una cuenta</h2>
 
                 <div class="iconos">
                     <div class="border-icon">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <p class="cuenta-gratis">Crear una cuenta</p>
+                <p class="cuenta-gratis">Crear una cuenta Locador</p>
                 <input class="color-input"   name="name" type="text" placeholder="Nombre">
                 <input type="email"  name="email" placeholder="Email">
                 <input type="password"  name="password" placeholder="Contraseña">
@@ -95,7 +95,6 @@
                 <input type="file" name="archivo" placeholder="Cargar archivo">
                 <input class="formulario input" type="submit" value="Registrarse">
 
-
             </form>
 
 
@@ -104,9 +103,10 @@
                     <h2>Bienvenido a Open-House</h2>
                     <p>Registrarse como Cliente</p>
                     <button class="sign-in-btn">Registrarse</button>
-                     <a    href="/"> <button class="sign-in-btn" href="/">Volver</button></a>
+                      <a    href="/"> <button class="btn">Volver</button></a>
                 </div>
             </div>
+        </div>
 
         <script src="/script.js"></script>
     </body>
