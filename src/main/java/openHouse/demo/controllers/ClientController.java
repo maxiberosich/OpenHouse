@@ -76,7 +76,7 @@ public class ClientController {
 
             modelo.put("exito", "Cliente actualizado correctamente!");
 
-            return "inicio.html";
+            return "redirect:/";
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());
