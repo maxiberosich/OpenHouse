@@ -11,18 +11,18 @@
         <link rel="stylesheet" href="/modificar_cliente.css">
     <div th:replace="/fragments/head2 :: head"></div>
 </head>
-<nav th:replace="/fragments/navbar :: nav"></nav>
+
 
 <body style="display: block!important">
 
-
+    <nav th:replace="/fragments/navbar :: nav"></nav>
     <fieldset >
         <div class="top-20 end-80">
             <div class="registrar" style="align-items: center!important; border-radius: 30px!important;
                  margin: 40px!important;  margin-right: 10px!important; margin-left: 10px!important;"> 
 
                 <h1 class="saludo text-white" style="text-align: center; font-size:  var ">
-                    Hola »<span class="username-color" th:text=" ${cliente.name}"></span>« 
+                    Hola »<span class="username-color" th:text="${cliente.name}"></span>« 
                 </h1>
 
                 <div class="centered">
@@ -40,9 +40,9 @@
     <div style="" class="form-container">
         <h1 id="modificar">Modificar Usuario</h1>
 
-        <form action="procesar_modificacion_cliente.php" th:action="@{/modificar/__${cliente.id}__}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/cliente/modificar/__${cliente.id}__}" action="procesar_modificacion_cliente.php" method="POST" enctype="multipart/form-data">
 
-            <input hidden th:value="${id}" name="id">
+            <input hidden th:value="${cliente.id}" name="id">
 
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
