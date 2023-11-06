@@ -96,8 +96,8 @@
                     <div class="card-body">
                         <form th:action="@{/reserva/crearReserva/__${propiedad.id}__/__${user.id}__}" method="POST">
 
-                            <input  th:value="${user.id}" name="idCliente">
-                            <input  th:value="${propiedad.id}" name="idPropiedad">
+                            <input hidden th:value="${user.id}" name="idCliente">
+                            <input hidden th:value="${propiedad.id}" name="idPropiedad">
 
                             <div class="form-group">
                                 <label for="cantper">Cantidad de personas</label>
