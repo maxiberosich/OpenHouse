@@ -6,148 +6,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="./inicio.css">
+    
+    
     <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+    <link href="/css/reservaPropiedad.css" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
-    <!-- comment
-    <div class="propiedad">
-         
-        <div class="card mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="30%" height="100"
-                aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"
-                viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Imagen propiedad a reservar</text>
 
-                
-                <div class="album py-5 bg-body-tertiary">
-                    <div class="container">
-                  
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            <div class="col">
-                                <div class="card shadow-sm" th:each="propiedad : ${propertys}">
-                                    <div class="swiper-container">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                           
-                                                <img th:src="@{/image/propiedad/__${propiedad.id}__}"
-                                                    alt="Imagen propiedad" />
-                                            </div>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="/img/iconoyaz.png" class="iconoyaz" width="50" alt="Logo de la pagina web" />
+            </a>
+            <a class="navbar-brand" th:href="@{/}">Open-House</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Navegación de palanca">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                                          
-                                        </div>
-                                        <div class="swiper-pagination"></div>  Opcional: agregar paginación
-                                    </div>
-                                    <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado">
-                                        <div class="card-body">
-                                            <div class="content">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td class="cell-with-comment" th:text="${propiedad.ciudad}">
-                                                            <!-- Puede fallar 
-
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="comment" th:text="${propiedad.descripcion}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th th:text="${propiedad.direccion}"></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Disponibilidad</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>$</th>
-                                                        <td th:text="${propiedad.precioBase}"></td>
-                                                    </tr>
-                                                </table>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <small class="text-body-secondary">Puntuacion</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </svg>
         </div>
-    </div> -->
+    </nav>
 
-    <div class="reserva">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
 
-                <div th:replace="/fragments/errores :: div"></div>
+    <div class="box">
 
-                <div class="card border-warning mb-3" style="max-width: 20rem;">
-                    <div class="card-header">
-                        <h2><strong>Formulario de Reserva</strong></h2>
-                    </div>
-                    <div class="card-body">
-                        <form th:action="@{/reserva/crearReserva/__${propiedad.id}__/__${user.id}__}" method="POST">
+        <div class="box-res">
+            <div>
+                <div class="col-md-6">
 
-                            <input hidden th:value="${user.id}" name="idCliente">
-                            <input hidden th:value="${propiedad.id}" name="idPropiedad">
+                    <div th:replace="/fragments/errores :: div"></div>
 
+                    <div class="card border-warning mb-3">
+                        <div class="card-header">
+                            <h2><strong>Formulario de Reserva</strong></h2>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/reserva/crearReserva/__${propiedad.id}__/__${user.id}__}" method="POST">
+
+                                <input hidden th:value="${user.id}" name="idCliente">
+                                <input hidden th:value="${propiedad.id}" name="idPropiedad">
+                                <p>Total de personas: <span id="totalPersonas">0</span></p>
+                                <label for="adultos">Adultos:</label>
+                                <select id="adultos" name="adultos" onchange="calcularCantidad()">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <br>
+                                <label for="ninos">Niños mayores a 12 años:</label>
+                                <select id="ninos" name="ninos" onchange="calcularCantidad()">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+
+                                </select>
+                                <br>
+                                <label for="bebes">Niños menores de 12 años:</label>
+                                <select id="bebes" name="bebes" onchange="calcularCantidad()">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </form>
+
+
+
+                            <label>
+                                <input type="checkbox" name="eventoPrivado" id="eventoPrivado">
+                                Utilizaré la propiedad para un evento privado.
+                            </label>
+
+
+
+
+                        </div>
+                        <form id="reservaForm">
                             <div class="form-group">
-                                <label for="cantper">Cantidad de personas</label>
-                                <input placeholder="Cantidad de personas" type="number" class="form-control" id="fecha"
-                                    name="cantPersonas" required>
+                                <label for="fechaInicio">Fecha ingreso:</label>
+                                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
                             </div>
                             <div class="form-group">
-                                <label for="fechai">Fecha ingreso:</label>
-                                <input type="date" class="form-control" id="fecha" name="fechaInicio" required>
+                                <label for="fechaFin">Fecha egreso:</label>
+                                <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
                             </div>
-                            <div class="form-group">
-                                <label for="fechae">Fecha egreso:</label>
-                                <input type="date" class="form-control" id="fecha" name="fechaFin" required>
-                            </div>
-                            <button 
-                                type="submit" 
-                                class="btn btn-primary">Crear Reserva</button>
+                            <div id="diasReserva"></div>
+                            <br>
+
+                            <button type="submit" class="btn btn-primary">Crear Reserva</button>
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
 
 
+
+        <div class="box-prop" style="width: 70%;">
+            <div>
+                <div>
+                    <div>
+                        <div class="col" th:each="propiedad : ${propertys}">
+                            <div class="card shadow-sm">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide"
+                                            th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}">
+
+                                            <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}"
+                                                th:src="@{/image/propiedad/__${propiedad.id}__}"
+                                                alt="Imagen propiedad" />
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                                <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado"> </a>
+                                <div class="card-body">
+                                    <div class="content">
+                                        <table class="table">
+                                            <tr>
+                                                <td class="cell-with-comment" th:text="${propiedad.ciudad}">
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td class="comment" th:text="${propiedad.descripcion}"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <th th:text="${propiedad.direccion}"></th>
+                                            </tr>
+
+                                            <tr>
+                                                <th>$</th>
+                                                <td th:text="${propiedad.precioBase}"></td>
+                                            </tr>
+                                        </table>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-body-secondary">Puntuacion</small>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
-    <section>
-        <div class="b-example-divider"></div>
 
-        <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
-                    <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                        <svg class="bi" width="30" height="24">
-                            <use xlink:href="#bootstrap" />
-                        </svg>
-                        <img src="img/iconoyaz.png" alt="Logo de Open-House" width="50" height="50">
-                    </a>
-                    <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Open-House, Inc</span>
-                </div>
+    <div>
+        <section>
+            <div class="container">
+                <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                            <svg class="bi" width="30" height="24">
+                                <use xlink:href="#bootstrap" />
+                            </svg>
+                            <img src="img/iconoyaz.png" alt="Logo de Open-House" width="50" height="50">
+                        </a>
+                        <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Open-House, Inc</span>
+                    </div>
 
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-twitter"></i></a></li>
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-instagram"></i></a></li>
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-facebook"></i></a></li>
-                </ul>
-            </footer>
-        </div>
-    </section>
+                    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                        <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-twitter"></i></a></li>
+                        <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-instagram"></i></a>
+                        </li>
+                        <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-facebook"></i></a></li>
+                    </ul>
+                </footer>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function calcularCantidad() {
+            const adultos = parseInt(document.getElementById("adultos").value);
+            const ninos = parseInt(document.getElementById("ninos").value);
+            const bebes = parseInt(document.getElementById("bebes").value);
+            const totalPersonas = adultos + ninos + bebes;
+
+            document.getElementById("totalPersonas").textContent = totalPersonas;
+        }
+
+    </script>
+
+    <script>
+
+        function calcularDiasDeReserva() {
+            const fechaInicioInput = document.getElementById("fechaInicio");
+            const fechaFinInput = document.getElementById("fechaFin");
+            const diasReservaElement = document.getElementById("diasReserva");
+
+
+            if (fechaInicioInput.value && fechaFinInput.value) {
+                const fechaInicio = new Date(fechaInicioInput.value);
+                const fechaFin = new Date(fechaFinInput.value);
+
+                const diferenciaEnMilisegundos = fechaFin - fechaInicio;
+
+                const dias = Math.ceil(diferenciaEnMilisegundos / (1000 * 60 * 60 * 24));
+
+                diasReservaElement.textContent = `Total de días reservados: ${dias}`;
+            } else {
+                diasReservaElement.textContent = "Selecciona ambas fechas para calcular los días de reserva.";
+            }
+        }
+        document.getElementById("fechaInicio").addEventListener("change", calcularDiasDeReserva);
+        document.getElementById("fechaFin").addEventListener("change", calcularDiasDeReserva);
+    </script>
 
 
 
@@ -156,4 +253,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
-</html>                       
+</html>
