@@ -22,27 +22,26 @@ public class PropertyService {
 
     @Autowired
     private PropertyRepository propertyRepository;
-    
+
     @Autowired
     private PrestationService prestationService;
-    
+
     @Autowired
     private ImageService imageService;
-    
+
     @Autowired
     private UserRepository userRepository;
 
     @Transactional
     public void crearProperty(Double precioBase,
-            String codigoPostal, String direccion, String descripcion, String idOwner,
-            MultipartFile archivo, String ciudad, String tipoPropiedad,Date fechaAlta,Date fechaBaja) throws MiException {
+            String codigoPostal, String direccion, String descripcion, String idOwner, MultipartFile archivo,
+            String ciudad, String tipoPropiedad, Integer capMaxPersonas, Date fechaAlta, Date fechaBaja) throws MiException {
 
-        validar(precioBase, codigoPostal, direccion, descripcion);
-        
+        validar(precioBase, codigoPostal, direccion, descripcion, capMaxPersonas);
+
         Optional<User> respuesta = userRepository.findById(idOwner);
 
-        if (respuesta.isPresent()) {            
-
+        if (respuesta.isPresent()) {
             Property propiedad = new Property();
             propiedad.setPrecioBase(precioBase);
             propiedad.setCodigoPostal(codigoPostal);
@@ -51,14 +50,15 @@ public class PropertyService {
             propiedad.setAlta(Boolean.TRUE);
             propiedad.setCiudad(ciudad);
             propiedad.setTipo(tipoPropiedad);
+            propiedad.setPermitidoFiestas(Boolean.TRUE);
+            propiedad.setCapMaxPersonas(capMaxPersonas);
             propiedad.setFechaAlta(fechaAlta);
             propiedad.setFechaBaja(fechaBaja);
-            
-            
+
             List<Image> listaImagen = new ArrayList();
             //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
             listaImagen.add(imageService.save(archivo));
-            
+
             propiedad.setImagenes(listaImagen);
 
             User usuario = respuesta.get();
@@ -81,40 +81,37 @@ public class PropertyService {
         propiedades = propertyRepository.buscarPorCodigoPostal(cp);
         return propiedades;
     }
-    
+
     @Transactional
-    public List<Property> buscarPorCiudad(String ciudad){
+    public List<Property> buscarPorCiudad(String ciudad) {
         List<Property> propiedadesCiudad = new ArrayList();
         propiedadesCiudad = propertyRepository.buscarPorCiudad(ciudad);
         return propiedadesCiudad;
     }
-    
+
     @Transactional
-    public List<Property> buscarSegunPrecio(String precioMinimo, String precioMaximo){
+    public List<Property> buscarSegunPrecio(String precioMinimo, String precioMaximo) {
         List<Property> propiedadesSegunPrecio = new ArrayList();
-        
         propiedadesSegunPrecio = propertyRepository.buscarSegunPrecio(precioMinimo, precioMaximo);
-        
         return propiedadesSegunPrecio;
     }
-         
-    public void validar (Double precioBase,
-            String codigoPostal,String direccion,String descripcion ) throws MiException{
-       
-        
-        if (precioBase==null) {
-            throw new MiException("Por favor indicar el precio base por noche!Se podra modificar mas adelante !");
+
+    public void validar(Double precioBase, String codigoPostal, String direccion, String descripcion, Integer capMaxPersonas) throws MiException {
+        if (precioBase == null) {
+            throw new MiException("Por favor indicar el precio base por noche! Se podrá modificar más adelante!");
         }
         if (codigoPostal == null) {
-            throw new MiException("Tiene que indicar el Codigo Postal de la propiedad , por favor.");
+            throw new MiException("Tiene que indicar el Código Postal de la propiedad, por favor.");
         }
         if (direccion == null) {
-            throw new MiException("Tiene que indicar la direccion exacta de la propiedad , por favor.");
+            throw new MiException("Tiene que indicar la dirección exacta de la propiedad, por favor.");
         }
         if (descripcion == null) {
-            throw new MiException("Por favor debe insertar un comentario, ayudara mucho al cliente a tomar una decision.");
+            throw new MiException("Por favor debe insertar un comentario, ayudará mucho al cliente a tomar una decisión.");
         }
-
+        if (capMaxPersonas == null) {
+            throw new MiException("Por favor, debe especificar la capacidad máxima de personas para la propiedad");
+        }
     }
 
     public void bajaPropiedad(String id) {
@@ -122,6 +119,14 @@ public class PropertyService {
         if (respuesta.isPresent()) {
             Property propiedad = respuesta.get();
             propiedad.setAlta(Boolean.FALSE);
+        }
+    }
+
+    public void permisionFiesta(String id) {
+        Optional<Property> respuesta = propertyRepository.findById(id);
+        if (respuesta.isPresent()) {
+            Property propiedad = respuesta.get();
+            propiedad.setPermitidoFiestas(Boolean.FALSE);
         }
     }
 
@@ -141,15 +146,14 @@ public class PropertyService {
         List<Property> listaPropiedades = propertyRepository.findAll();
         return listaPropiedades;
     }
-    
+
     @Transactional
-    public Property buscarPropiedad(String id){
+    public Property buscarPropiedad(String id) {
         Optional<Property> propiedadSeleccionada = propertyRepository.findById(id);
         Property propiedad = propiedadSeleccionada.get();
         return propiedad;
     }
 
-    
-    //crear metodo agregaro comentario, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
+    //crear metodo agregar comentario, lo tiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
 }
