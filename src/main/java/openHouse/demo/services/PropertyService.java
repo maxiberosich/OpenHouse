@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import openHouse.demo.entities.Client;
+import openHouse.demo.entities.Comment;
 import openHouse.demo.entities.Image;
 import openHouse.demo.entities.Owner;
 import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.exceptions.MiException;
+import openHouse.demo.repositories.ClientRepository;
 import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class PropertyService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ClientRepository clienteRepository;
 
     @Transactional
     public void crearProperty(Double precioBase,
@@ -64,28 +70,24 @@ public class PropertyService {
             User usuario = respuesta.get();
             Owner owner = (Owner) usuario;
             propiedad.setPropietario(owner);
-
-            Prestation prestaciones = prestationService.createPrestation(2, 2, 3,
-                    1, true, true, true, true, true,
-                    true, true, true, true, true, true, true);
-
-            propiedad.setPrestaciones(prestaciones);
+            
+          
 
             propertyRepository.save(propiedad);
         }
     }
-    
+
     @Transactional
-     public void modificarPropiedad(Double precioBase, String idProperty, Integer capMaxPersonas,
-            String codigoPostal, String direccion, String descripcion, 
-            MultipartFile archivo, String ciudad, String tipoPropiedad,Date fechaAlta,Date fechaBaja) throws MiException{
-        
+    public void modificarPropiedad(Double precioBase, String idProperty, Integer capMaxPersonas,
+            String codigoPostal, String direccion, String descripcion,
+            MultipartFile archivo, String ciudad, String tipoPropiedad, Date fechaAlta, Date fechaBaja) throws MiException {
+
         validar(precioBase, codigoPostal, direccion, descripcion, capMaxPersonas);
-        
-        Optional<Property> respuesta= propertyRepository.findById(idProperty);
-        
-        if(respuesta.isPresent()){
-            Property propiedad= respuesta.get();
+
+        Optional<Property> respuesta = propertyRepository.findById(idProperty);
+
+        if (respuesta.isPresent()) {
+            Property propiedad = respuesta.get();
             propiedad.setPrecioBase(precioBase);
             propiedad.setCapMaxPersonas(capMaxPersonas);
             propiedad.setCodigoPostal(codigoPostal);
@@ -101,11 +103,11 @@ public class PropertyService {
             listaImagen.add(imageService.save(archivo));
 
             propiedad.setImagenes(listaImagen);
-            
+
             propertyRepository.save(propiedad);
-                    
+
         }
-        
+
     }
 
     @Transactional
@@ -183,5 +185,33 @@ public class PropertyService {
     
 
     //crear metodo agregar comentario, lo tiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
+    @Transactional
+    public void agregarComentario(String idCliente, String idPopiedad, String cuerpo, Double valoracion,
+             MultipartFile archivo) throws MiException {
+
+        Optional<Client> respuestaCliente = clienteRepository.findById(idCliente);
+        Optional<Property> respuestaPropiedad = propertyRepository.findById(idPopiedad);
+
+        if (respuestaCliente.isPresent() && respuestaPropiedad.isPresent()) {
+            Property propiedad = respuestaPropiedad.get();
+            Comment nuevoComentario = new Comment();
+            Client cliente = respuestaCliente.get();
+            Image imagenCliente = imageService.save(archivo);
+
+            nuevoComentario.setCliente(cliente);
+            nuevoComentario.setCuerpo(cuerpo);
+            nuevoComentario.setValoracion(valoracion);
+            nuevoComentario.setImagen(imagenCliente);
+
+            List<Comment> listaComentarios = propiedad.getComentarios();
+            listaComentarios.add(nuevoComentario);
+            propiedad.setComentarios(listaComentarios);
+
+            propertyRepository.save(propiedad);
+        }
+    }
+    
+    
+    
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
 }

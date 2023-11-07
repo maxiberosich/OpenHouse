@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -22,7 +23,8 @@ public class Comment {
     @OneToOne
     private Image imagen;
     
-    @OneToOne
+    //OneToOne
+    @OneToMany
     private Property propiedad;
     
     @ManyToOne
