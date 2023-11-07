@@ -74,6 +74,38 @@ public class PropertyService {
             propertyRepository.save(propiedad);
         }
     }
+    @Transactional
+     public void modificarPropiedad(Double precioBase, String idProperty, Integer capMaxPersonas,
+            String codigoPostal, String direccion, String descripcion, 
+            MultipartFile archivo, String ciudad, String tipoPropiedad,Date fechaAlta,Date fechaBaja) throws MiException{
+        
+        validar(precioBase, codigoPostal, direccion, descripcion, capMaxPersonas);
+        
+        Optional<Property> respuesta= propertyRepository.findById(idProperty);
+        
+        if(respuesta.isPresent()){
+            Property propiedad= respuesta.get();
+            propiedad.setPrecioBase(precioBase);
+            propiedad.setCapMaxPersonas(capMaxPersonas);
+            propiedad.setCodigoPostal(codigoPostal);
+            propiedad.setDireccion(direccion);
+            propiedad.setDescripcion(descripcion);
+            propiedad.setCiudad(ciudad);
+            propiedad.setTipo(tipoPropiedad);
+            propiedad.setFechaAlta(fechaAlta);
+            propiedad.setFechaBaja(fechaBaja);
+            
+            List<Image> listaImagen = propiedad.getImagenes();
+            //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
+            listaImagen.add(imageService.save(archivo));
+
+            propiedad.setImagenes(listaImagen);
+            
+            propertyRepository.save(propiedad);
+                    
+        }
+        
+    }
 
     @Transactional
     public List<Property> buscarPorCodigoPostal(String cp) {
