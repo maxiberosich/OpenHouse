@@ -67,8 +67,8 @@ public class PropertyController {
     }
 
     @PostMapping("/detalles/{id}")
-    public String mostrarPropiedad(@PathVariable String id) {
-        propertyService.buscarPropiedad(id);
+    public String mostrarPropiedadD(@PathVariable String id, ModelMap model){
+        model.addAttribute("propiedad", propertyService.getOne(id));
         return "propiedad_detalles.html";
     }
 
