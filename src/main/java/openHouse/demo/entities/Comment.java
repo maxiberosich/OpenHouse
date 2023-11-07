@@ -24,7 +24,7 @@ public class Comment {
     private Image imagen;
     
     //OneToOne
-    @OneToMany
+    @ManyToOne
     private Property propiedad;
     
     @ManyToOne
