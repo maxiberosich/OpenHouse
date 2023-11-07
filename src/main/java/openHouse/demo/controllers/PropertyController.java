@@ -3,6 +3,7 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.enums.City;
@@ -37,9 +38,12 @@ public class PropertyController {
     }
 
     @PostMapping("/registrarPropiedad/{id}")
-    public String registroPropiedad(@PathVariable String id, @RequestParam Double precioBase, @RequestParam String codigoPostal, @RequestParam String direccion,
-            @RequestParam String descripcion, ModelMap modelo, MultipartFile archivo, @RequestParam String ciudad, @RequestParam String tipoPropiedad,
-            @RequestParam Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja) {
+    public String registroPropiedad
+            (@PathVariable String id, @RequestParam Double precioBase, @RequestParam String codigoPostal, @RequestParam String direccion,
+            @RequestParam String descripcion, ModelMap modelo, MultipartFile archivo, @RequestParam String ciudad,
+            @RequestParam String tipoPropiedad,
+            @RequestParam Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja) {
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion,
                     id, archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja);
