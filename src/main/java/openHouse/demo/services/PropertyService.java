@@ -134,7 +134,7 @@ public class PropertyService {
     }
 
     public Property getOne(String id) {
-        return propertyRepository.getById(id);
+        return propertyRepository.getOne(id);
     }
 
     public List<Property> listaPropiedades() {
@@ -142,12 +142,6 @@ public class PropertyService {
         return listaPropiedades;
     }
     
-    @Transactional
-    public Property buscarPropiedad(String id){
-        Optional<Property> propiedadSeleccionada = propertyRepository.findById(id);
-        Property propiedad = propiedadSeleccionada.get();
-        return propiedad;
-    }
 
     
     //crear metodo agregaro comentario, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .

@@ -1,12 +1,9 @@
 package openHouse.demo.controllers;
 
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
-import openHouse.demo.services.ClientService;
-import openHouse.demo.services.OwnerService;
 import openHouse.demo.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,12 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class ControllerPortal {
-
-    @Autowired
-    private ClientService clientService;
-    
-    @Autowired
-    private OwnerService ownerService;
     
     @Autowired
     private PropertyService propertyService;
@@ -48,10 +39,12 @@ public class ControllerPortal {
         return "login.html";
     }
     
+    
     @GetMapping("/registrar")
     public String registrar() {
         return "registrar.html";
     }
+    
     
     @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_PROPIETARIO') or hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
@@ -65,4 +58,26 @@ public class ControllerPortal {
             return "redirect:/";
         }
     }
+    
+    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_PROPIETARIO')")
+    @GetMapping("/modificarPerfil")
+    public String perfil(ModelMap modelo, HttpSession session) {
+
+        User cliente = (User) session.getAttribute("usersession");
+        
+        modelo.put("cliente", cliente);
+        
+        if(cliente.getRol().toString().equals("PROPIETARIO")){
+            return "modificarpropietario.html";
+        }
+        
+        if(cliente.getRol().toString().equals("CLIENTE")){
+            return "modificar_cliente.html";
+        }else{
+            return null;
+        }
+
+        
+    }
+    
 }

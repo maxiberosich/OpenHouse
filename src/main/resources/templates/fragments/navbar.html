@@ -26,7 +26,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <!-- <a class="dropdown-item" th:href="@{/login}">Iniciar Sesion</a> -->                        
-                        <a class="dropdown-item" th:href="@{/cliente/modificar}">Modificar</a>
+                        <a class="dropdown-item" th:href="@{/modificarPerfil}">Modificar</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_PROPIETARIO')" th:href="@{/propiedad/registrarPropiedad}">Cargar Propiedad</a>
                         <a class="dropdown-item" href="/logout">Cerrar Sesión</a>
