@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+   <head>
+    <!-- Bootswatch -->
+    <link rel="stylesheet" href = "https://bootswatch.com/5/minty/bootstrap.min.css " />
+    <!-- CSS -->
+    <link href="css/error.css" rel="stylesheet" />
+    <!-- Metadatos  -->
+    <meta charset="UTF-8" />
+    <meta name="author" content="Equipo1" />
+    <meta name="description" content="Alquileres de quinchos para fiestas" />
+    <meta name="keywords" content="alquiler, quincho, pileta, juntada" />
+    <meta name="viewport" content="widht=device-width, initial-scale=1" />
+    <title>OpenHouse</title>
+    <!-- icono -->
+    <link rel="icon" type="image/x-icon" href="imagenes/piscina.png" />
+  </head>
+
+
+  <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Open-House</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Navegación de palanca">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/}">home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body class="tema-oscuro">
+<header class="header">
+            <section class="contenedorMain">
+                <div class="titulohouse">
+                  <h1 class="titulo"> OOPs...</h1>
+                    <a class="navbar-brand2" th:text="'Error ' + ${codigo}">Open-House</a>
+                    <p class="usuarioerr" th:text="${mensaje}"></p>
+                </div>
+                <section class="text-center container">
+			<div class="row mt-2">
+				<div class="divVolver">
+					<a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+				</div>
+			</div>
+		</section>
+                <div class="container">
+                    <p class="usuario" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
+                   
+                </div>
+            </section>
+        </header>
+</body>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+  crossorigin="anonymous"
+></script>
+</body>
+</html>

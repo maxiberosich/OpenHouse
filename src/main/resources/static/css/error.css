@@ -1,0 +1,35 @@
+/* error*/
+.titulohouse {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 300px;
+    color: aliceblue;
+
+}
+
+
+.tema-oscuro {
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('tu-imagen-de-fondo.jpg') center/cover no-repeat;
+    height: 100vh;
+    margin: 0;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.856);
+ 
+}
+.titulo{
+    margin-top: 50px;
+    height: 30px;
+    color: aliceblue;
+    align-items: center;
+    text-align: center;
+    font-size: 120px;
+    border-color: black;
+}
+.navbar-brand2{
+    margin-top: 90px;
+    height: 130px;
+    font-size: 70px;
+}
