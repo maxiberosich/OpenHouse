@@ -46,4 +46,8 @@ public class UserService implements UserDetailsService{
         }
     }
     
+    public User getOne(String id) {
+        return userRepository.getOne(id);
+    }
+    
 }

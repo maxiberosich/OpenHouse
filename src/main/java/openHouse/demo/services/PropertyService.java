@@ -74,6 +74,7 @@ public class PropertyService {
             propertyRepository.save(propiedad);
         }
     }
+    
     @Transactional
      public void modificarPropiedad(Double precioBase, String idProperty, Integer capMaxPersonas,
             String codigoPostal, String direccion, String descripcion, 
@@ -127,25 +128,7 @@ public class PropertyService {
         propiedadesSegunPrecio = propertyRepository.buscarSegunPrecio(precioMinimo, precioMaximo);
         return propiedadesSegunPrecio;
     }
-
-    public void validar(Double precioBase, String codigoPostal, String direccion, String descripcion, Integer capMaxPersonas) throws MiException {
-        if (precioBase == null) {
-            throw new MiException("Por favor indicar el precio base por noche! Se podrá modificar más adelante!");
-        }
-        if (codigoPostal == null) {
-            throw new MiException("Tiene que indicar el Código Postal de la propiedad, por favor.");
-        }
-        if (direccion == null) {
-            throw new MiException("Tiene que indicar la dirección exacta de la propiedad, por favor.");
-        }
-        if (descripcion == null) {
-            throw new MiException("Por favor debe insertar un comentario, ayudará mucho al cliente a tomar una decisión.");
-        }
-        if (capMaxPersonas == null) {
-            throw new MiException("Por favor, debe especificar la capacidad máxima de personas para la propiedad");
-        }
-    }
-
+    
     public void bajaPropiedad(String id) {
         Optional<Property> respuesta = propertyRepository.findById(id);
         if (respuesta.isPresent()) {
@@ -171,7 +154,7 @@ public class PropertyService {
     }
 
     public Property getOne(String id) {
-        return propertyRepository.getById(id);
+        return propertyRepository.getOne(id);
     }
 
     public List<Property> listaPropiedades() {
@@ -179,12 +162,25 @@ public class PropertyService {
         return listaPropiedades;
     }
 
-    @Transactional
-    public Property buscarPropiedad(String id) {
-        Optional<Property> propiedadSeleccionada = propertyRepository.findById(id);
-        Property propiedad = propiedadSeleccionada.get();
-        return propiedad;
+    public void validar(Double precioBase, String codigoPostal, String direccion, String descripcion, Integer capMaxPersonas) throws MiException {
+        if (precioBase == null) {
+            throw new MiException("Por favor indicar el precio base por noche! Se podrá modificar más adelante!");
+        }
+        if (codigoPostal == null) {
+            throw new MiException("Tiene que indicar el Código Postal de la propiedad, por favor.");
+        }
+        if (direccion == null) {
+            throw new MiException("Tiene que indicar la dirección exacta de la propiedad, por favor.");
+        }
+        if (descripcion == null) {
+            throw new MiException("Por favor debe insertar un comentario, ayudará mucho al cliente a tomar una decisión.");
+        }
+        if (capMaxPersonas == null) {
+            throw new MiException("Por favor, debe especificar la capacidad máxima de personas para la propiedad");
+        }
     }
+
+    
 
     //crear metodo agregar comentario, lo tiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.

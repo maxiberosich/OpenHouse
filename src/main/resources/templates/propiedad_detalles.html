@@ -3,16 +3,57 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="/fragments/head :: head" ></head>
     <body>
-        <div th:replace="/fragments/mostrar_propiedades :: div"></div>
+
+        <nav th:replace="/fragments/navbar :: nav"></nav>
         
+        <div class="carta">
+            <div class="carta-image">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                            <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
+                                
+                                <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
+                            </div>
+                        </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+            <div class="carta-content">
+                <h2 th:text="${propiedad.ciudad}">Título de la carta</h2>
+                <p th:text="${propiedad.descripcion}">Descripción de la carta.</p>
+                <p th:text="${propiedad.precioBase}">Precio: $100</p>
+                <p>Días disponibles: Lunes a Viernes</p>
+                <button type="button" ><a th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
+            </div>
+        </div>
+
+        <!-- Componente items -->
+
+        <div class="items-list">
+            <!-- Ver la logica para ver los atributos de la casa -->
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item">Item 5</div>
+            <div class="item">Item 6</div>
+            <!-- Agrega más elementos aquí -->
+        </div>
+
+
         <div th:replace="/fragments/mostrar_comentario :: div"></div>
-        
+
         <div th:replace="/fragments/crear_comentario :: div"></div>
         
+        <div th:replace="/fragments/errores :: div"></div>
+
         <div th:replace="/fragments/Js :: div"></div>
+
+        <section th:replace="/fragments/footer :: section"></section>
         
     </body>
 </html>
-        
+
 
 
