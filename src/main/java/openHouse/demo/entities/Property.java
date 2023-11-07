@@ -26,20 +26,18 @@ public class Property {
 
     @OneToOne
     private Prestation prestaciones;
-    
+
     @OneToMany
     private List<Image> imagenes;
-    
+
     @ManyToOne
     private Owner propietario;
-    
-    
+
     private String ciudad;
 
     @OneToMany
     private List<Comment> comentarios;
 
-    
     private String tipo;
 
     private Double precioBase;
@@ -48,12 +46,14 @@ public class Property {
     private String descripcion;
     private Double valoracion;
     private Boolean alta;
-    
+    private Boolean permitidoFiestas;
+    private Integer capMaxPersonas;
+
     //CALENDARIO
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
-    
+
     @Temporal(TemporalType.DATE)
     private Date fechaBaja;
-    
+
 }
