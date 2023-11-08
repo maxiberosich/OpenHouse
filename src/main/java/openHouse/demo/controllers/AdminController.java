@@ -37,7 +37,7 @@ public class AdminController {
     public String adminPanel(ModelMap modelo) {
         List<Property> propiedades = propertyService.listaPropiedades();
         modelo.addAttribute("propertys", propiedades);
-        return "inicio.html";
+        return "redirect:/";
     }
 
     @GetMapping("/clientes")
