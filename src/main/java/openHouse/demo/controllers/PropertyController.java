@@ -9,6 +9,7 @@ import openHouse.demo.entities.User;
 import openHouse.demo.enums.City;
 import openHouse.demo.enums.PropType;
 import openHouse.demo.exceptions.MiException;
+import openHouse.demo.services.CommentService;
 import openHouse.demo.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,6 +28,9 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
+    
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/registrarPropiedad")
     public String registrarPropiedad(ModelMap modelo, HttpSession session) {
@@ -63,6 +67,7 @@ public class PropertyController {
     @GetMapping("/detalles/{id}")
     public String mostrarPropiedad(@PathVariable String id, ModelMap modelo) {
         modelo.addAttribute("propiedad", propertyService.getOne(id));
+        modelo.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
         return "propiedad_detalles.html";
     }
 
