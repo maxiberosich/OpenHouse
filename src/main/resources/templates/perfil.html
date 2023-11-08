@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace= "/fragments/head :: head" </head>
+    <head>
+        <title>Perfil</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="static.css/perfil.css"/>
+    </head>
     <body>
         <div class="form-group my-3">
-            <form method="POST" enctype="multipart/form-data" th:action="@{/cliente/perfil}"></form>
+            <form method="POST" enctype="multipart/form-data" th:action="@{/usuario/perfil}"></form>
             <h1>Acerca del usuario</h1>
             <img class="logo" src="/static.img/OPENHOUSE.png">
             <h3>Nombre</h3>
             <h4>@usuario</h4>
             <section>
                 <ul>
-                    <li th:value="${user.email}">correo electrónico: </li>
+                    <li th:value="${user.email}">Correo electrónico: </li>
                     <li th:value="${user.city}">Ciudad: </li>
                     <li th:value="${user.phone}">Celular: </li>
                     <li th:value="${user.dni}">DNI: </li>
-                    <li th:value="${user.birthdate}">fecha de nacimiento: </li>
+                    <li th:value="${user.birthdate}">Fecha de nacimiento: </li>
                 </ul>              
             </section>
         </div>
