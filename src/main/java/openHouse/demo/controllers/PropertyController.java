@@ -3,11 +3,13 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.enums.City;
 import openHouse.demo.enums.PropType;
 import openHouse.demo.exceptions.MiException;
+import openHouse.demo.services.CommentService;
 import openHouse.demo.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,6 +28,9 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
+    
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/registrarPropiedad")
     public String registrarPropiedad(ModelMap modelo, HttpSession session) {
@@ -37,9 +42,12 @@ public class PropertyController {
     }
 
     @PostMapping("/registrarPropiedad/{id}")
-    public String registroPropiedad(@PathVariable String id, @RequestParam Double precioBase, @RequestParam String codigoPostal, @RequestParam String direccion,
-            @RequestParam String descripcion, ModelMap modelo, MultipartFile archivo, @RequestParam String ciudad, @RequestParam String tipoPropiedad,
-            @RequestParam Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja) {
+    public String registroPropiedad
+            (@PathVariable String id, @RequestParam Double precioBase, @RequestParam String codigoPostal, @RequestParam String direccion,
+            @RequestParam String descripcion, ModelMap modelo, MultipartFile archivo, @RequestParam String ciudad,
+            @RequestParam String tipoPropiedad,
+            @RequestParam Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja) {
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion,
                     id, archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja);
@@ -59,12 +67,13 @@ public class PropertyController {
     @GetMapping("/detalles/{id}")
     public String mostrarPropiedad(@PathVariable String id, ModelMap modelo) {
         modelo.addAttribute("propiedad", propertyService.getOne(id));
+        modelo.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
         return "propiedad_detalles.html";
     }
 
     @PostMapping("/detalles/{id}")
-    public String mostrarPropiedad(@PathVariable String id) {
-        propertyService.buscarPropiedad(id);
+    public String mostrarPropiedadD(@PathVariable String id, ModelMap model){
+        model.addAttribute("propiedad", propertyService.getOne(id));
         return "propiedad_detalles.html";
     }
 

@@ -32,8 +32,8 @@ public class ReservationController {
         modelo.put("user", user);
         //modelo.put("idPropiedad", idPropiedad);
         
-        Property propiedad = propService.buscarPropiedad(idPropiedad);
-        modelo.addAttribute("propiedad", propiedad);
+        Property propiedad = propService.getOne(idPropiedad);
+        modelo.addAttribute("propertys", propiedad);
         
         return "reservar_propiedad.html";
     }
