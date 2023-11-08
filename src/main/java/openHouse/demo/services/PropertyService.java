@@ -101,7 +101,7 @@ public class PropertyService {
 
             propiedad.setImagenes(listaImagen);
             
-            propertyRepository.save(propiedad);
+            propertyRepository.save(propiedad); 
                     
         }
         
@@ -186,6 +186,6 @@ public class PropertyService {
         return propiedad;
     }
 
-    //crear metodo agregar comentario, lo tiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
+    //crear metodo agregar comentario, lo tiene que agregar un clien  reserva en la propiedad terminada y recien puede comentar .
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
 }
