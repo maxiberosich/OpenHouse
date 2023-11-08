@@ -18,7 +18,7 @@ public class PerfilController {
     private UserRepository userRepository;
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
-    @GetMapping("/perfil${id}")
+    @GetMapping("/perfil/{id}")
     public String perfil(ModelMap modelo, HttpSession session) {
         User user = (User) session.getAttribute("usersession");
         if (user != null) {

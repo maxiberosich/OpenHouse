@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, String> {
 
-    @Query("SELECT c FROM Comment c WHERE p.propiedad.id = :idPropiedad")
+    @Query("SELECT c FROM Comment c WHERE c.propiedad.id = :idPropiedad")
     public List<Comment> buscarPorIdPropiedad(@Param("idPropiedad") String idPropiedad);
 }
