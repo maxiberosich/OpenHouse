@@ -118,7 +118,11 @@ public class OwnerService {
         
         if (respuesta.isPresent()) {
             Owner propietario = respuesta.get();
-            propietario.setAlta(Boolean.FALSE);
+            if (propietario.getAlta() == true) {
+                propietario.setAlta(false);
+            }else if (propietario.getAlta() == false){
+                propietario.setAlta(true);
+            }
         }
     }
     
