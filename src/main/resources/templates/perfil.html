@@ -4,24 +4,65 @@
         <title>Perfil</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="static.css/perfil.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{/css/perfil.css}">
     </head>
     <body>
-        <div class="form-group my-3">
-            <form method="POST" enctype="multipart/form-data" th:action="@{/usuario/perfil}"></form>
-            <h1>Acerca del usuario</h1>
-            <img class="logo" src="/static.img/OPENHOUSE.png">
-            <h3>Nombre</h3>
-            <h4>@usuario</h4>
-            <section>
-                <ul>
-                    <li th:value="${user.email}">Correo electrónico: </li>
-                    <li th:value="${user.city}">Ciudad: </li>
-                    <li th:value="${user.phone}">Celular: </li>
-                    <li th:value="${user.dni}">DNI: </li>
-                    <li th:value="${user.birthdate}">Fecha de nacimiento: </li>
-                </ul>              
-            </section>
+       <style th:replace="/fragments/style_perfil :: style"></style>
+        <br><br>
+
+
+        <div class="container">
+            <div class="card">
+                <div style="background-color: #151D21!important" class="card-header d-flex align-items-center justify-content-evenly bg-danger"><h4 style=" color: #DFE2F2!important" class="fw-bold">Perfil</h4></div>
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex">
+
+                        <div th:if="${session.usersession != null and session.usersession.image != null}" class=" d-flex perfil">
+                            <img th:src="@{/image/perfil/__${session.usersession.id}__}">
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+
+                            <table style="border-color: inherit!important;border-style: double!important;" class="table">
+                                <tbody>
+
+                                    <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
+                                        <th th:text="'Nombre: '+ ${session.usersession.name}" scope="row"></th>
+
+                                    </tr>
+
+                                    <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
+                                        <th th:text="'Email: '+ ${session.usersession.email}" scope="row"></th>
+
+                                    </tr>
+                                    <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
+                                        <th th:text="'Rol: '+ ${session.usersession.rol}" scope="row"></th>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+
+                   
+
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color: #151D21!important"  class="card-footer bg-danger ">
+                    <p class="fw-semibold " text= "'User Id : '+${user.id}" ></p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <footer th:replace="/fragments/footer :: footer" > </footer>
         </div>
     </body>
 </html>
