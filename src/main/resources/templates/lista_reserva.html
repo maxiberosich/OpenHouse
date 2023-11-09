@@ -17,21 +17,23 @@
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                
+                <tbody th:each="reservas : ${reserva}">
                     <tr>
-                        <td th:text="${reserva.id}"></td>
-                        <td th:text="${reserva.fechaInicio}"></td>
-                        <td th:text="${reserva.fechaFin}"></td>
-                        <td th:text="${reserva.precioFinal}"></td>
-                        <td th:text="${reserva.cantPersonas}"></td>
-                        <td th:text="${reserva.propiedad.direccion}"></td>
+                        <td th:text="${reservas.id}"></td>
+                        <td th:text="${reservas.fechaInicio}"></td>
+                        <td th:text="${reservas.fechaFin}"></td>
+                        <td th:text="${reservas.precioFinal}"></td>
+                        <td th:text="${reservas.cantPersonas}"></td>
+                        <td th:text="${reservas.propiedad.direccion}"></td>
+                        
                         <!-- comment<td>
                             <a sec:authorize="hasRole('ADMIN')" th:href="@{/owner/modificar/__${owner.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
                         </td> -->
                     </tr>
                 </tbody>
             </table>
-
+            
             <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
                 <div class="card-body">
                     <h5 class="card-title">Éxito ð</h5>

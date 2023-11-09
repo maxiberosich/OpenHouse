@@ -59,10 +59,10 @@ public class PropertyController {
                     
                     //de aca para abajo son atributos de prestaciones.
                     //int-
-                    cantidadPers, cantAuto, cantCuarto, cantBanio,
+                    5, 5, 5, 5,
                     //boolean-
-                    pileta, asador, cochera, aireAcondicionado,
-                    wiFi, tv, barra, seAceptanMascotas, aguaCorriente, cocina, heladera, microondas);
+                    true, true, true, true,
+                    true, true, true, true, true, true, true, true);
             modelo.put("exito", "Propiedad cargada correctamente");
             return "redirect:/";
         } catch (MiException ex) {
