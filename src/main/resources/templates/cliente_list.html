@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace= "/fragments/head :: head" </head>
+    <head th:replace= "/fragments/head :: head"> </head>
     <body>
-        <nav th:replace= "/fragments/navbar :: nav" </nav>
+        <nav th:replace= "/fragments/navbar :: nav"></nav>
 
         <div class="container m-5">
             <table class="table">
@@ -10,36 +10,37 @@
                     <tr>
                         <th scope="col">Id del/la cliente/a</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Rol</th>
-                        <th scope="col">Alta o baja</th>
-                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Foto de Perfil</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Alta</th>
+                        <th scope="col">Modificar</th>
+                        <th scope="col">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody th:each="client : ${clientes}">
                     <tr>
                         <th scope="row" th:text="${client.id}"></th>
                         <td th:text="${client.name}"></td>
-                        <td th:text="${client.rol}"></td>
-                        <td th:text="${client.alta}"></td>
+                        <td th:text="${client.email}"></td>
                         <td>
-                            <a sec:authorize="hasRole('ADMIN')" th:href="@{/client/modificar/__${client.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
+                            <a><img th:if="${client.image != null}" class="logo" th:src="@{/image/perfil/__${client.id}__}"></a>
+                        </td>
+                        <td th:text="${client.dni}"></td>
+                        <td>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/modificarAltaCliente/__${client.id}__}" ><p th:text="${client.alta}"></p> </a>
+                        </td>
+                        <td>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/modificarCliente/__${client.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
+                        </td>
+                        <td>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/eliminarCliente/__${client.id}__}"><i class="fas fa-feather-alt"></i>Eliminar</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
-                <div class="card-body">
-                    <h5 class="card-title">Éxito ð</h5>
-                    <p class="card-text" th:text="${exito}"></p>
-                </div>
-            </div>
-            <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
-                <div class="card-body">
-                    <h5 class="card-title">Error ð</h5>
-                    <p class="card-text" th:text="${error}"></p>
-                </div>
-            </div>
+            <div th:replace="/fragments/errores :: div"></div>
         </div>
 
         <footer th:replace="/fragments/footer.html :: footer" </footer>
