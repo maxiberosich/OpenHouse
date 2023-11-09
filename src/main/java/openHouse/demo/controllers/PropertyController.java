@@ -3,7 +3,6 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
-import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.enums.City;
