@@ -16,8 +16,8 @@ public class Prestation {
     @GenericGenerator(name= "uuid", strategy="uuid2")
     private String Id;
     
-    @OneToOne
-    private Property propiedad;
+    /*@OneToOne
+    private Property propiedad;*/
     
     private Integer cantidadPers;
     private Integer cantAuto;
