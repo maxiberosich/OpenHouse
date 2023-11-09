@@ -41,7 +41,12 @@ public class PropertyService {
     @Transactional
     public void crearProperty(Double precioBase,
             String codigoPostal, String direccion, String descripcion, String idOwner, MultipartFile archivo,
-            String ciudad, String tipoPropiedad, Integer capMaxPersonas, Date fechaAlta, Date fechaBaja) throws MiException {
+            String ciudad, String tipoPropiedad, Integer capMaxPersonas, Date fechaAlta, Date fechaBaja,
+            //de aca para abajo son atributos de prestaciones.
+            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
+            boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
+            boolean heladera, boolean microondas) throws MiException {
 
         validar(precioBase, codigoPostal, direccion, descripcion, capMaxPersonas);
 
@@ -71,8 +76,13 @@ public class PropertyService {
             Owner owner = (Owner) usuario;
             propiedad.setPropietario(owner);
             
-          
-
+            Prestation prestacion=prestationService.createPrestation
+                    (idPropiedad, cantidadPers, cantAuto, cantCuarto, cantBanio,
+                    pileta, asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas,
+                    aguaCorriente, cocina, heladera, microondas);
+            
+            propiedad.setPrestaciones(prestacion);
+            
             propertyRepository.save(propiedad);
         }
     }
@@ -80,7 +90,12 @@ public class PropertyService {
     @Transactional
     public void modificarPropiedad(Double precioBase, String idProperty, Integer capMaxPersonas,
             String codigoPostal, String direccion, String descripcion,
-            MultipartFile archivo, String ciudad, String tipoPropiedad, Date fechaAlta, Date fechaBaja) throws MiException {
+            MultipartFile archivo, String ciudad, String tipoPropiedad, Date fechaAlta, Date fechaBaja,
+            
+            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
+            boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
+            boolean heladera, boolean microondas) throws MiException {
 
         validar(precioBase, codigoPostal, direccion, descripcion, capMaxPersonas);
 
@@ -103,7 +118,14 @@ public class PropertyService {
             listaImagen.add(imageService.save(archivo));
 
             propiedad.setImagenes(listaImagen);
-
+            
+            Prestation prestacion=prestationService.createPrestation
+                    (idPropiedad, cantidadPers, cantAuto, cantCuarto, cantBanio,
+                    pileta, asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas,
+                    aguaCorriente, cocina, heladera, microondas);
+            
+            propiedad.setPrestaciones(prestacion);
+            
             propertyRepository.save(propiedad);
 
         }
@@ -214,4 +236,24 @@ public class PropertyService {
     
     
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
+    //hay que probarlo REY.
+    public void valoracionPropiedad(String idPropiedad){
+        Optional<Property> respuesta = propertyRepository.findById(idPropiedad);
+        
+        if (respuesta.isPresent()) {
+            
+            Property propiedad = respuesta.get();
+            List<Comment> comentarios=propiedad.getComentarios();
+            Integer cantidadComentarios=0;
+            Double valorFinal = null;
+            
+            cantidadComentarios=propiedad.getComentarios().size();
+            
+            for (Comment object :comentarios ) {
+                valorFinal=valorFinal+object.getValoracion();
+            }
+            propiedad.setValoracion(valorFinal/cantidadComentarios);
+            propertyRepository.save(propiedad);
+        }
+    }
 }
