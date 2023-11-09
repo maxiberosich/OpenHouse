@@ -32,6 +32,7 @@
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/propietarios}">Administrar Propietarios</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_PROPIETARIO')" th:href="@{/propiedad/registrarPropiedad}">Cargar Propiedad</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/reserva/list/__${id}__}">Reservas</a>
                         <a class="dropdown-item" href="/logout">Cerrar Sesión</a>
                     </div>
                 </li>
