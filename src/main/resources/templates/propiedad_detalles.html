@@ -1,26 +1,45 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OpenHouse</title> 
+        <link href="/propiedadestilo.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace="/fragments/head :: head" ></head>
+    </head>
     <body>
+<<<<<<< Updated upstream
 
         <nav th:replace="/fragments/navbar :: nav"></nav>
         
+=======
+>>>>>>> Stashed changes
         <div class="carta">
             <div class="carta-image">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
+<<<<<<< Updated upstream
                             <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
                                 
                                 <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
                             </div>
                         </div>
+=======
+                        <div class="swiper-slide" th:each="foto : ${propiedad.imagenes}"> 
+                            <img width="100%" height="100%" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen 1"> </div> 
+
+
+                    </div>
+>>>>>>> Stashed changes
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
             </div>
             <div class="carta-content">
                 <h2 th:text="${propiedad.ciudad}">Título de la carta</h2>
+<<<<<<< Updated upstream
                 <p th:text="${propiedad.descripcion}">Descripción de la carta.</p>
                 <p th:text="${propiedad.precioBase}">Precio: $100</p>
                 <p>Días disponibles: Lunes a Viernes</p>
@@ -57,3 +76,82 @@
 
 
 
+=======
+                <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
+                <p th:text="${propiedad.precioBase}">Precio: $100</p>
+                <p>Días disponibles: Lunes a Viernes</p>
+                <button type="button" class="boton-estilizado" ><a class="boton-estilizado" >Alquilar</a></button>
+            </div>
+        </div>
+
+        <div class="items-list">
+            <div class="item">Cantidad de Personas</div>
+            <div class="item">Cantidad auto</div>
+            <div class="item">Cuartos</div>
+            <div class="item">Baños</div>
+            <div class="item">Piscina</div>
+            <div class="item">Asador</div>
+            <div class="item">Cochera</div>
+            <div class="item">Aire acondicionado</div>
+            <div class="item">Wi-Fi</div>
+            <div class="item">Tv</div>
+<!--            <div class="item">Barra</div>
+            <div class="item">Mascotas</div>
+            <div class="item">Cocina</div>-->
+
+        </div>
+
+
+        <div class="contenedor">
+            <div class="contenedor-imagen">
+                <img class="img-tamaño" src="img\Image20231025161308.png" alt="ImagenUsuario">
+
+            </div>
+            <div class="contenedor-comentario">
+                <div>
+                    <h3>Nombre de usuario</h3>
+                    <form action="{/}" method="post">
+                        <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="comentario"></textarea>
+                        <br>
+                        <br>
+                        <div class="contenedor-boton">
+                            <input type="file" id="input-archivo" class="input-archivo" name="foto" accept="image/*">
+                            <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
+                        </div>
+
+                        <br>
+                        <button class="boton-estilizado" type="submit"> Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="espaciado">
+    <div class="carta">
+        <div class="carta-content">
+            <h2>Nombre del usuario</h2>
+            <h5>Contenido del Comentario</h5>
+        </div>
+        <div class="carta-image">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 1"></div> <!--Aqui ira el each -->
+                    <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 2"></div>
+                    <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 3"></div>
+                    <!-- Agrega las imágenes adicionales aquí -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="img.js"></script>
+    </body>
+</html>
+>>>>>>> Stashed changes
