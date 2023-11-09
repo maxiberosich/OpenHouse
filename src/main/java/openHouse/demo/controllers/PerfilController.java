@@ -18,6 +18,4 @@ public class PerfilController {
         return "perfil.html";
     }
     
-    
-    
 }
