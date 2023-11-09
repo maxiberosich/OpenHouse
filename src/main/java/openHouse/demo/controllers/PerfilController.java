@@ -12,10 +12,9 @@ public class PerfilController {
     
     @Autowired
     private UserService userService;
-
-    
+   
     @GetMapping("/perfil")
-    public String perfil() {        
+    public String perfilUsuario() { 
         return "perfil.html";
     }
     
