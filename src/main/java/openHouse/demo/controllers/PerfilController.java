@@ -13,10 +13,9 @@ public class PerfilController {
     
     @Autowired
     private UserService userService;
-
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    
     @GetMapping("/perfil")
-    public String perfil() {
+    public String perfil() {        
         return "perfil.html";
     }
 
