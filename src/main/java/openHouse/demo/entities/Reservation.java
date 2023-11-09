@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import java.util.Date;
 import lombok.Data;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
