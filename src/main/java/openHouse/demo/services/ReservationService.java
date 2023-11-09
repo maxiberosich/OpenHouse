@@ -96,7 +96,7 @@ public class ReservationService {
             reservation.setFechaFin(fechaFin);
             reservation.setCantPersonas(cantPersonas);
             //DEFINIR COMO CALCULAMOS EL PRECIO FINAL !!LO MISMO PARA CALCULAS LOS DIAS QUE LAS NOCHES
-            Double precioNuevo=precio(fechaFin, fechaFin, idPropietario);
+            Double precioNuevo=precio(fechaInicio, fechaFin, idPropietario);
             reservation.setPrecioFinal(precioNuevo);
             reservationRepository.save(reservation);
         }
