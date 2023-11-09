@@ -10,8 +10,8 @@
 
     </head>
     <body>
-        <nav th:replace="/fragments/navbar :: nav"></nav>
-        
+        <nav th:replace="/fragments/navbar :: nav"></nav>        
+
         <div class="carta">
             <div class="carta-image">
                 <div class="swiper-container">
@@ -23,61 +23,63 @@
                         </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
+            </div>
+                
+        <div class="carta-content">
+            <h2 th:text="${propiedad.ciudad}">Título de la carta</h2>
+            <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
+            <p th:text="${propiedad.precioBase}">Precio: $100</p>
+            <p>Días disponibles: Lunes a Viernes</p>
+            <button type="button" class="boton-estilizado"><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
+            <!--<button type="button" class="boton-estilizado" ><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}" >Alquilar</a></button>-->
+        </div>
+    </div>
+
+<div class="items-list">
+    <div class="item"  > Cantidad de Personas</div>
+    <div class="item">Cantidad auto</div>
+    <div class="item">Cuartos</div>
+    <div class="item">Baños</div>
+    <div class="item" th:if="propiedad.prestaciones.pileta">Piscina</div>
+    <div class="item" th:if="propiedad.prestaciones.asador">Asador</div>
+    <div class="item" th:if="propiedad.prestaciones.>Cochera</div>
+    <div class="item" th:if="propiedad.prestaciones.aireAcondicionado">Aire acondicionado</div>
+    <div class="item" th:if="propiedad.prestaciones.wiFi">Wi-Fi</div>
+    <div class="item" th:if="propiedad.prestaciones.tv">Tv</div>
+    <!--            <div class="item">Barra</div>
+                <div class="item">Mascotas</div>
+                <div class="item">Cocina</div>-->
+
+</div>
+
+
+<div class="contenedor">
+    <div class="contenedor-imagen">
+        <img class="img-tamaño" src="img\Image20231025161308.png" alt="ImagenUsuario">
+
+    </div>
+    <div class="contenedor-comentario">
+        <div>
+            <h3>Nombre de usuario</h3>
+            <form action="{/}" method="post">
+                <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="comentario"></textarea>
+                <br>
+                <br>
+                <div class="contenedor-boton">
+                    <input type="file" id="input-archivo" class="input-archivo" name="foto" accept="image/*">
+                    <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
+
                 </div>
-            </div>
-            <div class="carta-content">
-                <h2 th:text="${propiedad.ciudad}">Título de la carta</h2>
-                <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
-                <p th:text="${propiedad.precioBase}">Precio: $100</p>
-                <p>Días disponibles: Lunes a Viernes</p>
-                <button type="button" class="boton-estilizado" ><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}" >Alquilar</a></button>
-            </div>
+
+                <br>
+                <button class="boton-estilizado" type="submit"> Enviar</button>
+            </form>
         </div>
-
-        <div class="items-list">
-            <div class="item">Cantidad de Personas</div>
-            <div class="item">Cantidad auto</div>
-            <div class="item">Cuartos</div>
-            <div class="item">Baños</div>
-            <div class="item">Piscina</div>
-            <div class="item">Asador</div>
-            <div class="item">Cochera</div>
-            <div class="item">Aire acondicionado</div>
-            <div class="item">Wi-Fi</div>
-            <div class="item">Tv</div>
-<!--            <div class="item">Barra</div>
-            <div class="item">Mascotas</div>
-            <div class="item">Cocina</div>-->
-
-        </div>
+    </div>
 
 
-        <div class="contenedor">
-            <div class="contenedor-imagen">
-                <img class="img-tamaño" src="img\Image20231025161308.png" alt="ImagenUsuario">
-
-            </div>
-            <div class="contenedor-comentario">
-                <div>
-                    <h3>Nombre de usuario</h3>
-                    <form action="{/}" method="post">
-                        <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="comentario"></textarea>
-                        <br>
-                        <br>
-                        <div class="contenedor-boton">
-                            <input type="file" id="input-archivo" class="input-archivo" name="foto" accept="image/*">
-                            <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
-                        </div>
-
-                        <br>
-                        <button class="boton-estilizado" type="submit"> Enviar</button>
-                    </form>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="espaciado">
+</div>
+<div class="espaciado">
     <div class="carta">
         <div class="carta-content">
             <h2>Nombre del usuario</h2>
@@ -99,9 +101,9 @@
     </div>
 
 </div>
-
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        <script src="img.js"></script>
-    </body>
+<section th:replace="/fragments/footer :: section"></section>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="img.js"></script>
+</body>
 </html>
 

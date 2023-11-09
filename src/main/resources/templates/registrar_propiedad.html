@@ -13,97 +13,172 @@
     </head>
     <body>
         <nav th:replace="/fragments/navbar :: nav"></nav>
+
         <div th:replace="/fragments/errores :: div"></div>
-        <div class="conteiner mt-6" >
-            <form th:if="${user != null}" 
-                  th:action="@{/propiedad/registrarPropiedad/__${user.id}__}" 
-                  method="POST" 
-                  enctype="multipart/form-data">
+        <div class="boxx" style="width: 40%;">
+            <div class="conteiner mt-6" >
+                <form th:if="${user != null}" 
+                      th:action="@{/propiedad/registrarPropiedad/__${user.id}__}" 
+                      method="POST" 
+                      enctype="multipart/form-data">
 
-                <input hidden th:value="${user.id}" name="id">
+                    <input hidden th:value="${user.id}" name="id">
 
-                <div class="form-group">
-                    <label for="precioBase">Precio Base:</label>
-                    <input type="number" 
-                           class="form-control" 
-                           placeholder="Ingresa el precio base" 
-                           id="precioBase" name="precioBase" 
-                           step="0.01" 
-                           required>
-                </div>
-                <div class="form-group">
-                    <label for="imagenes">Imágenes:</label>
-                    <input type="file" 
-                           class="form-control" 
-                           id="imagenes"
-                           name="archivo" 
-                           multiple = "multiple"
-                           accept="image/*">
-                </div>
-                <div class="form-group">
-                    <label for="codigoPostal">Código Postal:</label>
-                    <input type="text" 
-                           class="form-control" 
-                           placeholder="Ingresa el código postal" 
-                           id="codigoPostal" 
-                           name="codigoPostal" 
-                           required>
-                </div>
-                <div class="form-group">
-                    <label for="capMaxPersonas">Capacidad Maxima de Personas:</label>
-                    <input type="text" 
-                           class="form-control" 
-                           placeholder="Ingresa la capacidad maxima de Personas" 
-                           id="codigoPostal" 
-                           name="capMaxPersonas" 
-                           required>
-                </div>
-                <div class="form-group">
-                    <label for="ciudad">Ciudad:</label>
+                    <div class="form-group">
+                        <label for="precioBase">Precio Base:</label>
+                        <input type="number" 
+                               class="form-control" 
+                               placeholder="Ingresa el precio base" 
+                               id="precioBase" name="precioBase" 
+                               step="0.01" 
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagenes">Imágenes:</label>
+                        <input type="file" 
+                               class="form-control" 
+                               id="imagenes"
+                               name="archivo" 
+                               multiple = "multiple"
+                               accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="codigoPostal">Código Postal:</label>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Ingresa el código postal" 
+                               id="codigoPostal" 
+                               name="codigoPostal" 
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="capMaxPersonas">Capacidad Maxima de Personas:</label>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Ingresa la capacidad maxima de Personas" 
+                               id="codigoPostal" 
+                               name="capMaxPersonas" 
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad:</label>
+                        <br>
+                        <select name="ciudad">
+                            <option th:each="City : ${Cities}"  
+                                    th:text="${City.label}" 
+                                    th:value="${City.label}"  >
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="direccion" 
+                               placeholder="Ingresa la dirección" 
+                               name="direccion" 
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipoPropiedad">Tipo de Propiedad:</label>
+                        <br>
+                        <select name="tipoPropiedad">
+                            <option th:each="Tipo : ${Propiedades}"  
+                                    th:text="${Tipo.label}" 
+                                    th:value="${Tipo.label}"  >
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea class="form-control" 
+                                  id="descripcion" 
+                                  placeholder="Ingresa una descripción" 
+                                  name="descripcion" 
+                                  rows="4" 
+                                  required></textarea>
+                    </div>
+
+                    <fieldset>
+                        <legend>Extras:</legend>
+                        <label>
+                            <input type="checkbox" name="wiFi"> Wi-Fi
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="asador"> Asador
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="pileta"> Piscina
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="cochera"> Cochera
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="aireAcondicionado"> A/C
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="tv"> TV por cable/digital
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="barra"> Barra de tragos
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="seAceptanMascotas"> Se aceptan mascotas
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="cocina"> Cocina
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="heladera"> Heladera
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="microondas"> Microondas
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="aguaCorriente"> Agua Corriente
+                        </label>
+                        <br>
+                        <label>
+                         Cantidad de Personas <input type="number" name="cantidadPers"> 
+                        </label>
+                        <br>
+                         <label>
+                           Cantidad de Habitaciones <input type="number" name="cantCuarto"> 
+                        </label>
+                        <br>
+                        <label>
+                            Cantidad de Baños <input type="number" name="cantBanio"> 
+                        </label>
+                        <br>
+                        <label>
+                            Cantidad de Autos <input type="number" name="cantAuto"> 
+                        </label>
+                        <br>
+
+                        <!-- Agrega más checkboxes según sea necesario -->
+                    </fieldset>
                     <br>
-                    <select name="ciudad">
-                        <option th:each="City : ${Cities}"  
-                                th:text="${City.label}" 
-                                th:value="${City.label}"  >
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" 
-                           class="form-control" 
-                           id="direccion" 
-                           placeholder="Ingresa la dirección" 
-                           name="direccion" 
-                           required>
-                </div>
 
-                <div class="form-group">
-                    <label for="tipoPropiedad">Tipo de Propiedad:</label>
-                    <br>
-                    <select name="tipoPropiedad">
-                        <option th:each="Tipo : ${Propiedades}"  
-                                th:text="${Tipo.label}" 
-                                th:value="${Tipo.label}"  >
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
-                    <textarea class="form-control" 
-                              id="descripcion" 
-                              placeholder="Ingresa una descripción" 
-                              name="descripcion" 
-                              rows="4" 
-                              required></textarea>
-                </div>
-                <!-- comment 
-                <div class="form-group">
-                    <label for="valoracion">Valoración:</label>
-                    <input type="number" class="form-control" id="valoracion" placeholder="Ingresa la valoración" name="valoracion" step="0.1" required>
-                </div>-->
-                <button type="submit" class="btn btn-primary">Cargar Propiedad</button>
-            </form>
+                    <!-- comment 
+                    <div class="form-group">
+                        <label for="valoracion">Valoración:</label>
+                        <input type="number" class="form-control" id="valoracion" placeholder="Ingresa la valoración" name="valoracion" step="0.1" required>
+                    </div>-->
+                    <button type="submit" class="btn btn-primary">Cargar Propiedad</button>
+                </form>
+            </div>
         </div>
         <section th:replace="/fragments/footer :: section"></section>
         <script
@@ -113,3 +188,8 @@
         ></script>
     </body>
 </html>
+
+
+
+
+

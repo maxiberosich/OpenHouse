@@ -49,13 +49,13 @@ public class PropertyController {
             @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja,
             
             
-            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) {
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, id,
-                    archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja, idPropiedad,
+                    archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja,
                     
                     //de aca para abajo son atributos de prestaciones.
                     //int-

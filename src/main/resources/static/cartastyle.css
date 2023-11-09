@@ -1,5 +1,5 @@
 .parrafo{
-padding: 0%;
+    padding: 0%;
 }
 
 .container{
@@ -51,12 +51,14 @@ padding: 0%;
     text-align: right;
 }
 .swiper-container {
-    max-width: 100%; /* Limita el ancho del carrusel al ancho del contenedor padre */
+    height:10rem; 
+    max-height: auto;/* Limita el ancho del carrusel al ancho del contenedor padre */
     overflow: hidden; /* Oculta el contenido que excede el cuadro */
+    object-fit: cover;
 }
 .swiper-slide img {
-    max-width: 100%; /* Limita el ancho de la imagen al ancho del carrusel */
+    /* Limita el ancho de la imagen al ancho del carrusel */
     max-height: 100%; /* Limita la altura de la imagen a la altura del carrusel */
-    object-fit: contain; /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
+     /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
 }
 
