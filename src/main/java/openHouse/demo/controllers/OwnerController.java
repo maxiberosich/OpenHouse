@@ -25,7 +25,7 @@ public class OwnerController {
     
     @GetMapping("/registrarPropietario")
     public String registrarProp(){
-        return "registrar.html"; //completar con html para registrar propiedad
+        return "registrar.html"; 
     }
     
     @PostMapping("/registroPropietario")
@@ -44,7 +44,7 @@ public class OwnerController {
             model.put("dni",dni);
             model.put("phone",phone);
             model.put("cbu",cbu);
-            return "registrar.html"; //completar con html para registrar propiedad
+            return "registrar.html"; 
         }
     }
     

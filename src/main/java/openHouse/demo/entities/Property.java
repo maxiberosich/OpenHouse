@@ -12,6 +12,7 @@ import jakarta.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 import lombok.Data;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity

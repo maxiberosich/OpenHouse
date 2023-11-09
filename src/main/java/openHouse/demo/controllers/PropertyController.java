@@ -3,7 +3,6 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
-import openHouse.demo.entities.Prestation;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.enums.City;
@@ -47,10 +46,23 @@ public class PropertyController {
             @RequestParam String descripcion, ModelMap modelo, MultipartFile archivo, @RequestParam String ciudad,
             @RequestParam String tipoPropiedad,
             @RequestParam Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta,
-            @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja) {
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja,
+            
+            
+            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
+            boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
+            boolean heladera, boolean microondas) {
         try {
-            propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion,
-                    id, archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja);
+            propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, id,
+                    archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja, idPropiedad,
+                    
+                    //de aca para abajo son atributos de prestaciones.
+                    //int-
+                    cantidadPers, cantAuto, cantCuarto, cantBanio,
+                    //boolean-
+                    pileta, asador, cochera, aireAcondicionado,
+                    wiFi, tv, barra, seAceptanMascotas, aguaCorriente, cocina, heladera, microondas);
             modelo.put("exito", "Propiedad cargada correctamente");
             return "redirect:/";
         } catch (MiException ex) {

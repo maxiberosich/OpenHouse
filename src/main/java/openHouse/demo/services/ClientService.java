@@ -108,7 +108,11 @@ public class ClientService {
         
         if (respuesta.isPresent()) {
             Client cliente = respuesta.get();
-            cliente.setAlta(Boolean.FALSE);
+            if (cliente.isAlta() == true) {
+                cliente.setAlta(false);
+            }else if (!cliente.isAlta() == false){
+                cliente.setAlta(true);
+            }
         }
     }
     public void validate(String name, String password, String password2, String email, String dni, String phone, Date birthdate)
