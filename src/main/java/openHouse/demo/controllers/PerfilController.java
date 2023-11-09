@@ -13,19 +13,9 @@ public class PerfilController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
-    @GetMapping("/perfil/{id}")
-    public String perfil(ModelMap modelo, HttpSession session) {
-        User user = (User) session.getAttribute("usersession");
-        if (user != null) {
-            modelo.put("user", user);
-            return "perfil.html";
-        } else {
-            return "inicio.html";
-        }
-    }
-
-        
+    
+    @GetMapping("/perfil")
+    public String perfil() {        
         return "perfil.html";
     }
     
