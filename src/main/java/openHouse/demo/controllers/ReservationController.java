@@ -31,6 +31,7 @@ public class ReservationController {
         User user = (User) session.getAttribute("usersession");
         modelo.put("user", user);
         //modelo.put("idPropiedad", idPropiedad);
+       
         
         Property propiedad = propService.getOne(idPropiedad);
         modelo.addAttribute("propertys", propiedad);
@@ -48,6 +49,7 @@ public class ReservationController {
             reservaServicio.crearReservacion(fechaInicio, fechaFin, idCliente,Integer.valueOf(cantPersonas) , idPropiedad);
             
             modelo.put("exito", "Reservacion agendada correctamente");
+             System.out.println(cantPersonas);
             return "redirect:/";
         } catch (MiException ex) {
             
