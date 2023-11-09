@@ -30,7 +30,7 @@
             <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
             <p th:text="${propiedad.precioBase}">Precio: $100</p>
             <p>Días disponibles: Lunes a Viernes</p>
-            <button type="button" class="boton-estilizado"><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
+            <button type="button" class="boton-estilizado"><a class="boton-estilizado" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
             <!--<button type="button" class="boton-estilizado" ><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}" >Alquilar</a></button>-->
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="item">Baños</div>
     <div class="item" th:if="propiedad.prestaciones.pileta">Piscina</div>
     <div class="item" th:if="propiedad.prestaciones.asador">Asador</div>
-    <div class="item" th:if="propiedad.prestaciones.>Cochera</div>
+    <div class="item" th:if="propiedad.prestaciones.cochera">Cochera</div>
     <div class="item" th:if="propiedad.prestaciones.aireAcondicionado">Aire acondicionado</div>
     <div class="item" th:if="propiedad.prestaciones.wiFi">Wi-Fi</div>
     <div class="item" th:if="propiedad.prestaciones.tv">Tv</div>
