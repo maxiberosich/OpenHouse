@@ -3,7 +3,7 @@
         <a class="navbar-brand" th:href="@{/}">
             <!-- cambiar icon -->
             <img src="/img/iconoyaz.png" class="iconoyaz"
-                 width="50"
+                 width="180px"
                  alt="Logo de la pagina web"
                  />
         </a>
@@ -25,7 +25,8 @@
                         Perfil
                     </a>
                     <div class="dropdown-menu">
-                        <!-- <a class="dropdown-item" th:href="@{/login}">Iniciar Sesion</a> -->                        
+                        <!-- <a class="dropdown-item" th:href="@{/login}">Iniciar Sesion</a> -->   
+                           <a class="dropdown-item" th:href="@{/usuario/perfil}">Perfil</a>
                         <a class="dropdown-item" th:href="@{/modificarPerfil}">Modificar</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_PROPIETARIO')" th:href="@{/propiedad/registrarPropiedad}">Cargar Propiedad</a>

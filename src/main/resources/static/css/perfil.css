@@ -1,5 +1,8 @@
 /*IMAGEN HEADER */
 
+html{
+    background: lightgray!important;
+}
 .header{
     margin:5px;
     background-color: #ecf0f3;
@@ -99,7 +102,7 @@
 }
 
 .tarjeta-index{
-    background-color: #ecf0f3;
+    background-color: #f3969a;
    /* box-shadow: 0px 0px 11px 6px #d1d9e6, 0px 0px 5px 0px #f9f9f9;*/
     border: none;
     border-radius: 12px;
