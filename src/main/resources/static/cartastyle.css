@@ -6,7 +6,7 @@
     background-color: transparent;
 }
 .card-body{
-    background: aliceblue;
+    background: #343a40;
 }
 .no-subrayado{
     text-decoration: none;
@@ -29,7 +29,7 @@
 .carta{
     border-end-end-radius: 10%;
     border-end-start-radius:10% ; /* Ajusta el valor según el radio de curvatura deseado */
-    background-color: whitesmoke; /* Cambia el color de fondo según tus preferencias */
+    background-color: #343a40; /* Cambia el color de fondo según tus preferencias */
     padding: 20px; /* Añade relleno (padding) para el contenido del cuadro */
     width: 100%; /* Ajusta el ancho del cuadro según tus necesidades */
     height: 100%;
@@ -40,9 +40,10 @@
 }
 .table td, .table th {
     border: null;
+    color: #f3969a;
     padding: 0.5%;
     text-align: left;
-    background-color: aliceblue;
+    background-color: #343a40;
     font-family: 'Times New Roman', Times, serif;
     font-size: medium;
 }
@@ -50,16 +51,14 @@
     text-align: right;
 }
 .swiper-container {
-    max-width: 100%; /* Limita el ancho del carrusel al ancho del contenedor padre */
+    height:10rem; 
+    max-height: auto;/* Limita el ancho del carrusel al ancho del contenedor padre */
     overflow: hidden; /* Oculta el contenido que excede el cuadro */
+    object-fit: cover;
 }
 .swiper-slide img {
-    max-width: 100%; /* Limita el ancho de la imagen al ancho del carrusel */
+    /* Limita el ancho de la imagen al ancho del carrusel */
     max-height: 100%; /* Limita la altura de la imagen a la altura del carrusel */
-    object-fit: contain; /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
+     /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
 }
 
-
-.album {
-
-}

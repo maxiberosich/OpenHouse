@@ -9,11 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.Data;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
-
 public class Image {
 
     @Id

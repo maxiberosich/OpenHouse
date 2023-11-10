@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-     background: lightgray!important;
+    background: lightgray!important;
 
 }
 .form-container {
@@ -56,14 +56,25 @@ body {
 
 fieldset{
     padding: 20px!important;
-    max-width: 400px!important;
+    max-width: 450px!important;
     max-height: 300px!important;
     border-radius: 8px!important;
     margin-right: 100px!important;
-    background: lightcoral!important;
+    background: #f3969a!important;
     margin-top: 80px!important;
+
 }
 
 #modificar{
     color: #f3969a;
+}
+
+.perfil img{
+    align-items: center!important;
+    width: 80%;
+    height: 90%;
+    border-radius: 8px!important;
+    object-fit: contain;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    
 }

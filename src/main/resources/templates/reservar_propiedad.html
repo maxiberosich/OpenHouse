@@ -1,159 +1,184 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
 
-<head>
-    <title>Formulario de reserva</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <head>
+        <title>Formulario de reserva</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="./inicio.css">
-    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
 
-</head>
+        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        <link href="/css/reservarPropiedad.css" rel="stylesheet" type="text/css">
 
-<body>
-    <!-- comment
-    <div class="propiedad">
-         
-        <div class="card mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="30%" height="100"
-                aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"
-                viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Imagen propiedad a reservar</text>
+    </head>
 
-                
-                <div class="album py-5 bg-body-tertiary">
-                    <div class="container">
-                  
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            <div class="col">
-                                <div class="card shadow-sm" th:each="propiedad : ${propertys}">
-                                    <div class="swiper-container">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                           
-                                                <img th:src="@{/image/propiedad/__${propiedad.id}__}"
-                                                    alt="Imagen propiedad" />
-                                            </div>
+    <body>
+        <div th:replace="/fragments/errores :: div"></div>
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img src="/img/iconoyaz.png" class="iconoyaz" width="50" alt="Logo de la pagina web" />
+                </a>
+                <a class="navbar-brand" th:href="@{/}">Open-House</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Navegación de palanca">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                                          
-                                        </div>
-                                        <div class="swiper-pagination"></div>  Opcional: agregar paginación
-                                    </div>
-                                    <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado">
-                                        <div class="card-body">
-                                            <div class="content">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td class="cell-with-comment" th:text="${propiedad.ciudad}">
-                                                            <!-- Puede fallar 
+            </div>
+        </nav>
 
-                                                        </td>
 
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="comment" th:text="${propiedad.descripcion}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th th:text="${propiedad.direccion}"></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Disponibilidad</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>$</th>
-                                                        <td th:text="${propiedad.precioBase}"></td>
-                                                    </tr>
-                                                </table>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <small class="text-body-secondary">Puntuacion</small>
-                                                </div>
-                                            </div>
-                                        </div>
+        <div class="box">
+
+            <div class="box-res" style="width: 100%;">
+                <div>
+                    <div class="col-md-6">
+
+                        <div th:replace="/fragments/errores :: div"></div>
+
+                        <div class="card border-warning mb-3">
+                            <div class="card-header">
+                                <h2><strong>Formulario de Reserva</strong></h2>
+                            </div>
+                            <div class="card-body">
+                                <form th:action="@{/reserva/crearReserva/__${propertys.id}__/__${user.id}__}" method="POST">
+
+                                    <input hidden th:value="${user.id}" name="idCliente">
+                                    <input hidden th:value="${propertys.id}" name="idPropiedad">
+
+
+                                    <label for="adultos">Total de Personas</label>
+                                    <select id="adultos" 
+                                            name="cantPersonas" 
+
+                                            >
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="20">+20</option>
+                                    </select>
+                                    <br><br>
+
+                                    <label>
+                                        <input type="checkbox" name="eventoPrivado" id="eventoPrivado">
+                                        Utilizaré la propiedad para un evento privado.
+                                    </label>
+
+                            </div>
+                            <form id="reservaForm">
+                                <div class="form-group">
+                                    <label for="fechaInicio">Fecha ingreso:</label>
+                                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="fechaFin">Fecha egreso:</label>
+                                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                                </div>
+                                <div id="diasReserva"></div>
+                                <br>
 
-                                </a>
+                                <input hidden th:value="${propertys.precioBase}" id="precioBase">  
+                                 <div id="precioFinal"></div>
+
+
+
+
+
+
+
+
+
+
+
+                                <br>
+                                <button type="submit" class="btn btn-primary">Crear Reserva</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="box-prop" style="width: 40%;">
+                <div>
+                    <div class="col" th:each="propiedad : ${propertys}">
+                        <div class="card shadow-sm">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"
+                                         th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}">
+
+                                        <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}"
+                                             th:src="@{/image/propiedad/__${propiedad.id}__}"
+                                             alt="Imagen propiedad" />
+                                    </div>
+                                </div>
+                            </div>
+                            <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado"> </a>
+                            <div class="card-body">
+                                <div class="content">
+                                    <table class="table">
+                                        <tr>
+                                            <td class="cell-with-comment" th:text="${propiedad.ciudad}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="comment" th:text="${propiedad.descripcion}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th th:text="${propiedad.direccion}"></th>
+                                        </tr>
+                                        <tr>
+                                            <th>$</th>
+                                            <td th:text="${propiedad.precioBase}"></td>
+                                        </tr>
+                                    </table>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-body-secondary">Puntuacion</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </svg>
+            </div>         
+
         </div>
-    </div> -->
-
-    <div class="reserva">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-
-                <div th:replace="/fragments/errores :: div"></div>
-
-                <div class="card border-warning mb-3" style="max-width: 20rem;">
-                    <div class="card-header">
-                        <h2><strong>Formulario de Reserva</strong></h2>
-                    </div>
-                    <div class="card-body">
-                        <form th:action="@{/reserva/crearReserva/__${propiedad.id}__/__${user.id}__}" method="POST">
-
-                            <input hidden th:value="${user.id}" name="idCliente">
-                            <input hidden th:value="${propiedad.id}" name="idPropiedad">
-
-                            <div class="form-group">
-                                <label for="cantper">Cantidad de personas</label>
-                                <input placeholder="Cantidad de personas" type="number" class="form-control" id="fecha"
-                                    name="cantPersonas" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fechai">Fecha ingreso:</label>
-                                <input type="date" class="form-control" id="fecha" name="fechaInicio" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fechae">Fecha egreso:</label>
-                                <input type="date" class="form-control" id="fecha" name="fechaFin" required>
-                            </div>
-                            <button 
-                                type="submit" 
-                                class="btn btn-primary">Crear Reserva</button>
-                        </form>
-                    </div>
-                </div>
 
 
-            </div>
+
+
+        <div>
+            <section th:replace="/fragments/footer :: section"></section>
         </div>
-    </div>
 
 
-    <section>
-        <div class="b-example-divider"></div>
+        <script src="/reservar_propiedad.js"></script>
 
-        <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
-                    <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                        <svg class="bi" width="30" height="24">
-                            <use xlink:href="#bootstrap" />
-                        </svg>
-                        <img src="img/iconoyaz.png" alt="Logo de Open-House" width="50" height="50">
-                    </a>
-                    <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Open-House, Inc</span>
-                </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-twitter"></i></a></li>
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-instagram"></i></a></li>
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><i class="bi bi-facebook"></i></a></li>
-                </ul>
-            </footer>
-        </div>
-    </section>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>                       
+</html>

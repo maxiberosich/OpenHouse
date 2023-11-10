@@ -2,8 +2,10 @@ package openHouse.demo.services;
 
 import java.util.Optional;
 import openHouse.demo.entities.Prestation;
+import openHouse.demo.entities.Property;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.PrestationRepository;
+import openHouse.demo.repositories.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,9 @@ public class PrestationService {
     @Autowired
     private PrestationRepository prestationRepository;
 
+    @Autowired
+    private PropertyRepository propertyRepository;
+
     @Transactional
     public Prestation createPrestation(Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
@@ -22,29 +27,35 @@ public class PrestationService {
 
         validate(cantidadPers, cantAuto, cantCuarto, cantBanio);
 
-        Prestation prestacion = new Prestation();
+        //Optional<Property> respuestaProperty = propertyRepository.findById(idPropiedad);
 
-        prestacion.setAguaCorriente(aguaCorriente);
-        prestacion.setAireAcondicionado(aireAcondicionado);
-        prestacion.setAsador(asador);
-        prestacion.setBarra(barra);
-        prestacion.setCantAuto(cantAuto);
-        prestacion.setCantBanio(cantBanio);
-        prestacion.setCantCuarto(cantCuarto);
-        prestacion.setCantidadPers(cantidadPers);
-        prestacion.setCochera(cochera);
-        prestacion.setCocina(cocina);
-        prestacion.setHeladera(heladera);
-        prestacion.setMicroondas(microondas);
-        prestacion.setPileta(pileta);
-        prestacion.setSeAceptanMascotas(seAceptanMascotas);
-        prestacion.setTv(tv);
-        prestacion.setWiFi(wiFi);
+        //if (respuestaProperty.isPresent()) {
+            //Property propiedad=respuestaProperty.get();
+            
+            
+            Prestation prestacion = new Prestation();
 
-        prestationRepository.save(prestacion);
-        
-        return prestacion;
-
+            prestacion.setAguaCorriente(aguaCorriente);
+            prestacion.setAireAcondicionado(aireAcondicionado);
+            prestacion.setAsador(asador);
+            prestacion.setBarra(barra);
+            prestacion.setCantAuto(cantAuto);
+            prestacion.setCantBanio(cantBanio);
+            prestacion.setCantCuarto(cantCuarto);
+            prestacion.setCantidadPers(cantidadPers);
+            prestacion.setCochera(cochera);
+            prestacion.setCocina(cocina);
+            prestacion.setHeladera(heladera);
+            prestacion.setMicroondas(microondas);
+            prestacion.setPileta(pileta);
+            prestacion.setSeAceptanMascotas(seAceptanMascotas);
+            prestacion.setTv(tv);
+            prestacion.setWiFi(wiFi);
+            //prestacion.setPropiedad(propiedad);
+            prestationRepository.save(prestacion);
+            return prestacion;
+        //}
+            //return null;
     }
 
     @Transactional
@@ -94,20 +105,20 @@ public class PrestationService {
     }
 
     @Transactional
-    public Prestation getOne(String idPrestation){        
-        return prestationRepository.getOne(idPrestation);        
+    public Prestation getOne(String idPrestation) {
+        return prestationRepository.getOne(idPrestation);
     }
-    
-    public void deletePrestation(String idPrestation) throws MiException{
-        
+
+    public void deletePrestation(String idPrestation) throws MiException {
+
         Optional<Prestation> respuesta = prestationRepository.findById(idPrestation);
-        if(respuesta.isPresent()){
+        if (respuesta.isPresent()) {
             Prestation prestacion = respuesta.get();
             prestationRepository.delete(prestacion);
-        }else{
+        } else {
             throw new MiException("No existen prestaciones.");
         }
-        
+
     }
-    
+
 }
