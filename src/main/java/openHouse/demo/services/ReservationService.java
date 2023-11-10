@@ -3,6 +3,7 @@ package openHouse.demo.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import openHouse.demo.entities.Client;
@@ -57,14 +58,19 @@ public class ReservationService {
         Client cliente =respuestaCliente.get();
         reservation.setCliente(cliente);
         
+        
         Property propiedad=respuestaPropiedad.get();
         reservation.setPropiedad(propiedad);
         
         
-        Double precioFinal=precio(fechaFin, fechaFin, idPropiedad);
+        Double precioFinal=precio(fechaInicio, fechaFin, idPropiedad);
         reservation.setPrecioFinal(precioFinal);
         reservation.setCliente(clientService.getOne(cliente.getId()));
         
+        List<Reservation> reservaciones=cliente.getReservaActiva();
+        reservaciones.add(reservation);
+        
+        cliente.setReservaActiva(reservaciones);
         reservationRepository.save(reservation);
     }
      
@@ -96,7 +102,7 @@ public class ReservationService {
             reservation.setFechaFin(fechaFin);
             reservation.setCantPersonas(cantPersonas);
             //DEFINIR COMO CALCULAMOS EL PRECIO FINAL !!LO MISMO PARA CALCULAS LOS DIAS QUE LAS NOCHES
-            Double precioNuevo=precio(fechaFin, fechaFin, idPropietario);
+            Double precioNuevo=precio(fechaInicio, fechaFin, idPropietario);
             reservation.setPrecioFinal(precioNuevo);
             reservationRepository.save(reservation);
         }
@@ -147,12 +153,14 @@ public class ReservationService {
     
     public Integer calcularNoches(Date fechaInicio,Date fechaFin){
             long elapsedms=fechaFin.getTime()-fechaInicio.getTime();
-            long diff = TimeUnit.MINUTES.convert(elapsedms, TimeUnit.MILLISECONDS);
-            diff=(diff/1440);
-            Integer noches;
             
+            //long diff = TimeUnit.MINUTES.convert(elapsedms, TimeUnit.MILLISECONDS);
+            long diff=(elapsedms/86400000);
+            Integer noches;
             noches = Math.toIntExact(diff);
+
             return noches;
     }
+    
     
 }

@@ -1,12 +1,9 @@
 package openHouse.demo.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import openHouse.demo.entities.Client;
-import openHouse.demo.entities.Image;
 import openHouse.demo.entities.Property;
-import openHouse.demo.services.ClientService;
+import openHouse.demo.entities.User;
 import openHouse.demo.services.PropertyService;
+import openHouse.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ImageController {
 
     @Autowired
-    ClientService clientService;
+    UserService userService;
     
     @Autowired
     PropertyService propertyService;
 
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenCliente(@PathVariable String id) {
-        Client cliente = clientService.getOne(id);
+        User cliente = userService.getOne(id);
         byte[] imagen = cliente.getImage().getContent();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

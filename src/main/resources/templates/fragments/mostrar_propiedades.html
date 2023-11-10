@@ -1,13 +1,11 @@
-<!-- Vista Propiedad: Separar -->
-
 <div class="carta">
     <div class="carta-image">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <!-- <div class="swiper-slide" th:each="foto : ${propiedad.imagenes}"> Parcial -->
-                <img th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen 1"> <!--</div> Aqui ira el each -->
+                 <div class="swiper-slide" th:each="foto : ${propiedad.imagenes}"> 
+                <img th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen 1"> </div> 
 
-                <!-- Agrega las imágenes adicionales aquí -->
+                  
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -22,15 +20,24 @@
     </div>
 </div>
 
-<!-- Componente items -->
+ Componente items 
 
 <div class="items-list">
-    <!-- Ver la logica para ver los atributos de la casa -->
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 3</div>
-    <div class="item">Item 4</div>
-    <div class="item">Item 5</div>
-    <div class="item">Item 6</div>
-    <!-- Agrega más elementos aquí -->
+     Ver la logica para ver los atributos de la casa 
+    <div class="item">Cantidad de Personas</div>
+    <div class="item">Cantidad auto</div>
+    <div class="item">Cuartos</div>
+    <div class="item">Baños</div>
+    <div class="item">Piscina</div>
+    <div class="item">Asadador</div>
+    <div class="item">Cochera</div>
+    <div class="item">Aire acondicionado</div>
+    <div class="item">Wi-Fi</div>
+    <div class="item">Tv</div>
+    <div class="item">Barra</div>
+    <div class="item">Mascotas</div>
+    <div class="item">Cocina</div>
+
 </div>
+
+ 

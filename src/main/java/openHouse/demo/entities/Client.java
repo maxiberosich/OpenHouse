@@ -1,8 +1,9 @@
 package openHouse.demo.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "cliente")
@@ -12,8 +13,8 @@ public class Client extends User {
     //private List <tarjetas>;
     // falta crear entidad "tarjeta" que esta como sugerencia en trello.  
     
-    @ManyToOne
-    private Reservation reservaActiva;
+    @OneToMany
+    private List<Reservation> reservaActiva;
     
     /*@OneToMany
     private List<Property> propiedades;*/
@@ -30,14 +31,15 @@ public class Client extends User {
         this.alta = alta;
     }
 
-    public Reservation getReservaActiva() {
+    public List<Reservation> getReservaActiva() {
         return reservaActiva;
     }
 
-    public void setReservaActiva(Reservation reservaActiva) {
+    public void setReservaActiva(List<Reservation> reservaActiva) {
         this.reservaActiva = reservaActiva;
     }
 
+  
     @Override
     public String toString() {
         return "Client{" + "alta=" + alta + ", reservaActiva=" + reservaActiva + '}';

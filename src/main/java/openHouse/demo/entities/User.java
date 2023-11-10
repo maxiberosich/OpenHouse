@@ -10,6 +10,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 import lombok.Data;
+
 import openHouse.demo.enums.Rol;
 import org.hibernate.annotations.GenericGenerator;
 

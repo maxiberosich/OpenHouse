@@ -3,6 +3,7 @@ package openHouse.demo.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,6 +15,9 @@ public class Prestation {
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name= "uuid", strategy="uuid2")
     private String Id;
+    
+    /*@OneToOne
+    private Property propiedad;*/
     
     private Integer cantidadPers;
     private Integer cantAuto;
