@@ -27,7 +27,7 @@
                     <div class="dropdown-menu">
                         <!-- <a class="dropdown-item" th:href="@{/login}">Iniciar Sesion</a> -->   
                            <a class="dropdown-item" th:href="@{/usuario/perfil}">Perfil</a>
-                        <a class="dropdown-item" th:href="@{/modificarPerfil}">Modificar</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_CLIENTE') or hasRole('ROLE_PROPIETARIO')" th:href="@{/modificarPerfil}">Modificar</a>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/clientes}">Administrar Clientes</a>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/propietarios}">Administrar Propietarios</a>
                         <div class="dropdown-divider"></div>

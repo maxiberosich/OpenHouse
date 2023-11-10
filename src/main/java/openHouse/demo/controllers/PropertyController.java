@@ -56,13 +56,13 @@ public class PropertyController {
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, id,
                     archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja,
-                    
+
                     //de aca para abajo son atributos de prestaciones.
                     //int-
-                    5, 5, 5, 5,
+                    cantidadPers, cantAuto, cantCuarto, cantBanio,
                     //boolean-
-                    true, true, true, true,
-                    true, true, true, true, true, true, true, true);
+                    pileta, asador, cochera, aireAcondicionado,
+                    wiFi, tv, barra, seAceptanMascotas, aguaCorriente, cocina, heladera, microondas);
             modelo.put("exito", "Propiedad cargada correctamente");
             return "redirect:/";
         } catch (MiException ex) {
