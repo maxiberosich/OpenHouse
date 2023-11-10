@@ -1,59 +1,116 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OpenHouse</title> 
+        <link href="/propiedadestilo.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace="/fragments/head :: head" ></head>
+    </head>
     <body>
+        <nav th:replace="/fragments/navbar :: nav"></nav>        
 
-        <nav th:replace="/fragments/navbar :: nav"></nav>
-        
         <div class="carta">
             <div class="carta-image">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                            <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
-                                
-                                <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
-                            </div>
+                        <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
+
+                            <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
                         </div>
+                    </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
+
+                <div class="carta-content">
+                    <h2 th:text="${propiedad.ciudad}">Título de la carta</h2>
+                    <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
+                    <p th:text="${propiedad.precioBase}">Precio: $100</p>
+                    <p>Días disponibles: Lunes a Viernes</p>
+                    <button type="button" class="boton-estilizado"><a class="boton-estilizado" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
+                    <!--<button type="button" class="boton-estilizado" ><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}" >Alquilar</a></button>-->
+                </div>
             </div>
-            <div class="carta-content">
-                <h2 th:text="${propiedad.ciudad}">Título de la carta</h2>
-                <p th:text="${propiedad.descripcion}">Descripción de la carta.</p>
-                <p th:text="${propiedad.precioBase}">Precio: $100</p>
-                <p>Días disponibles: Lunes a Viernes</p>
-                <button type="button" ><a th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
+
+            <div class="items-list">
+                <div class="item" th:text="'Cantidad de Personas: ' + ${propiedad.prestaciones.cantidadPers}" ></div>
+                <div class="item" th:text="'Cantidad auto: ' + ${propiedad.prestaciones.cantAuto}" ></div>
+                <div class="item" th:text="'Cuartos: ' + ${propiedad.prestaciones.cantCuarto}" ></div>
+                <div class="item" th:text="'Baños: ' + ${propiedad.prestaciones.cantBanio}" ></div>
+                <div class="item" th:if="${propiedad.prestaciones.pileta}">Piscina</div>
+                <div class="item" th:if="${propiedad.prestaciones.asador}">Asador</div>
+                <div class="item" th:if="${propiedad.prestaciones.cochera}">Cochera</div>
+                <div class="item" th:if="${propiedad.prestaciones.aireAcondicionado}">Aire acondicionado</div>
+                <div class="item" th:if="${propiedad.prestaciones.wiFi}">Wi-Fi</div>
+                <div class="item" th:if="${propiedad.prestaciones.tv}">Tv</div>
+                <div class="item" th:if="${propiedad.prestaciones.barra}">Barra de tragos</div>
+                <div class="item" th:if="${propiedad.prestaciones.seAceptanMascotas}">Se aceptan Mascotas</div>
+                <div class="item" th:if="${propiedad.prestaciones.aguaCorriente}">Agua Corriente</div>
+                <div class="item" th:if="${propiedad.prestaciones.cocina}">Cocina</div>
+                <div class="item" th:if="${propiedad.prestaciones.heladera}">Heladera</div>
+                <div class="item" th:if="${propiedad.prestaciones.microondas}">Microondas</div>        
             </div>
-        </div>
-
-        <!-- Componente items -->
-
-        <div class="items-list">
-            <!-- Ver la logica para ver los atributos de la casa -->
-            <div class="item">Item 1</div>
-            <div class="item">Item 2</div>
-            <div class="item">Item 3</div>
-            <div class="item">Item 4</div>
-            <div class="item">Item 5</div>
-            <div class="item">Item 6</div>
-            <!-- Agrega más elementos aquí -->
-        </div>
 
 
-        <div th:replace="/fragments/mostrar_comentario :: div"></div>
+            <div class="contenedor">
+                <div class="contenedor-imagen">
+                    <img class="img-tamaño" src="img\Image20231025161308.png" alt="ImagenUsuario">
 
-        <div th:replace="/fragments/crear_comentario :: div"></div>
-        
-        <div th:replace="/fragments/errores :: div"></div>
+                </div>
+                <div class="contenedor-comentario">
+                    <div>
+                        <h3>Nombre de usuario</h3>
+                        <form action="{/}" method="post">
+                            <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="comentario"></textarea>
+                            <br>
+                            <br>
+                            <div class="contenedor-boton">
+                                <input type="file" id="input-archivo" class="input-archivo" name="foto" accept="image/*">
+                                <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
 
-        <div th:replace="/fragments/Js :: div"></div>
+                            </div>
 
-        <section th:replace="/fragments/footer :: section"></section>
-        
+                            <br>
+                            <button class="boton-estilizado" type="submit"> Enviar</button>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="espaciado">
+                <div class="carta">
+                    <div class="carta-content">
+                        <h2>Nombre del usuario</h2>
+                        <h5>Contenido del Comentario</h5>
+                    </div>
+                    <div class="carta-image">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 1"></div> <!--Aqui ira el each -->
+                                <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 2"></div>
+                                <div class="swiper-slide"><img src="img\Image20231025161308.png" alt="Imagen 3"></div>
+                                <!-- Agrega las imágenes adicionales aquí -->
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <section th:replace="/fragments/footer :: section"></section>
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous"
+            ></script>
+            <script src="img.js"></script>
     </body>
 </html>
-
-
 

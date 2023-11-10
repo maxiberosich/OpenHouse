@@ -4,9 +4,11 @@
     float: none;
     align-content: center;
     text-align: center;
+    background-color: #343a40;
     max-width: 100%;
-    border: 1px solid #ccc;
-   
+    color: #f3969a;
+    border: 1px solid #f3969a;
+
 }
 
 .carta-image {
@@ -19,6 +21,11 @@
     flex: 3;
     max-width: 75%; /* 3/4 del ancho total */
     padding: 10px;
+    overflow-wrap:break-word;
+
+}
+.parrafo{
+    width: 80%;
 }
 
 img {
@@ -52,26 +59,37 @@ img {
 .items-list {
     display: flex;
     flex-wrap: wrap;
+    color: #f3969a;
+    background-color: #343a40;
     max-width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #f3969a;
 }
 
 .item {
     width: calc(25% - 10px); /* 25% - margin */
     margin: 5px;
+
     border: none;
     text-align: center;
     padding: 10px;
 }
 
 .espaciado{
-    padding-top:3%;
-}        
+    padding-top: 1%;
+}
+
 .contenedor{
     display: flex;
     max-width: 100%;
+    height: auto;
+    color: #f3969a;
+    background-color: #343a40;
     border-radius:2% ;
-    border: 1px solid #ccc;
+    border: 1px solid #f3969a;
+}
+.img-tamaño{
+    max-width: auto;
+    max-height: auto;
 }
 
 .contenedor-imagen{
@@ -79,7 +97,33 @@ img {
     max-width: 25%;
     position: relative;
 }
+.swiper-slide img {
+    max-width: 100%; /* Limita el ancho de la imagen al ancho del carrusel */
+    max-height: 100%; /* Limita la altura de la imagen a la altura del carrusel */
+    object-fit: contain; /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
+}
 
+.boton-estilizado{
+    background-color: #f3969a;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+.a{
+
+}
+.contenedor-boton{
+    position: relative;
+    display: inline-block;
+}
+.input-archivo{
+    background-color: #343a40;
+    display: none;
+}
 .contenedor-comentario{
     flex: 3;
     max-width: 75%;
@@ -87,6 +131,7 @@ img {
 
 .input-grande{
     /* Estilos CSS para hacer que un campo de entrada con la clase "input-grande" sea más grande */
+    background-color: lightgray;
     width: 75%;
     height: 100px;
     font-size: 20px;

@@ -14,20 +14,23 @@
 
 
 <body style="display: block!important">
-
     <nav th:replace="/fragments/navbar :: nav"></nav>
+
     <fieldset >
         <div class="top-20 end-80">
-            <div class="registrar" style="align-items: center!important; border-radius: 30px!important;
+            <div class="conteiner" style="align-items: center!important; border-radius: 30px!important;
                  margin: 40px!important;  margin-right: 10px!important; margin-left: 10px!important;"> 
 
                 <h1 class="saludo text-white" style="text-align: center; font-size:  var ">
-                    Hola »<span class="username-color" th:text="${cliente.name}"></span>« 
+                    Hola »<span class="username"style="color:#343a40;" th:text="${cliente.name}"></span>« 
                 </h1>
 
                 <div class="centered">
-                    <a class="d-flex align-items-center">
-                        <img class="logo"  th:src="@{/image/perfil/__${session.usersession.id}__}" height="100px;" >
+                    <a class="perfil img " >
+                        <img class="logo" style="width: 150px!important;
+                       height: 150px!important;
+                       position: relative!important;
+                       left: 120px!important;"  th:src="@{/image/perfil/__${session.usersession.id}__}" >
                     </a>
                 </div>
             </div>
@@ -81,6 +84,18 @@
             </div>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+    <div class="container">
+        <footer th:replace="/fragments/footer :: footer" > </footer>
+    </div>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+    ></script>
+
 </body>
 </html>

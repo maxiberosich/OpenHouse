@@ -18,13 +18,14 @@
                         <div class="card-body">
                             <div class="content">
                                 <table class="table">
-                                    <tr>                                    
-                                        <td class="cell-with-comment" th:text="${propiedad.ciudad}">                                            
+                                    <tr>
+                                    <tr>
+                                        <td class="cell-with-comment">Descripcion
+                                            <div class="comment" th:text="${propiedad.descripcion}"></div>
                                         </td>
-
                                     </tr>
                                     <tr>
-                                        <td class="comment" th:text="${propiedad.descripcion}"></td>
+                                        <th th:text="${propiedad.ciudad}">Ubicacion:</th>
                                     </tr>
                                     <tr>
                                         <th th:text="${propiedad.direccion}"></th>
@@ -33,24 +34,21 @@
                                         <th>Disponibilidad</th>
                                     </tr>
                                     <tr>
-                                        <th>$</th>
-                                        <td th:text="${propiedad.precioBase}"></td>
+                                        <th th:text="${propiedad.precioBase}">$</th>
                                     </tr>
                                 </table>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-body-secondary">Puntuacion</small>
-                                    
+                                    <small class="text-body-secondary" th:text="${propiedad.valoracion}">Puntuacion</small>
+
                                 </div  > 
-                                <div th:if="${session.usersession != null}" class="d-flex justify-content-between align-items-center">
+<!--                                <div th:if="${session.usersession != null}" class="d-flex justify-content-between align-items-center">
                                     <button><a th:href="@{/reserva/crear/__${propiedad.id}__}"> Reservar</a></button>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
-                </div>
-
                 </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-

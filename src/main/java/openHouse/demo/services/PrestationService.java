@@ -20,17 +20,17 @@ public class PrestationService {
     private PropertyRepository propertyRepository;
 
     @Transactional
-    public void createPrestation(String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+    public Prestation createPrestation(Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) throws MiException {
 
         validate(cantidadPers, cantAuto, cantCuarto, cantBanio);
 
-        Optional<Property> respuestaProperty = propertyRepository.findById(idPropiedad);
+        //Optional<Property> respuestaProperty = propertyRepository.findById(idPropiedad);
 
-        if (respuestaProperty.isPresent()) {
-            Property propiedad=respuestaProperty.get();
+        //if (respuestaProperty.isPresent()) {
+            //Property propiedad=respuestaProperty.get();
             
             
             Prestation prestacion = new Prestation();
@@ -51,11 +51,11 @@ public class PrestationService {
             prestacion.setSeAceptanMascotas(seAceptanMascotas);
             prestacion.setTv(tv);
             prestacion.setWiFi(wiFi);
-            prestacion.setPropiedad(propiedad);
+            //prestacion.setPropiedad(propiedad);
             prestationRepository.save(prestacion);
-             
-        }
-            
+            return prestacion;
+        //}
+            //return null;
     }
 
     @Transactional
