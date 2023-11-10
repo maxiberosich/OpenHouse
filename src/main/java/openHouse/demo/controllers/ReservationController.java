@@ -3,6 +3,7 @@ package openHouse.demo.controllers;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import openHouse.demo.entities.Property;
+import openHouse.demo.entities.Reservation;
 import openHouse.demo.entities.User;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.ClientService;
@@ -67,8 +68,9 @@ public class ReservationController {
     
     @GetMapping("/list/{idCliente}")
     public String mostrarReserva(ModelMap modelo,@PathVariable String idCliente){
+        //ESTO ANDA 
         modelo.addAttribute("reserva",clienteService.getOne(idCliente).getReservaActiva());
-        //modelo.put("reserva", clienteService.getOne(idCliente).getReservaActiva());
+       
         return "lista_reserva.html";
     }
 }

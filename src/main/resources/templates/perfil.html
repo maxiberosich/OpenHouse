@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <title>Perfil</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" th:href="@{/css/perfil.css}">
-    </head>
+    <head th:replace="/fragments/head :: head"></head>
     <body style="background: lightgray!important">
-        <style th:replace="/fragments/style_perfil :: style"></style>
+        
         <nav th:replace="/fragments/navbar :: nav"></nav>
         <br><br>
 
@@ -30,27 +24,27 @@
                                 <tbody>
 
                                     <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                        <th th:text="'Nombre: '+ ${session.usersession.name}" scope="row"></th>
+                                        <th th:text="'Nombre: '+ ${usuario.name}" scope="row"></th>
 
                                     </tr>
 
                                     <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                        <th th:text="'Email: '+ ${session.usersession.email}" scope="row"></th>
+                                        <th th:text="'Email: '+ ${usuario.email}" scope="row"></th>
 
                                     </tr>
 
                                     <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                        <th th:text="'Celular: '+ ${session.usersession.phone}" scope="row"></th>
+                                        <th th:text="'Celular: '+ ${usuario.phone}" scope="row"></th>
 
                                     </tr>
 
                                     <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                        <th th:text="'DNI: '+ ${session.usersession.Dni}" scope="row"></th>
+                                        <th th:text="'DNI: '+ ${usuario.Dni}" scope="row"></th>
 
                                     </tr>
 
                                     <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                        <th th:text="'Rol: '+ ${session.usersession.rol}" scope="row"></th>
+                                        <th th:text="'Rol: '+ ${usuario.rol}" scope="row"></th>
 
                                     </tr>
 
@@ -70,5 +64,15 @@
         <div class="container">
             <footer th:replace="/fragments/footer :: footer" > </footer>
         </div>
+        
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
     </body>
 </html>

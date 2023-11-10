@@ -56,7 +56,7 @@ public class PropertyController {
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, id,
                     archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja,
-                    
+
                     //de aca para abajo son atributos de prestaciones.
                     //int-
                     cantidadPers, cantAuto, cantCuarto, cantBanio,
