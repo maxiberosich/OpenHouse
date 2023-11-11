@@ -17,15 +17,15 @@
             <div class="row g-0">
                 <div class="col-md-4 d-flex">
 
-                    <div th:if="${session.usersession != null and session.usersession.image != null}" class=" d-flex perfil">
+                    <div th:if="${session.usersession != null and session.usersession.image != null}" id="perfil">
                         <img th:src="@{/image/perfil/__${session.usersession.id}__}">
                     </div>
 
                 </div>
                 <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-body" style="margin-left: -200px!important;">
 
-                        <table style="border-color: #343a40!important;border-style: double!important;" class="table">
+                        <table style="border-color: #343a40!important;border-style: double!important; width: 95%" class="table">
                             <tbody>
 
                                 <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
