@@ -31,7 +31,7 @@ public class OwnerController {
     @PostMapping("/registroPropietario")
     public String registroPropietario(@RequestParam String name, @RequestParam String password, String password2,
             @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
-            @RequestParam("birthdate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,@RequestParam String cbu, MultipartFile archivo, ModelMap model){
+            @RequestParam("birthdate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,@RequestParam String cbu,@RequestParam(required = false) MultipartFile archivo, ModelMap model){
         
         try {
             ownerService.crearPropietario(name,password,password2,email,dni,phone,birthdate,cbu,archivo);
@@ -53,7 +53,7 @@ public class OwnerController {
     public String modificarPropietario(@PathVariable String id, @RequestParam String name, @RequestParam String email,
             @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
             @RequestParam String dni, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,
-            @RequestParam String cbu, MultipartFile archivo, ModelMap modelo) {
+            @RequestParam String cbu,@RequestParam(required = false) MultipartFile archivo, ModelMap modelo) {
         
         try {
 
