@@ -54,6 +54,7 @@
                 <div class="item" th:if="${propiedad.prestaciones.heladera}">Heladera</div>
                 <div class="item" th:if="${propiedad.prestaciones.microondas}">Microondas</div>        
             </div>
+            <br>
 
 
             <div class="contenedor" sec:authorize="hasRole('ROLE_CLIENTE')">
@@ -67,7 +68,7 @@
                         <form th:action="@{/comentario/registroCommentario/__${propiedad.id}__/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
                             <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="cuerpo"></textarea>
                             <br>
-                            <br>
+                            
                             <div class="contenedor-boton">
                                 <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
                                 <input type="file" id="input-archivo" class="input-archivo" name="archivo" accept="image/*">                                
