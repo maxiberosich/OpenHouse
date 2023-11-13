@@ -74,7 +74,7 @@ public class PropertyService {
 
             User usuario = respuesta.get();
             Owner owner = (Owner) usuario;
-            propiedad.setPropietario(owner);
+            propiedad.setPropietario(owner);            
             
             Prestation prestacion=prestationService.createPrestation
                     ( cantidadPers, cantAuto, cantCuarto, cantBanio,

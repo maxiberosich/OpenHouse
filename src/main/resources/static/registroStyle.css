@@ -4,20 +4,23 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
-
-body {
+html{
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-image: url(img/fondoplaya.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+body {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #fff;
     margin: 5%;
- 
-    
+
+
 }
 
 .container-form {
@@ -45,7 +48,7 @@ body {
 .message button {
     padding: 1rem;
     font-weight: 400;
-    background-color: #4a4aee;
+    background-color: #f3969a;
     border-radius: 2rem;
     border: none;
     outline: none;
@@ -57,18 +60,18 @@ body {
 }
 
 .message button:hover {
-    background-color: #6464f8;
+    background-color: #e47479;
 }
 
 .formulario {
     width: 400px;
-   
+
     padding: 1rem;
     margin: 2rem;
     background-color: rgb(51, 51, 51, 0.602);
     text-align: center;
-    
-  
+
+
 }
 
 
@@ -94,13 +97,10 @@ body {
     border: solid thin white;
     border-radius: 50%;
     font-size: 1.5rem;
-    transition: all .3s ease-in;
+    transition: all .2s ease-in;
 }
 
-.border-icon:hover {
-    background-color: #4a4aee;
-    cursor: pointer;
-}
+
 
 .cuenta-gratis {
     padding: 2rem 0;
@@ -111,7 +111,7 @@ body {
     display: block;
     margin: auto;
     margin-bottom: 2rem;
-    background-color: transparent;
+    background-color: #343a40;
     border: none;
     border-bottom: white thin solid;
     text-align: center;
@@ -127,7 +127,7 @@ body {
     border: solid thin white;
     padding: .7rem;
     border-radius: 2rem;
-    background-color: white;
+    background-color: #e47479;
     font-weight: 600;
     margin-top: 2rem;
     font-size: .8rem;
@@ -141,7 +141,7 @@ body {
     border: solid thin white;
     padding: .7rem;
     border-radius: 2rem;
-    background-color: white;
+    background-color: #e47479;
     font-weight: 600;
     margin-top: 3rem;
     font-size: .8rem;
@@ -163,4 +163,14 @@ body {
 .sign-up.active {
     opacity: 0;
     visibility: hidden;
+}
+
+.bx{
+    background-color: #ffffff!important;
+    border-radius: 5px!important;
+}
+.border-icon:hover{
+    background-color: white;
+    cursor: pointer;
+
 }
