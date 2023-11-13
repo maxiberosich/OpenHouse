@@ -77,15 +77,19 @@ public class PropertyController {
     }
 
     @GetMapping("/detalles/{id}")
-    public String mostrarPropiedad(@PathVariable String id, ModelMap modelo) {
-        modelo.addAttribute("propiedad", propertyService.getOne(id));
-        modelo.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
+    public String mostrarPropiedad(@PathVariable String id, HttpSession session, ModelMap model) {
+        User usuario = (User) session.getAttribute("usersession");
+        model.addAttribute("propiedad", propertyService.getOne(id));
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
         return "propiedad_detalles.html";
     }
 
     @PostMapping("/detalles/{id}")
-    public String mostrarPropiedadD(@PathVariable String id, ModelMap model){
+    public String mostrarPropiedadD(@PathVariable String id, HttpSession session, ModelMap model){
+        User usuario = (User) session.getAttribute("usersession");
         model.addAttribute("propiedad", propertyService.getOne(id));
+        model.addAttribute("usuario", usuario);
         return "propiedad_detalles.html";
     }
 
