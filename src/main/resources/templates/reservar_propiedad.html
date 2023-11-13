@@ -9,12 +9,12 @@
 
 
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-        <link href="/css/reservaPropiedad.css" rel="stylesheet" type="text/css">
+        <link href="/css/reservarPropiedad.css" rel="stylesheet" type="text/css">
 
     </head>
 
     <body>
-         <div th:replace="/fragments/errores :: div"></div>
+        <div th:replace="/fragments/errores :: div"></div>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" th:href="@{/}">
@@ -32,7 +32,7 @@
 
         <div class="box">
 
-            <div class="box-res">
+            <div class="box-res" style="width: 100%;">
                 <div>
                     <div class="col-md-6">
 
@@ -49,17 +49,10 @@
                                     <input hidden th:value="${propertys.id}" name="idPropiedad">
 
 
-                                    <!-- comment 
-                                    
-                                    LA ETIQUETA SPAN no tiene el atributo name, por ende no me lo toma como parametro para 
-                                    los controladores.
-                                    
-                                    <p >Total de personas: <span id="totalPersonas" >0</span></p>
-                                     -->
                                     <label for="adultos">Total de Personas</label>
                                     <select id="adultos" 
                                             name="cantPersonas" 
-                                            
+
                                             >
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -72,46 +65,25 @@
                                         <option value="8">8</option>
                                         <option value="9">9</option>
                                         <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="20">+20</option>
                                     </select>
-                                    <!-- comment 
-                                    <br>
-                                    <label for="ninos">Niños mayores a 12 años:</label>
-                                    <select id="ninos" name="ninos" onchange="calcularCantidad()">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-    
-                                    </select>
-                                    <br>
-                                    <label for="bebes">Niños menores de 12 años:</label>
-                                    <select id="bebes" name="bebes" onchange="calcularCantidad()">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                </form>
-    
-    
-    
-                                <label>
-                                    <input type="checkbox" name="eventoPrivado" id="eventoPrivado">
-                                    Utilizaré la propiedad para un evento privado.
-                                </label>
-    
-    
-    
-                                    -->
+                                    <br><br>
+
+                                    <label>
+                                        <input type="checkbox" name="eventoPrivado" id="eventoPrivado">
+                                        Utilizaré la propiedad para un evento privado.
+                                    </label>
+
                             </div>
                             <form id="reservaForm">
                                 <div class="form-group">
@@ -125,6 +97,20 @@
                                 <div id="diasReserva"></div>
                                 <br>
 
+                                <input hidden th:value="${propertys.precioBase}" id="precioBase">  
+                                 <div id="precioFinal"></div>
+
+
+
+
+
+
+
+
+
+
+
+                                <br>
                                 <button type="submit" class="btn btn-primary">Crear Reserva</button>
                             </form>
                         </div>
@@ -132,17 +118,67 @@
                 </div>
             </div>
 
-            <div th:replace="/fragments/Carta :: div"></div>            
 
-            <div>
-                <section th:replace="/fragments/footer :: section"></section>
-            </div>
 
-            <script src="/reservar_propiedad.js"></script>
+            <div class="box-prop" style="width: 40%;">
+                <div>
+                    <div class="col" th:each="propiedad : ${propertys}">
+                        <div class="card shadow-sm">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"
+                                         th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}">
 
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                                        <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}"
+                                             th:src="@{/image/propiedad/__${propiedad.id}__}"
+                                             alt="Imagen propiedad" />
+                                    </div>
+                                </div>
+                            </div>
+                            <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado"> </a>
+                            <div class="card-body">
+                                <div class="content">
+                                    <table class="table">
+                                        <tr>
+                                            <td class="cell-with-comment" th:text="${propiedad.ciudad}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="comment" th:text="${propiedad.descripcion}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th th:text="${propiedad.direccion}"></th>
+                                        </tr>
+                                        <tr>
+                                            <th>$</th>
+                                            <td th:text="${propiedad.precioBase}"></td>
+                                        </tr>
+                                    </table>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-body-secondary">Puntuacion</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>         
+
+        </div>
+
+
+
+
+        <div>
+            <section th:replace="/fragments/footer :: section"></section>
+        </div>
+
+
+        <script src="/reservar_propiedad.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 
 </html>

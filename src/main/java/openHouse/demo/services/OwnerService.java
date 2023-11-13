@@ -47,7 +47,7 @@ public class OwnerService {
     }
     
     @Transactional
-    public void modificarPropietario(String name, String password, String password2, String email, String dni, String phone,
+    public Owner modificarPropietario(String name, String password, String password2, String email, String dni, String phone,
             Date birthdate, String cbu, MultipartFile archivo, String idPropietario) throws MiException {
         
         validar(name, password, password2, email, dni, phone, birthdate,cbu);
@@ -65,8 +65,9 @@ public class OwnerService {
             
             Image imagen = imageService.save(archivo);
             propietario.setImage(imagen);
-            propietarioRepositorio.save(propietario);
+            return propietarioRepositorio.save(propietario);
         }
+        return null;
     }
     
     public void validar(String name, String password, String password2, String email, String dni, String phone,
@@ -123,7 +124,8 @@ public class OwnerService {
             }else if (propietario.getAlta() == false){
                 propietario.setAlta(true);
             }
-        }
+            propietarioRepositorio.save(propietario);
+        }        
     }
     
     public Owner getOne(String id){

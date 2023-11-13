@@ -32,22 +32,24 @@ public class CommentController {
         Property propiedad = propertyService.getOne(idPropiedad);
         modelo.put("user", user);
         modelo.addAttribute("propiedad", propiedad);
-        
+        modelo.put("comentarios", propiedad.getComentarios());
         return "/fragments/crear_comentario";
     }
     
     @PostMapping("/registroCommentario/{idPropiedad}/{idCliente}")
-    public String registroComentario(ModelMap modelo, @PathVariable String idCliente, @PathVariable String idPropiedad,
-            MultipartFile archivo, @RequestParam String cuerpo, @RequestParam Double valoracion){
+    public String registroComentario(ModelMap modelo, @PathVariable String idCliente, 
+            @PathVariable String idPropiedad, @RequestParam(required=false) MultipartFile archivo, 
+            @RequestParam String cuerpo, @RequestParam(required=false) Double valoracion){
         
         try {
-            commentService.create(archivo, idPropiedad, cuerpo, valoracion, idCliente);
+            commentService.create(archivo, idPropiedad, cuerpo, 2.0, idCliente);
             modelo.put("exito", "Reservacion agendada correctamente");
             
-            return "redirect:/propiedad/detalles/{id}";
+            return "redirect:/propiedad/detalles/{idPropiedad}";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
-            return "redirect:/propiedad/detalles/{id}";
+            System.out.println("El comentario entro aqui, Chinga tu madre");
+            return "redirect:/propiedad/detalles/{idPropiedad}";
         }
     }
 }

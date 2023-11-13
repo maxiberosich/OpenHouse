@@ -27,7 +27,7 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
-    
+
     @Autowired
     private CommentService commentService;
 
@@ -41,22 +41,18 @@ public class PropertyController {
     }
 
     @PostMapping("/registrarPropiedad/{id}")
-    public String registroPropiedad
-            (@PathVariable String id, @RequestParam Double precioBase, @RequestParam String codigoPostal, @RequestParam String direccion,
+    public String registroPropiedad(@PathVariable String id, @RequestParam Double precioBase, @RequestParam String codigoPostal, @RequestParam String direccion,
             @RequestParam String descripcion, ModelMap modelo, MultipartFile archivo, @RequestParam String ciudad,
             @RequestParam String tipoPropiedad,
             @RequestParam Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta,
             @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja,
-            
-            
-            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) {
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, id,
-                    archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja, idPropiedad,
-                    
+                    archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja,
                     //de aca para abajo son atributos de prestaciones.
                     //int-
                     cantidadPers, cantAuto, cantCuarto, cantBanio,
@@ -77,15 +73,19 @@ public class PropertyController {
     }
 
     @GetMapping("/detalles/{id}")
-    public String mostrarPropiedad(@PathVariable String id, ModelMap modelo) {
-        modelo.addAttribute("propiedad", propertyService.getOne(id));
-        modelo.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
+    public String mostrarPropiedad(@PathVariable String id, HttpSession session, ModelMap model) {
+        User usuario = (User) session.getAttribute("usersession");
+        model.addAttribute("propiedad", propertyService.getOne(id));
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
         return "propiedad_detalles.html";
     }
 
     @PostMapping("/detalles/{id}")
-    public String mostrarPropiedadD(@PathVariable String id, ModelMap model){
+    public String mostrarPropiedadD(@PathVariable String id, HttpSession session, ModelMap model) {
+        User usuario = (User) session.getAttribute("usersession");
         model.addAttribute("propiedad", propertyService.getOne(id));
+        model.addAttribute("usuario", usuario);
         return "propiedad_detalles.html";
     }
 
@@ -114,5 +114,38 @@ public class PropertyController {
         modelo.addAttribute("propiedadesSegunPrecio", propiedadesSegunPrecio);
 
         return "busqueda.html";
+    }
+
+    @GetMapping("/modificarPropiedad/{idPropiedad}")
+    public String modificarPropiedad(ModelMap modelo, @PathVariable String idPropiedad) {
+        modelo.addAttribute("property", propertyService.getOne(idPropiedad));
+        return "modificar_propiedad.html";
+    }
+
+    @PostMapping("/modificadoPropiedad/{id}")
+    public String modificadoPropiedad(@PathVariable String idProperty, @RequestParam(required = false) Double precioBase, @RequestParam(required = false) String codigoPostal, @RequestParam(required = false) String direccion,
+            @RequestParam(required = false) String descripcion, @RequestParam(required = false) ModelMap modelo, @RequestParam(required = false) MultipartFile archivo, @RequestParam(required = false) String ciudad,
+            @RequestParam(required = false) String tipoPropiedad,
+            @RequestParam(required = false) Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja,
+            Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
+            boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
+            boolean heladera, boolean microondas) throws MiException {
+        try {
+            propertyService.modificarPropiedad(precioBase, idProperty, capMaxPersonas, codigoPostal, direccion, descripcion, archivo, ciudad,
+                    tipoPropiedad, fechaAlta, fechaBaja, cantidadPers, cantAuto, cantCuarto, cantBanio, pileta, asador,
+                    cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas, aguaCorriente, cocina, heladera, microondas);
+            modelo.put("exito", "Propiedad modificada correctamente");
+            return "redirect:/propiedad_detalles.html";
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("precioBase", precioBase);
+            modelo.put("codigoPostal", codigoPostal);
+            modelo.put("direccion", direccion);
+            modelo.put("descripcion", descripcion);
+            modelo.put("capMaxPersonas", capMaxPersonas);
+            return "modificar_propiedad.html";
+        }
     }
 }

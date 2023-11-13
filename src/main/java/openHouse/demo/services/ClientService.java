@@ -110,9 +110,10 @@ public class ClientService {
             Client cliente = respuesta.get();
             if (cliente.isAlta() == true) {
                 cliente.setAlta(false);
-            }else if (!cliente.isAlta() == false){
+            }else if (cliente.isAlta() == false){
                 cliente.setAlta(true);
             }
+            clientRepo.save(cliente);
         }
     }
     public void validate(String name, String password, String password2, String email, String dni, String phone, Date birthdate)

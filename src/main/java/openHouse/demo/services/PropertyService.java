@@ -43,7 +43,7 @@ public class PropertyService {
             String codigoPostal, String direccion, String descripcion, String idOwner, MultipartFile archivo,
             String ciudad, String tipoPropiedad, Integer capMaxPersonas, Date fechaAlta, Date fechaBaja,
             //de aca para abajo son atributos de prestaciones.
-            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) throws MiException {
@@ -74,10 +74,10 @@ public class PropertyService {
 
             User usuario = respuesta.get();
             Owner owner = (Owner) usuario;
-            propiedad.setPropietario(owner);
+            propiedad.setPropietario(owner);            
             
             Prestation prestacion=prestationService.createPrestation
-                    (idPropiedad, cantidadPers, cantAuto, cantCuarto, cantBanio,
+                    ( cantidadPers, cantAuto, cantCuarto, cantBanio,
                     pileta, asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas,
                     aguaCorriente, cocina, heladera, microondas);
             
@@ -92,7 +92,7 @@ public class PropertyService {
             String codigoPostal, String direccion, String descripcion,
             MultipartFile archivo, String ciudad, String tipoPropiedad, Date fechaAlta, Date fechaBaja,
             
-            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+             Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) throws MiException {
@@ -121,7 +121,7 @@ public class PropertyService {
 
             
             Prestation prestacion=prestationService.createPrestation
-                    (idPropiedad, cantidadPers, cantAuto, cantCuarto, cantBanio,
+                    (cantidadPers, cantAuto, cantCuarto, cantBanio,
                     pileta, asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas,
                     aguaCorriente, cocina, heladera, microondas);
             
