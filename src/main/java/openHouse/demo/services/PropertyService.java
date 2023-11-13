@@ -92,7 +92,7 @@ public class PropertyService {
             String codigoPostal, String direccion, String descripcion,
             MultipartFile archivo, String ciudad, String tipoPropiedad, Date fechaAlta, Date fechaBaja,
             
-            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+             Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) throws MiException {
@@ -118,6 +118,7 @@ public class PropertyService {
             listaImagen.add(imageService.save(archivo));
 
             propiedad.setImagenes(listaImagen);
+
             
             Prestation prestacion=prestationService.createPrestation
                     (cantidadPers, cantAuto, cantCuarto, cantBanio,
@@ -127,6 +128,7 @@ public class PropertyService {
             propiedad.setPrestaciones(prestacion);
             
             propertyRepository.save(propiedad);
+
 
         }
 
@@ -204,6 +206,7 @@ public class PropertyService {
         }
     }
 
+
     
 
     //crear metodo agregar comentario, lo tiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
@@ -235,6 +238,7 @@ public class PropertyService {
     
     
     
+
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
     //hay que probarlo REY.
     public void valoracionPropiedad(String idPropiedad){
