@@ -101,7 +101,7 @@ public class PropertyController {
 
         List<Property> propiedadesCiudad = propertyService.buscarPorCiudad(ciudad);
 
-        modelo.addAttribute("propiedadesCiudad", propiedadesCiudad);
+        modelo.addAttribute("propertys", propiedadesCiudad);
 
         return "busqueda.html";
     }
