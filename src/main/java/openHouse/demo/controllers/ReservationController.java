@@ -74,10 +74,12 @@ public class ReservationController {
         return "lista_reserva.html";
     }
     
-    @GetMapping("/modificarReserva/{idReserva}/{propertyId}")
-    public String modificarReserva(@PathVariable String idReserva,@PathVariable String propertyId, ModelMap modelo){
-        modelo.put("reserva", reservaServicio.getOne(idReserva));
-        modelo.put("property",propService.getOne(propertyId));
+    @GetMapping("/modificarReserva/{idReserva}/{idCliente}")
+    public String modificarReserva(@PathVariable String idReserva,@PathVariable String idCliente, ModelMap modelo){
+        Reservation reserva= reservaServicio.getOne(idReserva);
+        reserva.getPropiedad().getId();
+        modelo.put("reserva", reserva);
+        modelo.put("cliente",clienteService.getOne(idCliente).);
         return "modificar_reserva.html";
     }
     

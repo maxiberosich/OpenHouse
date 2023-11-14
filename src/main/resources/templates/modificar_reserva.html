@@ -43,9 +43,9 @@
                                 <h2><strong>Modificar la Reserva</strong></h2>
                             </div>
                             <div class="card-body">
-                                <form th:action="@{/reserva/modificoReserva/__${reserva.id}__/__${property.id}__}" method="POST">
+                                <form th:action="@{/reserva/modificoReserva/__${reserva.id}__/__${cliente.id}__}" method="POST">
 
-                                    <input hidden th:value="${property.id}" name="propertyId">
+                                    <input hidden th:value="${reserva.propiedad.Id}" name="propertyId">
                                     <input hidden th:value="${reserva.id}" name="idReserva">
 
 

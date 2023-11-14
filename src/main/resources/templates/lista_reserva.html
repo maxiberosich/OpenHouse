@@ -28,9 +28,9 @@
                         <td th:text="${reservas.cantPersonas}"></td>
                         <td th:text="${reservas.propiedad.direccion}"></td>
                         
-                        <!-- <td>
-                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/modificarReserva/__${reserva.id}__/__${reservas.propiedad.Id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
-                        </td> -->
+                        <td>
+                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/modificarReserva/__${reserva.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
+                        </td>
                     </tr>
                 </tbody> 
             </table>
