@@ -22,84 +22,83 @@
                         </div>
                     </div>
                 </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
 
+            <div class="carta-content">
+                <h2 class="titulo" th:text="${propiedad.ciudad}">Título de la carta</h2>
+                <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
+                <p th:text="${propiedad.precioBase}">Precio: $100</p>
+                <p>Días disponibles: Lunes a Viernes</p>
+                <button type="button" class="boton-estilizado" sec:authorize="hasRole('ROLE_CLIENTE')"><a class="boton-estilizado"  th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
+                <!--<button type="button" class="boton-estilizado" ><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}" >Alquilar</a></button>-->
+            </div>
+        </div>
+
+        <div class="items-list">
+            <div class="item" th:text="'Cantidad de Personas: ' + ${propiedad.prestaciones.cantidadPers}" ></div>
+            <div class="item" th:text="'Cantidad auto: ' + ${propiedad.prestaciones.cantAuto}" ></div>
+            <div class="item" th:text="'Cuartos: ' + ${propiedad.prestaciones.cantCuarto}" ></div>
+            <div class="item" th:text="'Baños: ' + ${propiedad.prestaciones.cantBanio}" ></div>
+            <div class="item" th:if="${propiedad.prestaciones.pileta}">Piscina</div>
+            <div class="item" th:if="${propiedad.prestaciones.asador}">Asador</div>
+            <div class="item" th:if="${propiedad.prestaciones.cochera}">Cochera</div>
+            <div class="item" th:if="${propiedad.prestaciones.aireAcondicionado}">Aire acondicionado</div>
+            <div class="item" th:if="${propiedad.prestaciones.wiFi}">Wi-Fi</div>
+            <div class="item" th:if="${propiedad.prestaciones.tv}">Tv</div>
+            <div class="item" th:if="${propiedad.prestaciones.barra}">Barra de tragos</div>
+            <div class="item" th:if="${propiedad.prestaciones.seAceptanMascotas}">Se aceptan Mascotas</div>
+            <div class="item" th:if="${propiedad.prestaciones.aguaCorriente}">Agua Corriente</div>
+            <div class="item" th:if="${propiedad.prestaciones.cocina}">Cocina</div>
+            <div class="item" th:if="${propiedad.prestaciones.heladera}">Heladera</div>
+            <div class="item" th:if="${propiedad.prestaciones.microondas}">Microondas</div>        
+        </div>
+        <br>
+
+
+        <div class="contenedor" sec:authorize="hasRole('ROLE_CLIENTE')">
+            <div class="contenedor-imagen">
+                <img class="img-tamaño" th:src="@{/image/perfil/__${usuario.id}__}" alt="ImagenUsuario">
+
+            </div>
+            <div class="contenedor-comentario">
+                <div>
+                    <h3 class="titulo" th:text="${usuario.name}"></h3>
+                    <form th:action="@{/comentario/registroCommentario/__${propiedad.id}__/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
+                        <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="cuerpo"></textarea>
+                        <br>
+
+                        <div class="contenedor-boton">
+                            <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
+                            <input type="file" id="input-archivo" class="input-archivo" name="archivo" accept="image/*">                                
+
+                        </div>
+
+                        <br>
+                        <button class="boton-estilizado" type="submit"> Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="espaciado" th:each="comentario : ${comentarios}">
+            <div class="carta" >
                 <div class="carta-content">
-                    <h2 class="titulo" th:text="${propiedad.ciudad}">Título de la carta</h2>
-                    <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
-                    <p th:text="${propiedad.precioBase}">Precio: $100</p>
-                    <p>Días disponibles: Lunes a Viernes</p>
-                    <button type="button" class="boton-estilizado" sec:authorize="hasRole('ROLE_CLIENTE')"><a class="boton-estilizado"  th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
-                    <!--<button type="button" class="boton-estilizado" ><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}" >Alquilar</a></button>-->
+                    <h2 th:text="${comentario.cliente.name}"></h2>
+                    <h5 th:text="${comentario.cuerpo}"></h5>
                 </div>
-            </div>
-
-            <div class="items-list">
-                <div class="item" th:text="'Cantidad de Personas: ' + ${propiedad.prestaciones.cantidadPers}" ></div>
-                <div class="item" th:text="'Cantidad auto: ' + ${propiedad.prestaciones.cantAuto}" ></div>
-                <div class="item" th:text="'Cuartos: ' + ${propiedad.prestaciones.cantCuarto}" ></div>
-                <div class="item" th:text="'Baños: ' + ${propiedad.prestaciones.cantBanio}" ></div>
-                <div class="item" th:if="${propiedad.prestaciones.pileta}">Piscina</div>
-                <div class="item" th:if="${propiedad.prestaciones.asador}">Asador</div>
-                <div class="item" th:if="${propiedad.prestaciones.cochera}">Cochera</div>
-                <div class="item" th:if="${propiedad.prestaciones.aireAcondicionado}">Aire acondicionado</div>
-                <div class="item" th:if="${propiedad.prestaciones.wiFi}">Wi-Fi</div>
-                <div class="item" th:if="${propiedad.prestaciones.tv}">Tv</div>
-                <div class="item" th:if="${propiedad.prestaciones.barra}">Barra de tragos</div>
-                <div class="item" th:if="${propiedad.prestaciones.seAceptanMascotas}">Se aceptan Mascotas</div>
-                <div class="item" th:if="${propiedad.prestaciones.aguaCorriente}">Agua Corriente</div>
-                <div class="item" th:if="${propiedad.prestaciones.cocina}">Cocina</div>
-                <div class="item" th:if="${propiedad.prestaciones.heladera}">Heladera</div>
-                <div class="item" th:if="${propiedad.prestaciones.microondas}">Microondas</div>        
-            </div>
-            <br>
-
-
-            <div class="contenedor" sec:authorize="hasRole('ROLE_CLIENTE')">
-                <div class="contenedor-imagen">
-                    <img class="img-tamaño" th:src="@{/image/perfil/__${usuario.id}__}" alt="ImagenUsuario">
-
-                </div>
-                <div class="contenedor-comentario">
-                    <div>
-                        <h3 class="titulo" th:text="${usuario.name}"></h3>
-                        <form th:action="@{/comentario/registroCommentario/__${propiedad.id}__/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
-                            <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="cuerpo"></textarea>
-                            <br>
-                            
-                            <div class="contenedor-boton">
-                                <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
-                                <input type="file" id="input-archivo" class="input-archivo" name="archivo" accept="image/*">                                
-
-                            </div>
-
-                            <br>
-                            <button class="boton-estilizado" type="submit"> Enviar</button>
-                        </form>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="espaciado" th:each="comentario : ${comentarios}">
-                <div class="carta" >
-                    <div class="carta-content">
-                        <h2 th:text="${comentario.cliente.name}"></h2>
-                        <h5 th:text="${comentario.cuerpo}"></h5>
-                    </div>
-                    <div class="carta-image">
+                <div class="carta-image">
+                    <div >
                         <div >
-                            <div >
-                                <div ><img th:src="@{/image/comentario/__${comentario.id}__}" alt="Imagen 1"></div> 
-                            </div>
+                            <div ><img th:src="@{/image/comentario/__${comentario.id}__}" alt="Imagen 1"></div> 
                         </div>
                     </div>
-
                 </div>
 
             </div>
+
         </div>
         <section th:replace="/fragments/footer :: section"></section>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
