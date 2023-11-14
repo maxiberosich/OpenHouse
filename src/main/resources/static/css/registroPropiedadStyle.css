@@ -12,9 +12,8 @@ navbar-collapse{
     text-align: center;
     display: flex;
     margin: 20px; /* Espacio entre los divs */
-
-
-      background-color:#343a40;
-        color: #f3969a;
-
+    align-content: center;
+}
+.container mt-6{
+    align-content: center;
 }

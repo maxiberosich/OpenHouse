@@ -15,9 +15,10 @@
         <nav th:replace="/fragments/navbar :: nav"></nav>
 
         <div th:replace="/fragments/errores :: div"></div>
-        <div class="boxx" style="width: 40%;">
+        <div class="boxx">
             <div class="conteiner mt-6" >
-                <form th:if="${user != null}" 
+                <form class="formulario" 
+                    th:if="${user != null}" 
                       th:action="@{/propiedad/registrarPropiedad/__${user.id}__}" 
                       method="POST" 
                       enctype="multipart/form-data">
