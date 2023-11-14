@@ -59,7 +59,7 @@ public class PrestationService {
     }
 
     @Transactional
-    public void update(Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+    public Prestation update(Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas, String idPrestation) throws MiException {
@@ -89,10 +89,10 @@ public class PrestationService {
             prestacion.setTv(tv);
             prestacion.setWiFi(wiFi);
 
-            prestationRepository.save(prestacion);
+            return prestationRepository.save(prestacion);
 
         }
-
+        return null;
     }
 
     private void validate(Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio) throws MiException {
