@@ -145,6 +145,13 @@ public class PropertyService {
         propiedadesCiudad = propertyRepository.buscarPorCiudad(ciudad);
         return propiedadesCiudad;
     }
+    
+    @Transactional
+    public List<Property> buscarPorPropietario(String idPropietario){
+        List<Property> propiedades = new ArrayList();
+        propiedades = propertyRepository.buscarPorPropietario(idPropietario);
+        return propiedades;
+    }
 
     @Transactional
     public List<Property> buscarSegunPrecio(String precioMinimo, String precioMaximo) {
