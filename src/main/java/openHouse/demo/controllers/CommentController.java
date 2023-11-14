@@ -39,12 +39,12 @@ public class CommentController {
     @PostMapping("/registroCommentario/{idPropiedad}/{idCliente}")
     public String registroComentario(ModelMap modelo, @PathVariable String idCliente, 
             @PathVariable String idPropiedad, @RequestParam(required=false) MultipartFile archivo, 
-            @RequestParam String cuerpo, @RequestParam(required=false) Double valoracion){
+            @RequestParam String cuerpo, @RequestParam Double Calificacion){
         
         try {
-            commentService.create(archivo, idPropiedad, cuerpo, 2.0, idCliente);
+            commentService.create(archivo, idPropiedad, cuerpo, Calificacion, idCliente);
             modelo.put("exito", "Reservacion agendada correctamente");
-            
+            System.out.println(Calificacion + "Que ande LPM");
             return "redirect:/propiedad/detalles/{idPropiedad}";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
