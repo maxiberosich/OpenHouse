@@ -89,7 +89,7 @@ public class ReservationService {
     }
     
     public void modificarReserva(Date fechaInicio, Date fechaFin, 
-     Integer cantPersonas, String idPropiedad, String idPropietario,String idReserva) throws MiException{
+     Integer cantPersonas, String idCliente, String idReserva) throws MiException{
         
         
         validar(fechaInicio, fechaFin, cantPersonas);
@@ -102,7 +102,7 @@ public class ReservationService {
             reservation.setFechaFin(fechaFin);
             reservation.setCantPersonas(cantPersonas);
             //DEFINIR COMO CALCULAMOS EL PRECIO FINAL !!LO MISMO PARA CALCULAS LOS DIAS QUE LAS NOCHES
-            Double precioNuevo=precio(fechaInicio, fechaFin, idPropietario);
+            Double precioNuevo=precio(fechaInicio, fechaFin, reservation.getPropiedad().getId());
             reservation.setPrecioFinal(precioNuevo);
             reservationRepository.save(reservation);
         }
@@ -160,6 +160,10 @@ public class ReservationService {
             noches = Math.toIntExact(diff);
 
             return noches;
+    }
+    
+    public Reservation getOne(String id){
+       return reservationRepository.getOne(id);     
     }
     
     

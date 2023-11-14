@@ -73,4 +73,34 @@ public class ReservationController {
        
         return "lista_reserva.html";
     }
+    
+    @GetMapping("/modificarReserva/{idReserva}/{idCliente}")
+    public String modificarReserva(@PathVariable String idReserva,@PathVariable String idCliente, ModelMap modelo){
+        Reservation reserva= reservaServicio.getOne(idReserva);
+        reserva.getPropiedad().getId();
+        modelo.put("reserva", reserva);
+        modelo.put("cliente",clienteService.getOne(idCliente).);
+        return "modificar_reserva.html";
+    }
+    
+    @PostMapping("/modificoReserva/{idReserva}/{propertyId}")
+    public String modificoReserva(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")Date fechaFin, ModelMap modelo,
+     @RequestParam Integer cantPersonas,@PathVariable String propertyId,@PathVariable String idReserva) throws MiException{
+        try{
+            /* modelo.addAttribute("reserva", reservaServicio.getOne(idReserva));
+            modelo.addAttribute("property",propService.getOne(propertyId));*/
+            reservaServicio.modificarReserva(fechaInicio, fechaFin, cantPersonas, propertyId,  idReserva);
+            return "lista_reserva.html";
+        }catch(MiException e){
+            modelo.put("error", e.getMessage());
+            modelo.put("fechaInicio", fechaInicio);
+            modelo.put("fechafin", fechaFin);
+            modelo.put("cantPersonas", cantPersonas);
+            return "modificar_reserva.html";
+        }
+        
+    }
+    
+    
 }

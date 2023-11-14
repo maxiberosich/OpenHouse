@@ -15,6 +15,7 @@
                         <th scope="col">cant personas</th>
                         <th scope="col">ubicacion</th>
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('CLIENTE')">Modificar</th>
                     </tr>
                 </thead>
                 
@@ -27,11 +28,11 @@
                         <td th:text="${reservas.cantPersonas}"></td>
                         <td th:text="${reservas.propiedad.direccion}"></td>
                         
-                        <!-- comment<td>
-                            <a sec:authorize="hasRole('ADMIN')" th:href="@{/owner/modificar/__${owner.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
-                        </td> -->
+                        <td>
+                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/modificarReserva/__${reserva.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
+                        </td>
                     </tr>
-                </tbody>
+                </tbody> 
             </table>
             
             <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
@@ -48,7 +49,7 @@
             </div>
         </div>
 
-            <footer th:replace="/fragments/footer.html :: footer"> </footer>
+            <section th:replace="/fragments/footer.html :: section"> </section>
 
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
