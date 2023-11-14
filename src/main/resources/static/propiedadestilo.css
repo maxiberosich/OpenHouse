@@ -1,6 +1,8 @@
+.br{
+    background-color: #343a40;
+}
 .carta {
     display: flex;
-
     float: none;
     align-content: center;
     text-align: center;
@@ -103,14 +105,20 @@ img {
     border: 2px solid #f3969a;
 }
 .img-tamaño{
-    max-width: auto;
-    max-height: auto;
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+    object-fit: contain;
+    padding: 4%;
+    padding-left: 11%;
+    padding-right: none;
 }
 
 .contenedor-imagen{
     flex: 1;
     max-width: 25%;
-    position: relative;
+    align-self: center;
+    position:relative;
 }
 .swiper-slide img {
     max-width: 100%; /* Limita el ancho de la imagen al ancho del carrusel */
@@ -122,8 +130,8 @@ img {
     background-color: #f3969a;
     color: black;
     border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 3px 10px;
+    border-radius: 10px;
     cursor: pointer;
     text-decoration: none;
 

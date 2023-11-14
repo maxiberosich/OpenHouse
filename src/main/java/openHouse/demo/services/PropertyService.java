@@ -92,7 +92,7 @@ public class PropertyService {
             String codigoPostal, String direccion, String descripcion,
             MultipartFile archivo, String ciudad, String tipoPropiedad, Date fechaAlta, Date fechaBaja,
             
-            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) throws MiException {
@@ -113,20 +113,20 @@ public class PropertyService {
             propiedad.setFechaAlta(fechaAlta);
             propiedad.setFechaBaja(fechaBaja);
             
-            List<Image> listaImagen = propiedad.getImagenes();
-            //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
-            listaImagen.add(imageService.save(archivo));
-
-            propiedad.setImagenes(listaImagen);
+            if(!archivo.isEmpty()){
+                List<Image> listaImagen = propiedad.getImagenes();
+                listaImagen.add(imageService.save(archivo));
+                propiedad.setImagenes(listaImagen);
+            }
             
-            Prestation prestacion=prestationService.createPrestation
-                    (cantidadPers, cantAuto, cantCuarto, cantBanio,
-                    pileta, asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas,
-                    aguaCorriente, cocina, heladera, microondas);
+            Prestation prestacion = prestationService.update(cantidadPers, cantAuto, cantCuarto, cantBanio, pileta,
+                    asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas, aguaCorriente, cocina,
+                    heladera, microondas, propiedad.getPrestaciones().getId());
             
             propiedad.setPrestaciones(prestacion);
             
             propertyRepository.save(propiedad);
+
 
         }
 
@@ -144,6 +144,13 @@ public class PropertyService {
         List<Property> propiedadesCiudad = new ArrayList();
         propiedadesCiudad = propertyRepository.buscarPorCiudad(ciudad);
         return propiedadesCiudad;
+    }
+    
+    @Transactional
+    public List<Property> buscarPorPropietario(String idPropietario){
+        List<Property> propiedades = new ArrayList();
+        propiedades = propertyRepository.buscarPorPropietario(idPropietario);
+        return propiedades;
     }
 
     @Transactional
@@ -204,6 +211,7 @@ public class PropertyService {
         }
     }
 
+
     
 
     //crear metodo agregar comentario, lo tiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar .
@@ -235,6 +243,7 @@ public class PropertyService {
     
     
     
+
     //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
     //hay que probarlo REY.
     public void valoracionPropiedad(String idPropiedad){
