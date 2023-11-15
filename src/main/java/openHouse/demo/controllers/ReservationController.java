@@ -35,6 +35,7 @@ public class ReservationController {
     public String crearReserva(ModelMap modelo, HttpSession session,@PathVariable String idPropiedad){
         User user = (User) session.getAttribute("usersession");
         modelo.put("user", user);
+        modelo.addAttribute("fechas", reservaServicio.obtenerFechasGuardadas(idPropiedad));
         //modelo.put("idPropiedad", idPropiedad);
        
         

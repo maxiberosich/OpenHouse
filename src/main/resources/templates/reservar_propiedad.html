@@ -47,7 +47,7 @@
 
                                     <input hidden th:value="${user.id}" name="idCliente">
                                     <input hidden th:value="${propertys.id}" name="idPropiedad">
-
+                                    <input hidden th:value="${fechas}" id="fechas">
 
                                     <label for="adultos">Total de Personas</label>
                                     <select id="adultos" 
@@ -98,20 +98,12 @@
                                 <br>
 
                                 <input hidden th:value="${propertys.precioBase}" id="precioBase">  
-                                 <div id="precioFinal"></div>
+                                <div id="precioFinal"></div>
 
-
-
-
-
-
-
-
-
-
-
+                                <p id="message"></p>
+                                
                                 <br>
-                                <button type="submit" class="btn btn-primary">Crear Reserva</button>
+                                <button type="submit" class="btn btn-primary" id="submitButton">Crear Reserva</button>
                             </form>
                         </div>
                     </div>

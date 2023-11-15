@@ -1,11 +1,16 @@
 
 package openHouse.demo.services;
 
+import jakarta.persistence.GeneratedValue;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.Reservation;
@@ -13,6 +18,7 @@ import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
 import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.ReservationRepository;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -162,5 +168,36 @@ public class ReservationService {
             return noches;
     }
     
+    public List<String> obtenerFechasGuardadas(String idPropiedad){
+        List<Reservation> lista = reservationRepository.buscarPorPropiedad(idPropiedad);
+        
+        List<Date> fechasBloqueadas = new ArrayList();
+        
+        for (Reservation reservation : lista) {
+            
+            Calendar calendarInicio = Calendar.getInstance();
+            calendarInicio.setTime(reservation.getFechaInicio());
+            
+            Calendar calendarFin = Calendar.getInstance();
+            calendarFin.setTime(reservation.getFechaFin());
+            
+            long diasEntre = ChronoUnit.DAYS.between(calendarInicio.toInstant(), calendarFin.toInstant());
+            
+            for (int i = 0 ; i < diasEntre+1; i++) {
+                
+                Date fechaBloqueada = calendarInicio.getTime();
+                fechasBloqueadas.add(fechaBloqueada);
+                calendarInicio.add(Calendar.DAY_OF_MONTH, 1);
+            }
+        }
+        List<String> fechasFinal = new ArrayList();
+        
+        for (Date fecha : fechasBloqueadas) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaTexto = formatter.format(fecha);
+            fechasFinal.add(fechaTexto);
+        }
+        return fechasFinal;
+    }
     
 }
