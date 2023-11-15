@@ -33,13 +33,13 @@
                        <!--<a class="dropdown-item" sec:authorize="hasRole('ROLE_PROPIETARIO')" th:href="@{/propiedad/modificar/__${session.usersession.propiedades.id}__}">Modificar Propiedad</a>-->
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_PROPIETARIO')" th:href="@{/propiedad/registrarPropiedad}">Cargar Propiedad</a>
-                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/reserva/list/__${session.usersession.id}__}">Reservas</a>
+                        <a class="dropdown-item" th:if="${session.usersession != null}" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/reserva/list/__${session.usersession.id}__}">Reservas</a>
                         <a class="dropdown-item" href="/logout">Cerrar Sesión</a>
                     </div>
                 </li>
             </ul>
-            <form class="d-flex" th:action="@{/propiedad/buscarPorCP}" method="GET">
-                <input class="form-control me-sm-2" type="search" placeholder="Buscar por CP" name="codigoPostal">
+            <form class="d-flex" th:action="@{/propiedad/buscarPorCiudad}" method="GET">
+                <input class="form-control me-sm-2" type="search" placeholder="Buscar por Ciudad" name="ciudad">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
             </form>
         </div>

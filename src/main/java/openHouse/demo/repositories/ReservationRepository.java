@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, String> {
-
-//    @Query("SELECT r FROM Reservation r WHERE r.alta = :alta")
-//    public List<Reservation> buscarPorDisponibilidad(@Param("alta") Boolean alta);
-
+    
+    @Query("SELECT r FROM Reservation r WHERE r.propiedad.id = :idPropiedad")
+    public List<Reservation> buscarPorPropiedad(@Param("idPropiedad") String idPropiedad);
 }

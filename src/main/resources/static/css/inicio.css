@@ -47,7 +47,7 @@ object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor*/
 
 /* Estilo para el cuerpo de la tarjeta */
 .card-body {
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -55,6 +55,7 @@ object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor*/
 /* Establecer una altura máxima para la tarjeta */
 .card {
     max-height: 600px; 
+    min-height: 600px;
 }
 
 /* Estilo para la tabla dentro del contenido de la tarjeta */
@@ -67,4 +68,9 @@ object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor*/
 .d-flex.justify-content-between.align-items-center button {
     margin-top: 10px;
     
+}
+.swiper-slide img {
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    height: 400px; /* Establece una altura fija */
+     object-fit: cover;/* Para mantener la proporción de la imagen */
 }

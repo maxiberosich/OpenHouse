@@ -2,6 +2,7 @@ package openHouse.demo.controllers;
 
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
+import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.Reservation;
 import openHouse.demo.entities.User;
@@ -35,6 +36,7 @@ public class ReservationController {
     public String crearReserva(ModelMap modelo, HttpSession session,@PathVariable String idPropiedad){
         User user = (User) session.getAttribute("usersession");
         modelo.put("user", user);
+        modelo.addAttribute("fechas", reservaServicio.obtenerFechasGuardadas(idPropiedad));
         //modelo.put("idPropiedad", idPropiedad);
        
         
@@ -68,9 +70,40 @@ public class ReservationController {
     
     @GetMapping("/list/{idCliente}")
     public String mostrarReserva(ModelMap modelo,@PathVariable String idCliente){
-        //ESTO ANDA 
+        
         modelo.addAttribute("reserva",clienteService.getOne(idCliente).getReservaActiva());
+        modelo.addAttribute("cliente",clienteService.getOne(idCliente));
        
         return "lista_reserva.html";
     }
+    
+    @GetMapping("/modificarReserva/{idReserva}/{idCliente}")
+    public String modificarReserva(@PathVariable String idReserva,@PathVariable String idCliente, ModelMap modelo){
+        Reservation reserva= reservaServicio.getOne(idReserva);
+        Client cliente = clienteService.getOne(idCliente);
+        modelo.put("reserva", reserva);
+        modelo.put("cliente", cliente);
+        return "modificar_reserva.html";
+    }
+    
+    @PostMapping("/modificoReserva/{idReserva}/{idCliente}")
+    public String modificoReserva(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")Date fechaFin, ModelMap modelo,
+     @RequestParam Integer cantPersonas,@PathVariable String idReserva,@PathVariable String idCliente) throws MiException{
+        try{
+            /* modelo.addAttribute("reserva", reservaServicio.getOne(idReserva));
+            modelo.addAttribute("property",propService.getOne(propertyId));*/
+            reservaServicio.modificarReserva(fechaInicio, fechaFin, cantPersonas, idCliente,  idReserva);
+            return "redirect:/reserva/list/{idCliente}";
+        }catch(MiException e){
+            modelo.put("error", e.getMessage());
+            modelo.put("fechaInicio", fechaInicio);
+            modelo.put("fechafin", fechaFin);
+            modelo.put("cantPersonas", cantPersonas);
+            return "modificar_reserva.html";
+        }
+        
+    }
+    
+    
 }
