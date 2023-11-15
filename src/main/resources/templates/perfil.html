@@ -57,6 +57,12 @@
                                     <th th:text="'Rol: '+ ${usuario.rol}" scope="row"></th>
 
                                 </tr>
+                                <tr sec:authorize="hasRole('ROLE_PROPIETARIO')" class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
+                                    <th th:if= "${usuario.rol == 'PROPIETARIO'}">
+                                    <th th:text="'CBU: '+ ${usuario.cbu}" scope="row">
+                                    </th>
+                                    </th>
+                                </tr>
 
                             <th:block th:if="${usuario.rol == 'PROPIETARIO'}">
                                 <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
@@ -64,10 +70,11 @@
                                 </tr>
                             </th:block>
                             </tbody>
-                        </table>
-
+                        </table>                           
                     </div>
+                    
                 </div>
+                
             </div>
 
             <div class="button-container">
@@ -79,10 +86,9 @@
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <footer th:replace="/fragments/footer :: footer" > </footer>
-    </div>
+    <div th:replace='/fragments/Carta :: div'></div>
+    <section th:replace="/fragments/footer :: section" > </section>
+    
 
 
     <script

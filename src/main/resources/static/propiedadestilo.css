@@ -1,159 +1,189 @@
-.br{
-    background-color: #343a40;
+.br {
+  background-color: #343a40;
 }
 .carta {
-    display: flex;
-    float: none;
-    align-content: center;
-    text-align: center;
-    background-color: whitesmoke;
-    max-width: 100%;
-    color: black;
-    border: 2px solid #f3969a;
-    border-radius: 15px;
-
+  display: flex;
+  float: none;
+  align-content: center;
+  text-align: center;
+  background-color: whitesmoke;
+  max-width: 100%;
+  color: black;
+  border: 2px solid #f3969a;
+  border-radius: 15px;
 }
 
-.titulo{
-    background-color: #343a40;
-    color: #f3969a;
-    text-align: center;
-    border-radius: 15px;
+.titulo {
+  background-color: #343a40;
+  color: #f3969a;
+  text-align: center;
+  border-radius: 15px;
 }
 .carta-image {
-    flex: 1;
-    max-width: 25%; /* 1/4 del ancho total */
-    position: relative;
+  flex: 1;
+  max-width: 25%; /* 1/4 del ancho total */
+  position: relative;
 }
 
 .carta-content {
-    flex: 3;
-    max-width: 75%; /* 3/4 del ancho total */
-    padding: 10px;
-    overflow-wrap:break-word;
-    align-items: center;
-
+  flex: 3;
+  max-width: 75%; /* 3/4 del ancho total */
+  padding: 10px;
+  overflow-wrap: break-word;
+  align-items: center;
 }
-.parrafo{
-    
-    align-content: center;
+.parrafo {
+  align-content: center;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .swiper-container {
-    max-width: 100%;
-    height: auto;
-    overflow: hidden;
-    position: relative;
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
 }
 
-.swiper-button-next, .swiper-button-prev {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    cursor: pointer;
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
 }
 
 .swiper-button-next {
-    right: 0;
+  right: 0;
 }
 
 .swiper-button-prev {
-    left: 0;
+  left: 0;
 }
 .items-list {
-    display: flex;
-    flex-wrap: wrap;
-    color: black;
-    background-color: whitesmoke;
-    max-width: 100%;
-    border: 2px solid #f3969a;
-    border-top: none;
-    border-radius: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  color: black;
+  background-color: whitesmoke;
+  max-width: 100%;
+  border: 2px solid #f3969a;
+  border-top: none;
+  border-radius: 15px;
 }
 
 .item {
-    width: calc(25% - 10px); /* 25% - margin */
-    margin: 5px;
-    
-    border: 1px solid #f3969a;
-    text-align: center;
-    padding: 3px;
-    color: #f3969a;
-    background-color: #343a40;
-    border-radius: 30px;
+  width: calc(25% - 10px); /* 25% - margin */
+  margin: 5px;
+
+  border: 1px solid #f3969a;
+  text-align: center;
+  padding: 3px;
+  color: #f3969a;
+  background-color: #343a40;
+  border-radius: 30px;
 }
 
-.espaciado{
-    padding-top: 1%;
+.espaciado {
+  padding-top: 1%;
 }
 
-.contenedor{
-    display: flex;
-    max-width: 100%;
-    height: auto;
-    color: black;
-    background-color: whitesmoke;
-    border-radius:2% ;
-    align-content: center;
-    border: 2px solid #f3969a;
+.contenedor {
+  display: flex;
+  max-width: 100%;
+  height: auto;
+  color: black;
+  background-color: whitesmoke;
+  border-radius: 2%;
+  align-content: center;
+  border: 2px solid #f3969a;
 }
-.img-tamaño{
-    width: 90%;
-    height: 90%;
-    border-radius: 20px;
-    object-fit: contain;
-    padding: 4%;
-    padding-left: 11%;
-    padding-right: none;
+.img-tamaño {
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
+  object-fit: contain;
+  padding: 4%;
+  padding-left: 11%;
+  padding-right: none;
 }
 
-.contenedor-imagen{
-    flex: 1;
-    max-width: 25%;
-    align-self: center;
-    position:relative;
+.contenedor-imagen {
+  flex: 1;
+  max-width: 25%;
+  align-self: center;
+  position: relative;
 }
 .swiper-slide img {
-    max-width: 100%; /* Limita el ancho de la imagen al ancho del carrusel */
-    max-height: 100%; /* Limita la altura de la imagen a la altura del carrusel */
-    object-fit: contain; /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
+  max-width: 100%; /* Limita el ancho de la imagen al ancho del carrusel */
+  max-height: 100%; /* Limita la altura de la imagen a la altura del carrusel */
+  object-fit: contain; /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
 }
 
-.boton-estilizado{
-    background-color: #f3969a;
-    color: black;
-    border: none;
-    padding: 3px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-
+.boton-estilizado {
+  background-color: #f3969a;
+  color: black;
+  border: none;
+  padding: 3px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.contenedor-boton{
-    position: relative;
-    display: inline-block;
+.contenedor-boton {
+  position: relative;
+  display: inline-block;
 }
-.input-archivo{
-    background-color: #343a40;
-    display: none;
+.input-archivo {
+  background-color: #343a40;
+  display: none;
 }
-.contenedor-comentario{
-    flex: 3;
-    max-width: 75%;
+.contenedor-comentario {
+  flex: 3;
+  max-width: 75%;
 }
 
-.input-grande{
-    /* Estilos CSS para hacer que un campo de entrada con la clase "input-grande" sea más grande */
-    background-color: lightgray;
-    width: 100%;
-    height: 100px;
-    font-size: 20px;
+.input-grande {
+  /* Estilos CSS para hacer que un campo de entrada con la clase "input-grande" sea más grande */
+  background-color: lightgray;
+  width: 100%;
+  height: 100px;
+  font-size: 20px;
+}
+        /* Estilo base del checkbox */
+        input[type="checkbox"] {
+            display: none; /* Oculta el checkbox estándar */
+        }
+
+        /* Estilo del contenedor de las estrellas */
+        .star-group {
+            padding-top: 0;
+            display: inline-block;
+            font-size: 0; /* Elimina el espacio entre los elementos en línea */
+        }
+
+        /* Estilo de la etiqueta que representa una estrella */
+        .star-label {
+            display: inline-block;
+            font-size: 30px;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        /* Estilo de la estrella cuando está seleccionada */
+        input[type="checkbox"]:checked + .star-label,
+        input[type="checkbox"]:checked ~ input[type="checkbox"] + .star-label {
+            color: gold; /* Color de la estrella rellena */
+        }
+
+.text-puntuacion{   
+    color:whitesmoke;
+}
+
+.numberList{
+    padding: 0,9%;
 }
