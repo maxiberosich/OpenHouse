@@ -1,5 +1,7 @@
 package openHouse.demo.services;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +12,8 @@ import openHouse.demo.enums.Rol;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +30,7 @@ public class OwnerService {
     
     @Transactional
     public  Owner crearPropietario(String name, String password, String password2, String email, String dni, String phone,
-            Date birthdate, String cbu, MultipartFile archivo) throws MiException {
+            Date birthdate, String cbu, MultipartFile archivo) throws MiException, IOException {
         
         validar(name, password, password2, email, dni, phone, birthdate,cbu);
         Owner propietario = new Owner();
@@ -39,7 +43,13 @@ public class OwnerService {
         propietario.setCbu(cbu);
         propietario.setRol(Rol.PROPIETARIO);
         propietario.setAlta(Boolean.TRUE);
-        Image imagen = imageService.save(archivo);
+        Image imagen = new Image();
+        if(archivo.isEmpty()){
+            imagen = imageService.save(archivo);
+            imagen.setContent(obtenerBytesImagenPredeterminada());
+        }else{
+            imagen = imageService.save(archivo);
+        } 
         
         propietario.setImage(imagen);
         
@@ -136,5 +146,11 @@ public class OwnerService {
         List<Owner> listaPropietarios=new ArrayList();
         listaPropietarios= propietarioRepositorio.findAll();
         return listaPropietarios;
+    }
+    
+    private byte[] obtenerBytesImagenPredeterminada() throws IOException {
+        Resource resource = new ClassPathResource("static/img/OPENHOUSE.png");
+        InputStream inputStream = resource.getInputStream();
+        return inputStream.readAllBytes();
     }
 }
