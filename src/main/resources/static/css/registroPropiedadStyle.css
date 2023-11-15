@@ -1,5 +1,8 @@
+
 body{
     background-color: lightgray;
+    color:#888;
+    font-family: sans-serif;
 }
 
 navbar-collapse{
@@ -9,10 +12,50 @@ navbar-collapse{
 .boxx{
 
     text-align: center;
-    display: flex;
-    margin: 20px; /* Espacio entre los divs */
+    display: block;
+    margin: 20px;
+    align-content: center;
+}
+.form-container{
+    
+    padding: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 1px solid #000;
+    border-radius: 8px;
+    background-color: #343a40;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 
-
-      background-color:#343a40;
-        color: #f3969a;
+}
+.form-group input[type="submit"] {
+    background-color: #000000;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.36);
+    margin-top: 10px;
+}
+.form-check{
+    
+}
+.form-check input{
+       width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#registrar{
+    color: #f3969a;
 }
