@@ -61,24 +61,20 @@
 
 
                             </tbody>
-                        </table>
-                        <table>
-                            <tbody class="text-center">
-                                <tr th:each="propiedad : ${propiedades}" th:text="${propiedad.id}"></tr>
-                            </tbody>
-                        </table>
+                        </table>                           
                     </div>
+                    
                 </div>
+                
             </div>
             <div style="background-color: #343a40!important;margin:2px;"  class="card-footer bg-danger ">
                 <p class="fw-semibold " text= "'User Id : '+${user.id}" ></p>
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <footer th:replace="/fragments/footer :: footer" > </footer>
-    </div>
+    <div th:replace='/fragments/Carta :: div'></div>
+    <section th:replace="/fragments/footer :: section" > </section>
+    
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

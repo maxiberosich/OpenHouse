@@ -4,11 +4,8 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
-<<<<<<< Updated upstream
 import openHouse.demo.enums.Rol;
-=======
 import openHouse.demo.services.OwnerService;
->>>>>>> Stashed changes
 import openHouse.demo.services.PropertyService;
 import openHouse.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +23,7 @@ public class PerfilController {
     private UserService userService;
 
     @Autowired
-<<<<<<< Updated upstream
-    private PropertyService propertyService;
 
-    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_PROPIETARIO') or hasRole('ROLE_ADMIN')")
-    @GetMapping("/perfil")
-    public String perfilUsuario(HttpSession session, ModelMap model) {
-        User logeado = (User) session.getAttribute("usersession");
-        User cliente = userService.getOne(logeado.getId());
-        model.put("usuario", cliente);
-        if (cliente.getRol().equals(Rol.PROPIETARIO)) {
-            
-            model.addAttribute("propertys", propertyService
-                    .buscarPorPropietario(cliente.getId()));
-        }
-
-=======
     private OwnerService ownerService;
     
     @Autowired
@@ -58,9 +40,8 @@ public class PerfilController {
             User propietario = ownerService.getOne(logeado.getId());
             List<Property> propiedades = propertyService.buscarPorPropiedad(propietario.getId());
             model.put("usuario", propietario);
-            model.put("propiedades", propiedades);
+            model.put("propertys", propiedades);
         }
->>>>>>> Stashed changes
         return "perfil.html";
     }
 
