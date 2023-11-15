@@ -31,5 +31,6 @@ public interface PropertyRepository extends JpaRepository<Property, String> {
 
     @Query("SELECT p FROM Property p WHERE p.valoracion = :valoracion")
     public List<Property> buscarPorValoracion(@Param("valoracion") Double valoracion);
+    
 
 }

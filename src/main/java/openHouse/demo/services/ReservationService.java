@@ -22,8 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-//FALTAN COSASA COMO :CALCULAR PRECIO FINAL -PRECIO BASE X NOCHE + PRESTACIONES(COMO INGRESO A LOS PRECIOS)+CANTIDAD DE PERSONAS
-//CREO QUE PARA HACER MAS FACIL TODO TENEMOS QUE HACER METODOS : CALCULAR PRECIO /CALCULAR NOCHES/CALCULAR PRESTACIONES /CALCULAR PRESONAS.
+
 
 @Service
 public class ReservationService {
@@ -80,7 +79,7 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
      
-    //que no sea nulo el id de cliente ni de propiedad
+
     public void validar( Date fechaInicio, Date fechaFin,
             Integer cantPersonas ) throws MiException{
         if (fechaInicio == null) {
@@ -95,7 +94,7 @@ public class ReservationService {
     }
     
     public void modificarReserva(Date fechaInicio, Date fechaFin, 
-     Integer cantPersonas, String idPropiedad, String idPropietario,String idReserva) throws MiException{
+     Integer cantPersonas, String idCliente, String idReserva) throws MiException{
         
         
         validar(fechaInicio, fechaFin, cantPersonas);
@@ -108,7 +107,7 @@ public class ReservationService {
             reservation.setFechaFin(fechaFin);
             reservation.setCantPersonas(cantPersonas);
             //DEFINIR COMO CALCULAMOS EL PRECIO FINAL !!LO MISMO PARA CALCULAS LOS DIAS QUE LAS NOCHES
-            Double precioNuevo=precio(fechaInicio, fechaFin, idPropietario);
+            Double precioNuevo=precio(fechaInicio, fechaFin, reservation.getPropiedad().getId());
             reservation.setPrecioFinal(precioNuevo);
             reservationRepository.save(reservation);
         }
@@ -168,6 +167,7 @@ public class ReservationService {
             return noches;
     }
     
+
     public List<String> obtenerFechasGuardadas(String idPropiedad){
         List<Reservation> lista = reservationRepository.buscarPorPropiedad(idPropiedad);
         
@@ -199,5 +199,10 @@ public class ReservationService {
         }
         return fechasFinal;
     }
+
+    public Reservation getOne(String id){
+       return reservationRepository.getOne(id);     
+    }
+    
     
 }
