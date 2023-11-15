@@ -160,6 +160,13 @@ public class PropertyService {
         return propiedadesSegunPrecio;
     }
     
+    @Transactional
+    public List<Property> buscarPorPropiedad(String id) {
+        List<Property> propiedadesId = new ArrayList();
+        propiedadesId = propertyRepository.buscarPorPropietario(id);
+        return propiedadesId;
+    }
+    
     public void bajaPropiedad(String id) {
         Optional<Property> respuesta = propertyRepository.findById(id);
         if (respuesta.isPresent()) {

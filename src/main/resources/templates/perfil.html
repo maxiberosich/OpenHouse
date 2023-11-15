@@ -5,8 +5,8 @@
         <link rel="stylesheet" th:href="@{/css/perfil.css}">
 
     <div th:replace="/fragments/head :: head" ></div></head>
-    <body style="background: lightgray!important">
-        
+<body style="background: lightgray!important">
+
     <style th:replace="/fragments/style_perfil :: style"></style>
     <nav th:replace="/fragments/navbar :: nav"></nav>
     <br><br>
@@ -52,23 +52,29 @@
                                     <th th:text="'Rol: '+ ${usuario.rol}" scope="row"></th>
 
                                 </tr>
+                                <tr sec:authorize="hasRole('ROLE_PROPIETARIO')" class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
+                                    <th th:if= "${usuario.rol == 'PROPIETARIO'}">
+                                    <th th:text="'CBU: '+ ${usuario.cbu}" scope="row">
+                                    </th>
+                                    </th>
+                                </tr>
 
 
                             </tbody>
-                        </table>
-
+                        </table>                           
                     </div>
+                    
                 </div>
+                
             </div>
             <div style="background-color: #343a40!important;margin:2px;"  class="card-footer bg-danger ">
                 <p class="fw-semibold " text= "'User Id : '+${user.id}" ></p>
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <footer th:replace="/fragments/footer :: footer" > </footer>
-    </div>
+    <div th:replace='/fragments/Carta :: div'></div>
+    <section th:replace="/fragments/footer :: section" > </section>
+    
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
