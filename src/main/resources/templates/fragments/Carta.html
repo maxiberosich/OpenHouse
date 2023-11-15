@@ -25,20 +25,17 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th th:text="${propiedad.ciudad}">Ubicacion:</th>
+                                        <th th:text="'Ubicacion: ' +  ${propiedad.ciudad}">Ubicacion:</th>
                                     </tr>
                                     <tr>
-                                        <th th:text="${propiedad.direccion}"></th>
+                                        <th th:text="'Direccion: ' + ${propiedad.direccion}"></th>
                                     </tr>
                                     <tr>
-                                        <th>Disponibilidad</th>
-                                    </tr>
-                                    <tr>
-                                        <th th:text="${propiedad.precioBase}">$</th>
+                                        <th th:text="'Precio por noche: ' + ${propiedad.precioBase}">$</th>
                                     </tr>
                                 </table>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-body-secondary" th:text="${propiedad.valoracion}">Puntuacion</small>
+                                    <small class="text-puntuacion" th:text="'Puntuacion: ' + ${propiedad.valoracion} + '&#9733;'"></small>
 
                                 </div  > 
 <!--                                <div th:if="${session.usersession != null}" class="d-flex justify-content-between align-items-center">

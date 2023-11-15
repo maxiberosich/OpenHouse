@@ -29,10 +29,10 @@
             <div class="carta-content">
                 <h2 class="titulo" th:text="${propiedad.ciudad}">Título de la carta</h2>
                 <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
-                <p th:text="${propiedad.precioBase}">Precio: $100</p>
+                <p th:text="'Precio por noche: ' + ${propiedad.precioBase}">Precio: $100</p>
                 <p>Días disponibles: Lunes a Viernes</p>
                 <button type="button" class="boton-estilizado" sec:authorize="hasRole('ROLE_CLIENTE')"><a class="boton-estilizado"  th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
-                <!--<button type="button" class="boton-estilizado" ><a class="boton-estilizado" th:href="@{/reserva/crear/__${propiedad.id}__}" >Alquilar</a></button>-->
+                <button type="button" class="boton-estilizado" th:if="${session.usersession == null}" ><a class="boton-estilizado" th:href="@{/login}" >Alquilar</a></button>
             </div>
         </div>
 
