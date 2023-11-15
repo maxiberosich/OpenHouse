@@ -67,6 +67,39 @@
                     <h3 class="titulo" th:text="${usuario.name}"></h3>
                     <form th:action="@{/comentario/registroCommentario/__${propiedad.id}__/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
                         <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="cuerpo"></textarea>
+
+                        <h5>Calificacion</h5>
+                        <div class="star-group">
+                            <input type="checkbox" name="Calificacion" th:value="10" id="star1">
+                            <label for="star1" class="star-label">10</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="9" id="star2">
+                            <label for="star2" class="star-label">9</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="8" id="star3">
+                            <label for="star3" class="star-label">8</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="7" id="star4">
+                            <label for="star4"  class="star-label">7</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="6" id="star5">
+                            <label for="star5" class="star-label">6</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="5" id="star6">
+                            <label for="star6" class="star-label">5</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="4" id="star7">
+                            <label for="star7" class="star-label">4</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="3" id="star8">
+                            <label for="star8" class="star-label">3</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="2" id="star9">
+                            <label for="star9" class="star-label">2</label>
+
+                            <input type="checkbox" name="Calificacion" th:value="1" id="star10">
+                            <label for="star10" class="star-label">1</label>
+                        </div>
                         <br>
 
                         <div class="contenedor-boton">
