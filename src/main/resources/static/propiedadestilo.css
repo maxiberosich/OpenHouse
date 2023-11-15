@@ -180,6 +180,10 @@ img {
             color: gold; /* Color de la estrella rellena */
         }
 
+.text-puntuacion{   
+    color:whitesmoke;
+}
+
 .numberList{
     padding: 0,9%;
 }
