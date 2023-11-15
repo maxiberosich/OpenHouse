@@ -1,5 +1,6 @@
 package openHouse.demo.controllers;
 
+import java.io.IOException;
 import java.util.Date;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.OwnerService;
@@ -31,7 +32,7 @@ public class OwnerController {
     @PostMapping("/registroPropietario")
     public String registroPropietario(@RequestParam String name, @RequestParam String password, String password2,
             @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
-            @RequestParam("birthdate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,@RequestParam String cbu,@RequestParam(required = false) MultipartFile archivo, ModelMap model){
+            @RequestParam("birthdate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,@RequestParam String cbu,@RequestParam(required = false) MultipartFile archivo, ModelMap model) throws IOException{
         
         try {
             ownerService.crearPropietario(name,password,password2,email,dni,phone,birthdate,cbu,archivo);
@@ -68,7 +69,7 @@ public class OwnerController {
             modelo.put("name", name);
             modelo.put("email", email);
 
-            return "modificar_cliente";
+            return "modificar_cliente.html";
         }
     }
     
