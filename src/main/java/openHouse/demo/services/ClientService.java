@@ -1,5 +1,7 @@
 package openHouse.demo.services;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +12,8 @@ import openHouse.demo.enums.Rol;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,12 +30,12 @@ public class ClientService {
 
     @Transactional
     public void createClient(String name, String password, String password2, String email, String dni, String phone,
-            Date birthdate, MultipartFile archivo) throws MiException {
+            Date birthdate, MultipartFile archivo) throws MiException, IOException {
 
         validate(name, password, password2, email, dni, phone, birthdate);
 
         Client cliente = new Client();
-        
+
         cliente.setRol(Rol.CLIENTE);
         cliente.setName(name);
         cliente.setEmail(email);
@@ -40,8 +44,14 @@ public class ClientService {
         cliente.setDni(dni);
         cliente.setPhone(phone);
         cliente.setAlta(true);
-        Image imagen = imageService.save(archivo);
-        
+        Image imagen = new Image();
+        if (archivo.isEmpty()) {
+            imagen = imageService.save(archivo);
+            imagen.setContent(obtenerBytesImagenPredeterminada());
+        } else {
+            imagen = imageService.save(archivo);
+        }
+
         cliente.setImage(imagen);
 
         clientRepo.save(cliente);
@@ -93,29 +103,30 @@ public class ClientService {
         clientes = clientRepo.findAll();
         return clientes;
     }
-    
-    public void elimnarClient(String id){
-        Optional<Client> respuesta =clientRepo.findById(id);
-        
+
+    public void elimnarClient(String id) {
+        Optional<Client> respuesta = clientRepo.findById(id);
+
         if (respuesta.isPresent()) {
             Client cliente = respuesta.get();
             clientRepo.delete(cliente);
         }
     }
-    
-    public void bajaCliente (String id){
-        Optional<Client> respuesta =clientRepo.findById(id);
-        
+
+    public void bajaCliente(String id) {
+        Optional<Client> respuesta = clientRepo.findById(id);
+
         if (respuesta.isPresent()) {
             Client cliente = respuesta.get();
             if (cliente.isAlta() == true) {
                 cliente.setAlta(false);
-            }else if (cliente.isAlta() == false){
+            } else if (cliente.isAlta() == false) {
                 cliente.setAlta(true);
             }
             clientRepo.save(cliente);
         }
     }
+
     public void validate(String name, String password, String password2, String email, String dni, String phone, Date birthdate)
             throws MiException {
         if (name.isEmpty() || name == null) {
@@ -148,6 +159,12 @@ public class ClientService {
         if (birthdate == null) {
             throw new MiException("Por favor debe indicar su fecha de nacimiento!.");
         }
+    }
+
+    private byte[] obtenerBytesImagenPredeterminada() throws IOException {
+        Resource resource = new ClassPathResource("static/img/OPENHOUSE.png");
+        InputStream inputStream = resource.getInputStream();
+        return inputStream.readAllBytes();
     }
 
 }
