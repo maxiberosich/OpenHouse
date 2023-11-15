@@ -62,12 +62,58 @@ html{
 }
 
 .card{
-    background-color: #6c757d!important;
+    background-color: transparent!important;
     --bs-card-border:#343a40!important;
 }
 
 #perfil img{
-    height: 300px!important;
-   margin-left: 0px;
-   margin-right: -300px;
+    height: auto!important;
+    margin-left: 0px;
+    /* margin-right: -300px; */
+    width: 240px;
+    object-fit: scale-down;
+    
+}
+@media only screen and (width:1399px) {
+    
+    
+#perfil img{
+    height: auto!important;
+    margin-left: 0px;
+    /* margin-right: -300px; */
+    width: 150px;
+    object-fit: scale-down;
+    
+}
+    
+    
+}
+.button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.modify-button {
+    background-color:  #f3969a;
+    color: white;
+}
+
+.delete-button {
+    background-color: #f44336; 
+    color: white;
+}
+
+.button:hover {
+    background-color: #333;
 }

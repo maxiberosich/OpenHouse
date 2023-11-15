@@ -68,7 +68,7 @@ public class OwnerController {
             modelo.put("name", name);
             modelo.put("email", email);
 
-            return "modificar_cliente";
+            return "modificar_cliente.html";
         }
     }
     
