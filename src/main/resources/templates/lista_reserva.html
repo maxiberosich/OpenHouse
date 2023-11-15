@@ -29,7 +29,7 @@
                         <td th:text="${reservas.propiedad.direccion}"></td>
                         
                         <td>
-                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/modificarReserva/__${reserva.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
+                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/modificarReserva/__${reservas.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
                         </td>
                     </tr>
                 </tbody> 
