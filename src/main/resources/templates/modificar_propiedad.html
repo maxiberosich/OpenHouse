@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modificar Propiedad</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous" />
+        <link href="/css/registroPropiedadStyle.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <div th:replace="/fragments/errores :: div"></div>
+        <div class="boxx" style="width: 40%;">
+            <div class="conteiner mt-6" >
+                <form  
+                      th:action="@{/propiedad/modificadoPropiedad/__${property.id}__}" 
+                      method="POST" 
+                      enctype="multipart/form-data">
+
+                    <input hidden th:value="${property.id}" name="idProperty">
+
+                    <div class="form-group">
+                        <label for="precioBase" th:text="'Precio Base: ' + ${property.precioBase}"></label>
+                        <input type="number" 
+                               class="form-control" 
+                               placeholder="Ingresa el precio base" 
+                               id="precioBase" name="precioBase" 
+                               step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="imagenes" >Imágenes:</label>
+                        <input type="file" 
+                               class="form-control" 
+                               id="imagenes"
+                               name="archivo" 
+                               multiple = "multiple"
+                               accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="codigoPostal" th:text="'Código Postal: ' + ${property.codigoPostal}"></label>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Ingresa el código postal" 
+                               id="codigoPostal" 
+                               name="codigoPostal" 
+                               >
+                    </div>
+                    <div class="form-group">
+                        <label for="capMaxPersonas">Capacidad Maxima de Personas:</label>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Ingresa la capacidad maxima de Personas" 
+                               id="codigoPostal" 
+                               name="capMaxPersonas" 
+                               >
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="direccion" 
+                               placeholder="Ingresa la dirección" 
+                               name="direccion" 
+                               >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea class="form-control" 
+                                  id="descripcion" 
+                                  placeholder="Ingresa una descripción" 
+                                  name="descripcion" 
+                                  rows="4" 
+                                  ></textarea>
+                    </div>
+
+                    <fieldset>
+                        <legend>Extras:</legend>
+                        <label>
+                            <input type="checkbox" name="wiFi"> Wi-Fi
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="asador"> Asador
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="pileta"> Piscina
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="cochera"> Cochera
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="aireAcondicionado"> A/C
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="tv"> TV por cable/digital
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="barra"> Barra de tragos
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="seAceptanMascotas"> Se aceptan mascotas
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="cocina"> Cocina
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="heladera"> Heladera
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="microondas"> Microondas
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="aguaCorriente"> Agua Corriente
+                        </label>
+                        <br>
+                        <label>
+                         Cantidad de Personas <input type="number" name="cantidadPers"> 
+                        </label>
+                        <br>
+                         <label>
+                           Cantidad de Habitaciones <input type="number" name="cantCuarto"> 
+                        </label>
+                        <br>
+                        <label>
+                            Cantidad de Baños <input type="number" name="cantBanio"> 
+                        </label>
+                        <br>
+                        <label>
+                            Cantidad de Autos <input type="number" name="cantAuto"> 
+                        </label>
+                        <br>
+
+                        <!-- Agrega más checkboxes según sea necesario -->
+                    </fieldset>
+                    <br>
+
+                    <!-- comment 
+                    <div class="form-group">
+                        <label for="valoracion">Valoración:</label>
+                        <input type="number" class="form-control" id="valoracion" placeholder="Ingresa la valoración" name="valoracion" step="0.1" required>
+                    </div>-->
+                    <button type="submit" class="btn btn-primary">Modificar Propiedad</button>
+                </form>
+            </div>
+        </div>
+        <section th:replace="/fragments/footer :: section"></section>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
+
+
+
+
+
