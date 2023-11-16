@@ -12,4 +12,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, String
     
     @Query("SELECT r FROM Reservation r WHERE r.propiedad.id = :idPropiedad")
     public List<Reservation> buscarPorPropiedad(@Param("idPropiedad") String idPropiedad);
+    
+    @Query("SELECT r FROM Reservation r WHERE r.propiedad.propietario.id = :idPropietario")
+    public List<Reservation> listaReservasActivas(@Param("idPropietario") String idPropietario);
 }
