@@ -12,3 +12,12 @@ star.addEventListener('click', function(){
 })
 
 })
+
+        // Función para cambiar la calificación al hacer clic en las estrellas
+        function changeRating(value) {
+            const checkbox = document.getElementById('ratingCheckbox');
+            checkbox.value = value;
+            console.alert=("El valor es: ");
+        }
+
+    
