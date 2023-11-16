@@ -2,6 +2,8 @@ package openHouse.demo.controllers;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +35,8 @@ public class ClientController {
             @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
             @RequestParam("birthdate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,
             @RequestParam(required = false) MultipartFile archivo, ModelMap model) throws IOException , MiException{
-        try {
 
+        try {
             clienteService.createClient(name, password, password2, email, dni, phone, birthdate, archivo);
             model.put("exito", "Cliente registrado correctamente!");
             return "redirect:/login";
@@ -46,9 +48,15 @@ public class ClientController {
             model.put("dni", dni);
             model.put("phone", phone);
             return "registrar.html";
+        } catch (IOException ex) {
+            model.put("error", ex.getMessage());
+            model.put("name", name);
+            model.put("email", email);
+            model.put("dni", dni);
+            model.put("phone", phone);
+            return "registrar.html";
         }
     }
-
 
     @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_PROPIETARIO')")
     @PostMapping("/modificar/{id}")
@@ -56,7 +64,7 @@ public class ClientController {
             @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
             @RequestParam String dni, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,
             @RequestParam(required = false) MultipartFile archivo, ModelMap modelo) {
-        
+
         try {
 
             clienteService.update(name, password, password2, email, dni, phone, birthdate, archivo, id);

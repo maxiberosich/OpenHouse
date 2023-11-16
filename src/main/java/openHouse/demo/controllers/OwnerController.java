@@ -40,6 +40,7 @@ public class OwnerController {
             @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
             @RequestParam("birthdate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,
             @RequestParam String cbu,@RequestParam(required = false) MultipartFile archivo, ModelMap model) throws IOException,MiException{
+
         
         try {
             ownerService.crearPropietario(name,password,password2,email,dni,phone,birthdate,cbu,archivo);
@@ -53,6 +54,14 @@ public class OwnerController {
             model.put("phone",phone);
             model.put("cbu",cbu);
             return "registrar.html"; 
+        } catch (IOException ex) {
+            model.put("error", ex.getMessage());
+            model.put("name",name);
+            model.put("email",email);
+            model.put("dni",dni);
+            model.put("phone",phone);
+            model.put("cbu",cbu);
+        return "registrar.html";
         }
     }
     
@@ -76,7 +85,7 @@ public class OwnerController {
             modelo.put("name", name);
             modelo.put("email", email);
 
-            return "modificar_cliente";
+            return "modificar_cliente.html";
         }
     }
     
