@@ -197,6 +197,7 @@ public class PropertyService {
 
     public List<Property> listaPropiedades() {
         List<Property> listaPropiedades = propertyRepository.findAll();
+        
         return listaPropiedades;
     }
 
@@ -272,4 +273,5 @@ public class PropertyService {
             propertyRepository.save(propiedad);
         }
     }
+    
 }
