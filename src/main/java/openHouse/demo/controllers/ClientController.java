@@ -1,5 +1,6 @@
 package openHouse.demo.controllers;
 
+import java.io.IOException;
 import java.util.Date;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.ClientService;
@@ -31,7 +32,7 @@ public class ClientController {
     public String registroCliente(@RequestParam String name, @RequestParam String password, String password2,
             @RequestParam String email, @RequestParam String dni, @RequestParam String phone,
             @RequestParam("birthdate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,
-            @RequestParam(required = false) MultipartFile archivo, ModelMap model) {
+            @RequestParam(required = false) MultipartFile archivo, ModelMap model) throws IOException {
         try {
 
             clienteService.createClient(name, password, password2, email, dni, phone, birthdate, archivo);
