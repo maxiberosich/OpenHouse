@@ -42,7 +42,7 @@ public class CommentController {
             @RequestParam String cuerpo, @RequestParam(required = false) Double Calificacion) {
 
         try {
-            commentService.create(archivo, idPropiedad, cuerpo, 4.0, idCliente);
+            commentService.create(archivo, idPropiedad, cuerpo, Calificacion, idCliente);
             modelo.put("exito", "Reservacion agendada correctamente");
             return "redirect:/propiedad/detalles/{idPropiedad}";
         } catch (MiException ex) {

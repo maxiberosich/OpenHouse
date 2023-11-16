@@ -154,31 +154,11 @@ img {
   height: 100px;
   font-size: 20px;
 }
-        /* Estilo base del checkbox */
-        input[type="checkbox"] {
-            display: none; /* Oculta el checkbox estándar */
-        }
 
-        /* Estilo del contenedor de las estrellas */
-        .star-group {
-            padding-top: 0;
-            display: inline-block;
-            font-size: 0; /* Elimina el espacio entre los elementos en línea */
-        }
-
-        /* Estilo de la etiqueta que representa una estrella */
-        .star-label {
-            display: inline-block;
-            font-size: 30px;
-            color: #aaa;
-            cursor: pointer;
-        }
-
-        /* Estilo de la estrella cuando está seleccionada */
-        input[type="checkbox"]:checked + .star-label,
-        input[type="checkbox"]:checked ~ input[type="checkbox"] + .star-label {
-            color: gold; /* Color de la estrella rellena */
-        }
+.img-comentario{
+    width: 70%;
+    height: 70%;
+}
 
 .text-puntuacion{   
     color:whitesmoke;
@@ -187,3 +167,17 @@ img {
 .numberList{
     padding: 0,9%;
 }
+
+.star{
+    font-size: 32px;
+    color: #bbb;
+    transition: color 0.3s;
+    cursor: pointer;
+    }
+    .star:hover,
+    .star.checked{
+        color: gold;
+    }
+    star.input{
+        display: none;
+    }
