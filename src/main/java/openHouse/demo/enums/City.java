@@ -1,6 +1,7 @@
 package openHouse.demo.enums;
 
 public enum City {
+    SELECCIONAR("Seleccionar"),
     MENDOZA("Mendoza"),
     CORDOBA("Córdoba"),
     NEUQUEN("Neuquén"),

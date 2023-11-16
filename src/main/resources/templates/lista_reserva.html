@@ -16,6 +16,7 @@
                         <th scope="col">ubicacion</th>
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                         <th scope="col" sec:authorize="hasRole('CLIENTE')">Modificar</th>
+                        <th scope="col" sec:authorize="hasRole('CLIENTE')">Cancelar Reserva</th>
                     </tr>
                 </thead>
                 
@@ -30,6 +31,9 @@
                         
                         <td>
                             <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/modificarReserva/__${reservas.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
+                        </td>
+                        <td>
+                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/eliminarReserva/__${reservas.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Cancelar</a>
                         </td>
                     </tr>
                 </tbody> 

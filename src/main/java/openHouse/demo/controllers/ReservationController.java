@@ -106,5 +106,13 @@ public class ReservationController {
         
     }
     
+    @GetMapping("eliminarReserva/{idReserva}/{idCliente}")
+    public String eliminarReserva(@PathVariable String idReserva, @PathVariable String idCliente){
+        clienteService.eliminarReserva(idCliente, idReserva);
+        reservaServicio.eliminarReserva(idReserva);
+        
+        return "redirect:/reserva/list/{idCliente}";
+    }
+    
     
 }
