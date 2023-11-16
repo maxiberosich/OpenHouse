@@ -34,10 +34,10 @@ const submitButton = document.getElementById('submitButton');
 const message = document.getElementById('message');
 const fechas = document.getElementById('fechas');
 const cadena = fechas.value.toString();
-const cadenaRes = cadena.replaceAll('[','');
-const cadenaRes2 = cadenaRes.toString().replaceAll(']','');
+const cadenaRes = cadena.replaceAll('[', '');
+const cadenaRes2 = cadenaRes.toString().replaceAll(']', '');
 const arrayCadena = cadenaRes2.toString().split(',');
-const arrayCadena2 = arrayCadena.toString().replaceAll(' ','');
+const arrayCadena2 = arrayCadena.toString().replaceAll(' ', '');
 const fechasReservadas = [];
 
 const cadenaJson = JSON.stringify(arrayCadena2);
@@ -48,22 +48,26 @@ dateInicioInput.addEventListener('change', () => {
     console.log(dateInicioInput.value);
     if (isReserved) {
         message.textContent = 'La fecha está reservada';
+        message.classList.add('error-mess');
         submitButton.disabled = true;
     } else {
         message.textContent = 'La fecha está disponible';
+        message.classList.add('error-mess1');
         submitButton.disabled = false;
     }
 });
 
-dateFinInput.addEventListener('change',() => {
+dateFinInput.addEventListener('change', () => {
     const fechaSeleccionada = dateFinInput.value;
     const reservado = cadenaJson.includes(fechaSeleccionada);
-    
-    if (reservado){
-        message.textContent = 'La fecha esta reservada';
+
+    if (reservado) {
+        message.textContent = 'La fecha está reservada';
+        message.classList.add('error-mess');
         submitButton.disabled = true;
     } else {
-        message.textContent = 'La fecha esta disponible';
+        message.textContent = 'La fecha está disponible';
+        message.classList.add('error-mess1');
         submitButton.disabled = false;
     }
 });

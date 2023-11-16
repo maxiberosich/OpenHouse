@@ -12,8 +12,8 @@ navbar-collapse{
 .boxx{
 
     text-align: center;
-    display: block;
-    margin: 20px;
+    display: flex;
+    margin: 70px; /* Espacio entre los divs */
     align-content: center;
 }
 .form-container{
