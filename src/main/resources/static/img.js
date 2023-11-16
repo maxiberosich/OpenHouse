@@ -10,13 +10,4 @@ var mySwiper = new Swiper('.swiper-container', {
         clickable: true // Opcional: permite hacer clic en la paginación
     }
 });
-var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    loop: true,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-    }
-});
 
