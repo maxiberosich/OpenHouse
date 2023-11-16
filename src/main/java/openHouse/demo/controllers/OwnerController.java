@@ -2,6 +2,8 @@ package openHouse.demo.controllers;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,14 @@ public class OwnerController {
             model.put("phone",phone);
             model.put("cbu",cbu);
             return "registrar.html"; 
+        } catch (IOException ex) {
+            model.put("error", ex.getMessage());
+            model.put("name",name);
+            model.put("email",email);
+            model.put("dni",dni);
+            model.put("phone",phone);
+            model.put("cbu",cbu);
+        return "registrar.html";
         }
     }
     
@@ -69,7 +79,7 @@ public class OwnerController {
             modelo.put("name", name);
             modelo.put("email", email);
 
-            return "modificar_cliente";
+            return "modificar_cliente.html";
         }
     }
     

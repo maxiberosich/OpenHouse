@@ -3,47 +3,43 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="es">
-
     <head>
         <title>Modificar Perfil</title>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/modificar_cliente.css">
-    <div th:replace="/fragments/head2 :: head"></div>
+    <div th:replace="/fragments/head :: head" ></div>
 </head>
 
 
+
 <body style="display: block!important">
+
     <nav th:replace="/fragments/navbar :: nav"></nav>
 
-    <fieldset >
-        <div class="top-20 end-80">
-            <div class="conteiner" style="align-items: center!important; border-radius: 30px!important;
-                 margin: 40px!important;  margin-right: 10px!important; margin-left: 10px!important;"> 
+    <br>
 
-                <h1 class="saludo text-white" style="text-align: center; font-size:  var ">
-                    Hola »<span class="username"style="color:#343a40;" th:text="${cliente.name}"></span>« 
-                </h1>
-
-                <div class="centered">
-                    <a class="perfil img " >
-                        <img class="logo" style="width: 150px!important;
-                       height: 150px!important;
-                       position: relative!important;
-                       left: 120px!important;"  th:src="@{/image/perfil/__${session.usersession.id}__}" >
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </fieldset> 
-
+    <br>
 
 
     <div style="" class="form-container">
-        <h1 id="modificar">Modificar Usuario</h1>
 
-        <form th:action="@{/cliente/modificar/__${cliente.id}__}" action="procesar_modificacion_cliente.php" method="POST" enctype="multipart/form-data">
+        <div class="modificar">
+            <h1 id="modificar">Modificar Usuario</h1>
+        </div>
+
+        <div class="perfil-padre">
+            <div class="perfil-hijo">
+                <img class="imagen-perfil" th:src="@{/image/perfil/__${session.usersession.id}__}" >
+            </div>
+        </div>
+
+
+        <div class="saludo">
+            <h1 id="saludo-h1">
+                Hola »<span class="username"style="color:#f3969ab5;" th:text="${cliente.name}"></span>« 
+            </h1>
+        </div>
+        <form th:action="@{/cliente/modificar/__${cliente.id}__}" method="POST" enctype="multipart/form-data">
 
             <input hidden th:value="${cliente.id}" name="id">
 
@@ -57,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="phone" required>
+                <input type="text" id="telefono" name="phone"  th:value="${cliente.phone}" required>
             </div>
             <div class="form-group">
                 <label for="telefono">Foto de Perfil</label>
@@ -65,11 +61,11 @@
             </div>
             <div class="form-group">
                 <label for="direccion">DNI:</label>
-                <input type="text" id="direccion" name="dni" required>
+                <input type="text" id="direccion" name="dni"  th:value="${cliente.Dni}" required>
             </div>
             <div class="form-group">
                 <label for="direccion">Fecha de Nacimiento</label>
-                <input type="date" id="direccion" name="birthdate" required>
+                <input type="date" id="direccion" name="birthdate"  th:value="${cliente.birthdate}" required>
             </div>
             <div class="form-group">
                 <label for="direccion">Contraseña:</label>
@@ -79,8 +75,10 @@
                 <label for="direccion">Repetir Contraseña:</label>
                 <input type="password" id="direccion" name="password2" required>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar Cambios">
+
+
+            <div class="button-container">
+                <input type="submit" class="button guardarCambios" value="Guardar Cambios">
             </div>
         </form>
     </div>
