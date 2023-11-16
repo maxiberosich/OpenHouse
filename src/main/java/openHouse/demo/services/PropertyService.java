@@ -13,6 +13,7 @@ import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
+import openHouse.demo.repositories.CommentRepository;
 import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class PropertyService {
 
     @Autowired
     private ClientRepository clienteRepository;
+    
+    @Autowired
+    private CommentRepository comentarioRepositorio;
 
     @Transactional
     public void crearProperty(Double precioBase,
@@ -251,25 +255,30 @@ public class PropertyService {
     
     
 
-    //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
-    //hay que probarlo REY.
-    public void valoracionPropiedad(String idPropiedad){
+    public void valoracionPropiedad(String idPropiedad) {
         Optional<Property> respuesta = propertyRepository.findById(idPropiedad);
-        
+
+        Integer cantidadComentarios = 0;
+        Double valorFinal = 0.0;
+
         if (respuesta.isPresent()) {
-            
+
             Property propiedad = respuesta.get();
-            List<Comment> comentarios=propiedad.getComentarios();
-            Integer cantidadComentarios=0;
-            Double valorFinal = null;
-            
-            cantidadComentarios=propiedad.getComentarios().size();
-            
-            for (Comment object :comentarios ) {
-                valorFinal=valorFinal+object.getValoracion();
+            System.out.println("tiene lista de comentarios :" +(!propiedad.getComentarios().isEmpty()));
+            System.out.println("probando con null :" +propiedad.getComentarios());
+            System.out.println("probando con size: " + propiedad.getComentarios().size());
+            List<Comment> comentarios2 = comentarioRepositorio.buscarPorIdPropiedad(idPropiedad);
+            System.out.println("tiene lista de comentarios LISTA COMENTARIOS DE RESERVA:" +(comentarios2.isEmpty()));
+            //System.out.println("probando con null :" +comentarios2.getComentarios());
+            System.out.println("probando con size LISTA COMENTARIOS DE RESERVA: " + comentarios2.size());
+            if (comentarios2.size()!=0) {
+                List<Comment> comentarios = comentarioRepositorio.buscarPorIdPropiedad(idPropiedad);
+                for (Comment object : comentarios) {
+                    valorFinal = valorFinal + object.getValoracion();
+                }
+                propiedad.setValoracion(valorFinal / comentarios.size());
+                propertyRepository.save(propiedad);
             }
-            propiedad.setValoracion(valorFinal/cantidadComentarios);
-            propertyRepository.save(propiedad);
         }
     }
 }

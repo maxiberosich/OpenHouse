@@ -73,13 +73,21 @@
 
                         <h5>Calificacion</h5>
                         <div class="rating">
-                            <i class="bi bi-star-fill star" name="Calificacion" th:value="1.0"></i>
-                            <i class="bi bi-star-fill star" name="Calificacion" th:value="2.0"></i>
-                            <i class="bi bi-star-fill star" name="Calificacion" th:value="3.0"></i>
-                            <i class="bi bi-star-fill star" name="Calificacion" th:value="4.0"></i>
-                            <i class="bi bi-star-fill star" name="Calificacion" th:value="5.0"></i>
+                            <!-- Checkbox -->
+                            <input hidden type="checkbox" id="ratingCheckbox" name="Calificacion" value="1">
+                            <input hidden type="checkbox" id="ratingCheckbox2" name="Calificacion" value="2">
+                            <input hidden type="checkbox" id="ratingCheckbox3" name="Calificacion" value="3">
+                            <input hidden type="checkbox" id="ratingCheckbox4" name="Calificacion" value="4">
+                            <input hidden type="checkbox" id="ratingCheckbox5" name="Calificacion" value="5">
+
+                    
+                            <!-- Estrellas -->
+                            <label for="ratingCheckbox" class="star" onclick="changeRating(1)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox2" class="star" onclick="changeRating(2)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox3" class="star" onclick="changeRating(3)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox4" class="star" onclick="changeRating(4)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox5" class="star" onclick="changeRating(5)"><i class="bi bi-star-fill"></i></label>
                         </div>
-                        <br>
 
                         <div class="contenedor-boton">
                             <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
@@ -100,18 +108,18 @@
                 <div class="carta-content">
                     <h2 th:text="${comentario.cliente.name}"></h2>
                     <h5 th:text="${comentario.cuerpo}"></h5>
+                    <div><h5 th:text="'Valoracion: ' + ${comentario.valoracion}+ '&#9733;'"></h5></div>
                 </div>
                 <div class="carta-image">
                     <div >
                         <div >
-                            <div ><img th:src="@{/image/comentario/__${comentario.id}__}" alt="Imagen Comentario"></div> 
+                            <div ><img class="img-comentario" th:src="@{/image/comentario/__${comentario.id}__}" alt="Imagen Comentario"></div> 
                         </div>
 
                     </div>
                 </div>
-                <div>
-                    <div><h5 th:text="'Valoracion: ' + ${comentario.valoracion}"></h5></div>
-                </div>
+                    
+                
 
             </div>
 
@@ -123,7 +131,8 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        <script src="img.js"></script>
+        <script src="/star.js"></script>
+        <script src="/img.js"></script>
     </body>
 </html>
 
