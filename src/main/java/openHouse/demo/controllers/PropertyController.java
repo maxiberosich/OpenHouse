@@ -49,7 +49,7 @@ public class PropertyController {
             Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
-            boolean heladera, boolean microondas) throws MiException{
+            boolean heladera, boolean microondas) throws MiException {
         try {
             propertyService.crearProperty(precioBase, codigoPostal, direccion, descripcion, id,
                     archivo, ciudad, tipoPropiedad, capMaxPersonas, fechaAlta, fechaBaja,
@@ -76,6 +76,8 @@ public class PropertyController {
     public String mostrarPropiedad(@PathVariable String id, HttpSession session, ModelMap model) {
         User usuario = (User) session.getAttribute("usersession");
         model.addAttribute("propiedad", propertyService.getOne(id));
+        model.addAttribute("imagenes", propertyService.getOne(id).getImagenes());
+        model.addAttribute("imagenesTamanio", propertyService.getOne(id).getImagenes().size());
         model.addAttribute("usuario", usuario);
         model.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
         return "propiedad_detalles.html";
@@ -86,6 +88,8 @@ public class PropertyController {
         User usuario = (User) session.getAttribute("usersession");
         model.addAttribute("propiedad", propertyService.getOne(id));
         model.addAttribute("usuario", usuario);
+        model.addAttribute("imagenes", propertyService.getOne(id).getImagenes());
+        model.addAttribute("comentarios", commentService.buscarPorIdPropiedad(id));
         return "propiedad_detalles.html";
     }
 
@@ -123,25 +127,25 @@ public class PropertyController {
     }
 
     @PostMapping("/modificadoPropiedad/{idProperty}")
-    public String modificadoPropiedad(@PathVariable String idProperty,@RequestParam(required = false) Double precioBase,
-            @RequestParam(required = false) String codigoPostal,@RequestParam(required = false) String direccion,
-            @RequestParam(required = false) String descripcion, ModelMap modelo,@RequestParam(required = false) MultipartFile archivo,
-            @RequestParam(required = false)String ciudad,@RequestParam(required = false) String tipoPropiedad,
+    public String modificadoPropiedad(@PathVariable String idProperty, @RequestParam(required = false) Double precioBase,
+            @RequestParam(required = false) String codigoPostal, @RequestParam(required = false) String direccion,
+            @RequestParam(required = false) String descripcion, ModelMap modelo, @RequestParam(required = false) MultipartFile archivo,
+            @RequestParam(required = false) String ciudad, @RequestParam(required = false) String tipoPropiedad,
             @RequestParam(required = false) Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta,
             @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja,
-            @RequestParam(required = false) Integer cantidadPers,@RequestParam(required = false) Integer cantAuto,
-            @RequestParam(required = false) Integer cantCuarto,@RequestParam(required = false) Integer cantBanio,
+            @RequestParam(required = false) Integer cantidadPers, @RequestParam(required = false) Integer cantAuto,
+            @RequestParam(required = false) Integer cantCuarto, @RequestParam(required = false) Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
-            boolean heladera, boolean microondas) throws MiException{
+            boolean heladera, boolean microondas) throws MiException {
         try {
             modelo.addAttribute("property", propertyService.getOne(idProperty));
-            
+
             propertyService.modificarPropiedad(precioBase, idProperty, capMaxPersonas, codigoPostal, direccion, descripcion, archivo, "mendoza",
                     "CASA", fechaAlta, fechaBaja, cantidadPers, cantAuto, cantCuarto, cantBanio, pileta, asador,
                     cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas, aguaCorriente, cocina, heladera, microondas);
             modelo.put("exito", "Propiedad modificada correctamente");
-            
+
             return "redirect:/";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
@@ -154,5 +158,5 @@ public class PropertyController {
             return "modificar_propiedad.html";
         }
     }
-    
+
 }

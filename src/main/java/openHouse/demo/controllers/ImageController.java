@@ -22,10 +22,10 @@ public class ImageController {
 
     @Autowired
     UserService userService;
-    
+
     @Autowired
     PropertyService propertyService;
-    
+
     @Autowired
     CommentService commentService;
 
@@ -37,17 +37,17 @@ public class ImageController {
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
-    
-    @GetMapping("/propiedad/{id}")
-    public ResponseEntity<byte[]> imagenPropiedad(@PathVariable String id) {
+
+    @GetMapping("/propiedad/{id}/{index}")
+    public ResponseEntity<byte[]> imagenPropiedad(@PathVariable String id, @PathVariable Integer index) {
         Property propiedad = propertyService.getOne(id);
-        byte[] imagen = propiedad.getImagenes().get(0).getContent();
+        byte[] imagen = propiedad.getImagenes().get(index).getContent();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
-    
-    @GetMapping("/comentario/{id}")
+
+    @GetMapping("/comentario/{idComentario}")
     public ResponseEntity<byte[]> imagenComentario(@PathVariable String idComentario) {
         Comment comentario = commentService.getOne(idComentario);
         byte[] imagen = comentario.getImagen().getContent();
@@ -55,6 +55,5 @@ public class ImageController {
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
-    
-    
+
 }
