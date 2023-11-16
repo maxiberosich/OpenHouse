@@ -57,7 +57,7 @@ public class ReservationController {
             
             modelo.put("exito", "Reservacion agendada correctamente");
              System.out.println(cantPersonas);
-            return "redirect:/";
+            return "confirm.html";
         } catch (MiException ex) {
             
             modelo.put("error", ex.getMessage());
