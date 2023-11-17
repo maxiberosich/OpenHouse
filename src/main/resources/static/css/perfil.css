@@ -99,6 +99,18 @@
     background-color: #333;
 }
 
+
+.swiper-container {
+    max-height: auto;/* Limita el ancho del carrusel al ancho del contenedor padre */
+    overflow: hidden; /* Oculta el contenido que excede el cuadro */
+    object-fit: cover;
+}
+.swiper-slide img {
+    /* Limita el ancho de la imagen al ancho del carrusel */
+    max-height: 100%; /* Limita la altura de la imagen a la altura del carrusel */
+     /* Ajusta la imagen para cubrir completamente el cuadro sin distorsionarla */
+
+}
 .col{
     width: 100%;
     height: 100%;
