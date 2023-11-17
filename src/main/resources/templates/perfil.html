@@ -8,30 +8,37 @@
     <div th:replace="/fragments/head :: head" ></div>
 </head>
 
-<body style="background: lightgray!important">
+<body>
 
     <style th:replace="/fragments/style_perfil :: style"></style>
-    <nav th:replace="/fragments/navbar :: nav"></nav>
+        <nav th:replace="/fragments/navbar :: nav"></nav>
 
     <br><br>
 
     <div class="container">
+        
         <div class="card">
             <div style="background-color:#343a40!important; margin:2px;" class="card-header d-flex align-items-center justify-content-evenly bg-danger">
                 <h4 style=" color: #f3969a!important" class="fw-bold">Perfil</h4>
             </div>
+                    <div class="saludo">
+                    <h1 id="saludo-h1">
+                        Hola »<span class="username"style="color:#f3969ab5;" th:text="${usuario.name}"></span>« 
+                    </h1>
+                </div>
 
-            <div class="row g-0">
-                <div class="col-md-4 d-flex">
-                    <div th:if="${session.usersession != null and session.usersession.image != null}" id="perfil">
+       <div class="row">
+                <div class="col">
+                    <div  id="perfil" th:if="${session.usersession != null and session.usersession.image != null}">
                         <img th:src="@{/image/perfil/__${session.usersession.id}__}">
                     </div>
                 </div>
 
+           <br>
                 <div class="col-md-8">
                     <div class="card-body" style="margin-left: -200px!important;">
 
-                        <table style="border-color: #343a40!important;border-style: double!important; width: 95% ;" id="table">
+                        <table style="border-color: #343a40!important;border-style: double!important; width: 80% ;" id="table">
                             <tbody>
 
                                 <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
@@ -73,27 +80,35 @@
                             </tbody>
                         </table>                           
                     </div>
-                    
+
                 </div>
-                
+
             </div>
 
             <div class="button-container">
                 <a th:href="@{/modificarPerfil}"><button class="button modify-button m-1 "  >Modificar</button></a>
                 <button class="button delete-button" onclick="darseDeBaja()">Darse de baja</button>
             </div>
+
             <div  id="card-footer bg-danger ">
                 <p class="fw-semibold " text= "'User Id : '+${user.id}" ></p>
             </div>
         </div>
     </div>
-    <div>
-        <div th:replace="/fragments/Carta :: div"></div>
+
+
+    <div class="cartas">
+        <div  th:replace='/fragments/Carta :: div'></div>
     </div>
-    
-    
-    <section th:replace="/fragments/footer :: section" > </section>
-    
+
+    <br><br>
+
+
+
+    <div class="container">
+        <footer th:replace="/fragments/footer :: footer" > </footer>
+    </div>
+
 
 
     <script
