@@ -31,7 +31,8 @@ public class CommentService {
     @Autowired
     private ImageService imageService;
 
-    public void create(MultipartFile archivo, String idPropiedad, String cuerpo, Double valoracion, String idCliente) throws MiException {
+    public void create(MultipartFile archivo, String idPropiedad, String cuerpo,
+            Double valoracion, String idCliente) throws MiException {
         validar(cuerpo, valoracion);
         Optional<Property> respuestaPropiedad = propertyRepository.findById(idPropiedad);
         Optional<Client> respuestaCliente = clientRepository.findById(idCliente);
@@ -40,6 +41,7 @@ public class CommentService {
             Property propiedad = respuestaPropiedad.get();
             Client cliente = respuestaCliente.get();
 
+            
             Comment comment = new Comment();
             comment.setPropiedad(propiedad);
             comment.setCuerpo(cuerpo);
@@ -47,6 +49,8 @@ public class CommentService {
             comment.setCliente(cliente);
             Image imagen = imageService.save(archivo);
             comment.setImagen(imagen);
+            List<Comment> comentarios = propiedad.getComentarios();
+            propiedad.setComentarios(comentarios);
             commentRepository.save(comment);
         }
 
@@ -99,6 +103,15 @@ public class CommentService {
         List<Comment> comentarios = new ArrayList();
         comentarios = commentRepository.buscarPorIdPropiedad(idPropiedad);
         return comentarios;
+    }
+    
+    public void elimnarComment(String id) {
+        Optional<Comment> respuesta = commentRepository.findById(id);
+
+        if (respuesta.isPresent()) {
+            Comment comment = respuesta.get();
+            commentRepository.delete(comment);
+        }
     }
 
 }

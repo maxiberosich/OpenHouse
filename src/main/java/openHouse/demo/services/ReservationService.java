@@ -2,10 +2,12 @@
 package openHouse.demo.services;
 
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Property;
 import openHouse.demo.entities.Reservation;
@@ -16,8 +18,7 @@ import openHouse.demo.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-//FALTAN COSASA COMO :CALCULAR PRECIO FINAL -PRECIO BASE X NOCHE + PRESTACIONES(COMO INGRESO A LOS PRECIOS)+CANTIDAD DE PERSONAS
-//CREO QUE PARA HACER MAS FACIL TODO TENEMOS QUE HACER METODOS : CALCULAR PRECIO /CALCULAR NOCHES/CALCULAR PRESTACIONES /CALCULAR PRESONAS.
+
 
 @Service
 public class ReservationService {
@@ -74,7 +75,7 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
      
-    //que no sea nulo el id de cliente ni de propiedad
+
     public void validar( Date fechaInicio, Date fechaFin,
             Integer cantPersonas ) throws MiException{
         if (fechaInicio == null) {
@@ -89,7 +90,7 @@ public class ReservationService {
     }
     
     public void modificarReserva(Date fechaInicio, Date fechaFin, 
-     Integer cantPersonas, String idPropiedad, String idPropietario,String idReserva) throws MiException{
+     Integer cantPersonas, String idCliente, String idReserva) throws MiException{
         
         
         validar(fechaInicio, fechaFin, cantPersonas);
@@ -102,7 +103,7 @@ public class ReservationService {
             reservation.setFechaFin(fechaFin);
             reservation.setCantPersonas(cantPersonas);
             //DEFINIR COMO CALCULAMOS EL PRECIO FINAL !!LO MISMO PARA CALCULAS LOS DIAS QUE LAS NOCHES
-            Double precioNuevo=precio(fechaInicio, fechaFin, idPropietario);
+            Double precioNuevo=precio(fechaInicio, fechaFin, reservation.getPropiedad().getId());
             reservation.setPrecioFinal(precioNuevo);
             reservationRepository.save(reservation);
         }
@@ -122,6 +123,7 @@ public class ReservationService {
         if (respuesta.isPresent()) {
             Reservation reserva = respuesta.get();
             reserva.setAlta(Boolean.FALSE);
+            reservationRepository.save(reserva);
         }
     }
     
@@ -162,5 +164,63 @@ public class ReservationService {
             return noches;
     }
     
+
+    public List<String> obtenerFechasGuardadas(String idPropiedad){
+        List<Reservation> lista = reservationRepository.buscarPorPropiedad(idPropiedad);
+        
+        List<Date> fechasBloqueadas = new ArrayList();
+        
+        for (Reservation reservation : lista) {
+            
+            Calendar calendarInicio = Calendar.getInstance();
+            calendarInicio.setTime(reservation.getFechaInicio());
+            
+            Calendar calendarFin = Calendar.getInstance();
+            calendarFin.setTime(reservation.getFechaFin());
+            
+            long diasEntre = ChronoUnit.DAYS.between(calendarInicio.toInstant(), calendarFin.toInstant());
+            
+            for (int i = 0 ; i < diasEntre+1; i++) {
+                
+                Date fechaBloqueada = calendarInicio.getTime();
+                fechasBloqueadas.add(fechaBloqueada);
+                calendarInicio.add(Calendar.DAY_OF_MONTH, 1);
+            }
+        }
+        List<String> fechasFinal = new ArrayList();
+        
+        for (Date fecha : fechasBloqueadas) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaTexto = formatter.format(fecha);
+            fechasFinal.add(fechaTexto);
+        }
+        return fechasFinal;
+    }
+
+    public Reservation getOne(String id){
+       return reservationRepository.getOne(id);     
+    }
     
+    public void darDeBajaReserva(String idReserva){
+        Optional<Reservation> respuesta = reservationRepository.findById(idReserva);
+        
+        if (respuesta.isPresent()) {
+            Reservation reserva= respuesta.get();
+            reserva.setAlta(false);
+            reservationRepository.save(reserva);
+        }
+    }
+    
+    public List<Reservation> listaReservasActivas(String idPropietario){
+        List<Reservation> listaReservas=reservationRepository.listaReservasActivas(idPropietario);
+        List<Reservation> listaActiva=new ArrayList<>();
+        
+        
+        for (Reservation reserva : listaReservas) {
+            if (reserva.isAlta()) {
+                listaActiva.add(reserva);
+            }
+        }
+        return listaActiva;
+    }
 }

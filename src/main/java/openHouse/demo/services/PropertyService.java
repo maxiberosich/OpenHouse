@@ -13,6 +13,7 @@ import openHouse.demo.entities.Property;
 import openHouse.demo.entities.User;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
+import openHouse.demo.repositories.CommentRepository;
 import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,13 @@ public class PropertyService {
 
     @Autowired
     private ClientRepository clienteRepository;
+    
+    @Autowired
+    private CommentRepository comentarioRepositorio;
 
     @Transactional
     public void crearProperty(Double precioBase,
-            String codigoPostal, String direccion, String descripcion, String idOwner, MultipartFile archivo,
+            String codigoPostal, String direccion, String descripcion, String idOwner, MultipartFile[] archivo,
             String ciudad, String tipoPropiedad, Integer capMaxPersonas, Date fechaAlta, Date fechaBaja,
             //de aca para abajo son atributos de prestaciones.
             Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
@@ -68,13 +72,18 @@ public class PropertyService {
 
             List<Image> listaImagen = new ArrayList();
             //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
-            listaImagen.add(imageService.save(archivo));
+            if(archivo != null && archivo.length>0){
+                for (MultipartFile file : archivo) {
+                    listaImagen.add(imageService.save(file));
 
+                }
+            }
+            
             propiedad.setImagenes(listaImagen);
 
             User usuario = respuesta.get();
             Owner owner = (Owner) usuario;
-            propiedad.setPropietario(owner);
+            propiedad.setPropietario(owner);            
             
             Prestation prestacion=prestationService.createPrestation
                     ( cantidadPers, cantAuto, cantCuarto, cantBanio,
@@ -92,7 +101,7 @@ public class PropertyService {
             String codigoPostal, String direccion, String descripcion,
             MultipartFile archivo, String ciudad, String tipoPropiedad, Date fechaAlta, Date fechaBaja,
             
-            String idPropiedad, Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
+            Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
             boolean pileta, boolean asador, boolean cochera, boolean aireAcondicionado, boolean wiFi,
             boolean tv, boolean barra, boolean seAceptanMascotas, boolean aguaCorriente, boolean cocina,
             boolean heladera, boolean microondas) throws MiException {
@@ -113,20 +122,20 @@ public class PropertyService {
             propiedad.setFechaAlta(fechaAlta);
             propiedad.setFechaBaja(fechaBaja);
             
-            List<Image> listaImagen = propiedad.getImagenes();
-            //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
-            listaImagen.add(imageService.save(archivo));
-
-            propiedad.setImagenes(listaImagen);
+            if(!archivo.isEmpty()){
+                List<Image> listaImagen = propiedad.getImagenes();
+                listaImagen.add(imageService.save(archivo));
+                propiedad.setImagenes(listaImagen);
+            }
             
-            Prestation prestacion=prestationService.createPrestation
-                    (cantidadPers, cantAuto, cantCuarto, cantBanio,
-                    pileta, asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas,
-                    aguaCorriente, cocina, heladera, microondas);
+            Prestation prestacion = prestationService.update(cantidadPers, cantAuto, cantCuarto, cantBanio, pileta,
+                    asador, cochera, aireAcondicionado, wiFi, tv, barra, seAceptanMascotas, aguaCorriente, cocina,
+                    heladera, microondas, propiedad.getPrestaciones().getId());
             
             propiedad.setPrestaciones(prestacion);
             
             propertyRepository.save(propiedad);
+
 
         }
 
@@ -145,12 +154,26 @@ public class PropertyService {
         propiedadesCiudad = propertyRepository.buscarPorCiudad(ciudad);
         return propiedadesCiudad;
     }
+    
+    @Transactional
+    public List<Property> buscarPorPropietario(String idPropietario){
+        List<Property> propiedades = new ArrayList();
+        propiedades = propertyRepository.buscarPorPropietario(idPropietario);
+        return propiedades;
+    }
 
     @Transactional
     public List<Property> buscarSegunPrecio(String precioMinimo, String precioMaximo) {
         List<Property> propiedadesSegunPrecio = new ArrayList();
         propiedadesSegunPrecio = propertyRepository.buscarSegunPrecio(precioMinimo, precioMaximo);
         return propiedadesSegunPrecio;
+    }
+    
+    @Transactional
+    public List<Property> buscarPorPropiedad(String id) {
+        List<Property> propiedadesId = new ArrayList();
+        propiedadesId = propertyRepository.buscarPorPropietario(id);
+        return propiedadesId;
     }
     
     public void bajaPropiedad(String id) {
@@ -183,6 +206,7 @@ public class PropertyService {
 
     public List<Property> listaPropiedades() {
         List<Property> listaPropiedades = propertyRepository.findAll();
+        
         return listaPropiedades;
     }
 
@@ -203,6 +227,7 @@ public class PropertyService {
             throw new MiException("Por favor, debe especificar la capacidad máxima de personas para la propiedad");
         }
     }
+
 
     
 
@@ -235,25 +260,26 @@ public class PropertyService {
     
     
     
-    //crear metodo valoracion, lotiene que agregar un cliente que haya tenido una reserva en la propiedad terminada y recien puede comentar.
-    //hay que probarlo REY.
-    public void valoracionPropiedad(String idPropiedad){
+
+    public void valoracionPropiedad(String idPropiedad) {
         Optional<Property> respuesta = propertyRepository.findById(idPropiedad);
-        
+
+        Integer cantidadComentarios = 0;
+        Double valorFinal = 0.0;
+
         if (respuesta.isPresent()) {
-            
+
             Property propiedad = respuesta.get();
-            List<Comment> comentarios=propiedad.getComentarios();
-            Integer cantidadComentarios=0;
-            Double valorFinal = null;
-            
-            cantidadComentarios=propiedad.getComentarios().size();
-            
-            for (Comment object :comentarios ) {
-                valorFinal=valorFinal+object.getValoracion();
+            List<Comment> comentarios2 = comentarioRepositorio.buscarPorIdPropiedad(idPropiedad);
+            if (comentarios2.size()!=0) {
+                List<Comment> comentarios = comentarioRepositorio.buscarPorIdPropiedad(idPropiedad);
+                for (Comment object : comentarios) {
+                    valorFinal = valorFinal + object.getValoracion();
+                }
+                propiedad.setValoracion(Math.ceil(valorFinal / comentarios.size()));
+                propertyRepository.save(propiedad);
             }
-            propiedad.setValoracion(valorFinal/cantidadComentarios);
-            propertyRepository.save(propiedad);
         }
     }
+    
 }

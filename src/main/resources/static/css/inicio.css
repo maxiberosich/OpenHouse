@@ -27,11 +27,7 @@
  
   
 
-/*carrousel*/
-.carrousel{
 
-
-}
 .carousel-item img{
 width: 80%;
 height: 70%;
@@ -42,4 +38,39 @@ object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor*/
 
 
 
+}
+/* cartas estilo*/
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+/* Estilo para el cuerpo de la tarjeta */
+.card-body {
+    display: block;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Establecer una altura máxima para la tarjeta */
+.card {
+    max-height: 600px; 
+    min-height: 600px;
+}
+
+/* Estilo para la tabla dentro del contenido de la tarjeta */
+.table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Estilo para el botón de reserva si el usuario está en sesión */
+.d-flex.justify-content-between.align-items-center button {
+    margin-top: 10px;
+    
+}
+.swiper-slide img {
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    height: 400px; /* Establece una altura fija */
+     object-fit: cover;/* Para mantener la proporción de la imagen */
 }

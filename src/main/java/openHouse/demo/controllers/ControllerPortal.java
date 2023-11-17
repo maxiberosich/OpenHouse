@@ -28,6 +28,9 @@ public class ControllerPortal {
     public String inicio(ModelMap modelo) {
         List<Property> propiedades = propertyService.listaPropiedades();
         modelo.addAttribute("propertys", propiedades);
+        for (Property propiedad : propiedades) {
+            propertyService.valoracionPropiedad(propiedad.getId());
+        }
         return "inicio.html";
     }
 

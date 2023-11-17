@@ -1,55 +1,81 @@
-body{
-    background-color: lightgray;
+
+.box-container {
+  
+ display: flex;
+
 }
-navbar-collapse{
-    align-items: center;
-    justify-content: space-between;
+
+.box-res {
+ flex: 1;
+ max-width: 25%;
+ max-width: 100%;
+ text-align: center;
 }
+
+.box-prop {
+  flex: 3;
+    max-width: 75%;
+    max-width: 25%; /* Añade esta línea */
+    margin: 5%; /* Añade esta línea */
+    align-content: center;
+
+    border-radius: 25px;
+        text-align: center
+}
+
 .box {
 
+  text-align: center;
+  display: flex; 
+  margin: 20px; /* Espacio entre los divs */
+ 
+}
+
+.card-header{
+   color: #343a40;
+    color: #f3969a;
+
+
+}
+#submitButton {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold; 
+    width: 50%;
     text-align: center;
-    display: flex;
-    margin: 20px; /* Espacio entre los divs */
-
+    margin: 2% auto;
+    display: block;
+  color: #343a40;
+    color: #f3969a;
+    
 }
-.box-res{
+.card-header{
+    background-color: #343a40;
+   font-family:cursive;
 
-    width: 70cm;
-    height: 100cm;
-    align-content: left;
-    position: relative;
-    left: 350px;
-
-    .card-header{
-        background-color:#343a40;
-        color: #f3969a;
-    }
-    .btn-primary{
-        background-color:#343a40;
-        color: #f3969a;
-    }
-    .boxx{
-              border: 1px solid #343a40;
-          
-    }
-}
-
-
-.box-prop{
-
-    position: relative;
-    right: 60px;
-    width: 70cm;
-    height: 100cm;
 }
 
 
 
 
 
+.error-mess{
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+.error-mess1{
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+}
 
-
-
-
-
-
+.card-header {
+  background-color: white;
+}
+.card-body2{
+  background-color: white;
+}

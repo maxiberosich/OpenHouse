@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url(../img/reservaconfir.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.top-left-nav {
+    background-color: #f3969a;
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.top-left-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.top-left-nav ul li {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.top-left-nav ul li a {
+    text-decoration: none;
+    color: #343a40;
+    display: block;
+}
+
+.contenedor {
+    background-color: rgba(5, 5, 5, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 30px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #343a40;
+}
+
+.btn {
+    margin-top: 20px;
+}
+.espacio{
+    padding-top: 20%;
+}
