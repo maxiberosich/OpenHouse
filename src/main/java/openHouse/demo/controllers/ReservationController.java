@@ -111,7 +111,7 @@ public class ReservationController {
         clienteService.eliminarReserva(idCliente, idReserva);
         reservaServicio.eliminarReserva(idReserva);
         
-        return "redirect:/reserva/list/{idCliente}";
+        return "cancel.html";
     }
     
     

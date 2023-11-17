@@ -176,6 +176,7 @@ public class ClientService {
             for (Reservation reserva : reservasActivas) {
                 if (reserva.getId().equals(idReserva)) {
                     reservasActivas.remove(reserva);
+                    break;
                 }
             }
             cliente.setReservaActiva(reservasActivas);
