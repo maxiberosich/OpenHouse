@@ -6,20 +6,16 @@
 }
 
 .box-res {
- flex: 5;
- max-width: 80%;
- width: 100%;
- margin: 2%;
- align-content: center;
-  
- border-radius: 25px;
+ flex: 1;
+ max-width: 25%;
+ max-width: 100%;
  text-align: center;
 }
 
 .box-prop {
-  flex: 5;
-    max-width: 65%;
-    width: 25%; /* Añade esta línea */
+  flex: 3;
+    max-width: 75%;
+    max-width: 25%; /* Añade esta línea */
     margin: 5%; /* Añade esta línea */
     align-content: center;
 
@@ -75,4 +71,11 @@
     color: green;
     font-weight: bold;
     font-size: 15px;
+}
+
+.card-header {
+  background-color: white;
+}
+.card-body2{
+  background-color: white;
 }
