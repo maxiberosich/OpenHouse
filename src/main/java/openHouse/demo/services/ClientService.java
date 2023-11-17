@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import openHouse.demo.entities.Client;
 import openHouse.demo.entities.Image;
+import openHouse.demo.entities.Reservation;
 import openHouse.demo.enums.Rol;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
@@ -166,5 +167,21 @@ public class ClientService {
         InputStream inputStream = resource.getInputStream();
         return inputStream.readAllBytes();
     }
-
+    
+    public void eliminarReserva(String idCliente,String idReserva){
+        Optional<Client> clienteRes = clientRepo.findById(idCliente);
+        if (clienteRes.isPresent()) {
+            Client cliente = clienteRes.get();
+            List<Reservation> reservasActivas = cliente.getReservaActiva();
+            for (Reservation reserva : reservasActivas) {
+                if (reserva.getId().equals(idReserva)) {
+                    reservasActivas.remove(reserva);
+                    break;
+                }
+            }
+            cliente.setReservaActiva(reservasActivas);
+            clientRepo.save(cliente);
+        }
+        
+    }
 }

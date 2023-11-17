@@ -12,18 +12,18 @@ navbar-collapse{
 .boxx{
 
     text-align: center;
-    display: block;
-    margin: 20px;
+    display: flex;
+    margin: 70px; /* Espacio entre los divs */
     align-content: center;
 }
 .form-container{
-    
+
     padding: 20px;
     margin-left: 20%;
     margin-right: 20%;
-    border: 1px solid #000;
+    border: 1px solid #f3969a;
     border-radius: 8px;
-    background-color: #343a40;
+    background-color: transparent;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .form-group {
@@ -36,9 +36,9 @@ navbar-collapse{
 .form-group input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #f3969a;
     border-radius: 4px;
-
+    background-color: rgba(0,0,0,0.125);
 }
 .form-group input[type="submit"] {
     background-color: #000000;
@@ -46,16 +46,34 @@ navbar-collapse{
     cursor: pointer;
     box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.36);
     margin-top: 10px;
+    background-color: rgba(0,0,0,0.125);
+    border: 1px solid #f3969a;
 }
 .form-check{
-    
+
 }
 .form-check input{
-       width: 100%;
+    width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #f3969a;
     border-radius: 4px;
+    background-color: rgba(0,0,0,0.125);
+
 }
 #registrar{
     color: #f3969a;
+}
+form-control textarea{
+    background-color: rgba(0,0,0,0.125);
+    border: 1px solid #f3969a;
+
+}
+#descripcion{
+    background-color: rgba(0,0,0,0.125);
+    border: 1px solid #f3969a;
+
+}
+#boton{
+    background-color: black;
+    border: 1px solid #f3969a;
 }

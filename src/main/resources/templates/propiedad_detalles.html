@@ -7,6 +7,7 @@
         <link href="/propiedadestilo.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     </head>
     <body>
@@ -16,14 +17,16 @@
             <div class="carta-image">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
-
-                            <img width="100%" height="100%" th:each="imagen : ${propiedad.imagenes}" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
+                        <div class="swiper-slide" th:each="imagen, iterStat : ${imagenes}" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
+                            <!-- Falta logica de como ver la foto -->
+                            <img width="100%" height="100%" th:src="@{/image/propiedad/__${propiedad.id}__/__${iterStat.index}__}" alt="Imagen propiedad"/>                                
                         </div>
+                        <!-- Agrega más imágenes según sea necesario -->
                     </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div> 
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
 
             <div class="carta-content">
@@ -31,7 +34,7 @@
                 <p class="parrafo" th:text="${propiedad.descripcion}">Descripción de la carta.</p>
                 <p th:text="'Precio por noche: ' + ${propiedad.precioBase}">Precio: $100</p>
                 <p>Días disponibles: Lunes a Viernes</p>
-                <button type="button" class="boton-estilizado" sec:authorize="hasRole('ROLE_CLIENTE')"><a class="boton-estilizado"  th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
+                <button type="button" class="boton-estilizado" th:if="${session.usersession != null}" sec:authorize="hasRole('ROLE_CLIENTE')"><a class="boton-estilizado"  th:href="@{/reserva/crear/__${propiedad.id}__}">Alquilar</a></button>
                 <button type="button" class="boton-estilizado" th:if="${session.usersession == null}" ><a class="boton-estilizado" th:href="@{/login}" >Alquilar</a></button>
             </div>
         </div>
@@ -57,7 +60,7 @@
         <br>
 
 
-        <div class="contenedor" sec:authorize="hasRole('ROLE_CLIENTE')">
+        <div class="contenedor" th:if="${session.usersession != null}" sec:authorize="hasRole('ROLE_CLIENTE')">
             <div class="contenedor-imagen">
                 <img class="img-tamaño" th:src="@{/image/perfil/__${usuario.id}__}" alt="ImagenUsuario">
 
@@ -65,42 +68,26 @@
             <div class="contenedor-comentario">
                 <div>
                     <h3 class="titulo" th:text="${usuario.name}"></h3>
-                    <form th:action="@{/comentario/registroCommentario/__${propiedad.id}__/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
+                    <form  th:action="@{/comentario/registroCommentario/__${propiedad.id}__/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
                         <textarea class="input-grande" type="text" placeholder="Ingrese su comentario" name="cuerpo"></textarea>
 
                         <h5>Calificacion</h5>
-                        <div class="star-group">
-                            <input type="checkbox" name="Calificacion" th:value="10" id="star1">
-                            <label for="star1" class="star-label">10</label>
+                        <div class="rating">
+                            <!-- Checkbox -->
+                            <input hidden type="checkbox" id="ratingCheckbox" name="Calificacion" value="1">
+                            <input hidden type="checkbox" id="ratingCheckbox2" name="Calificacion" value="2">
+                            <input hidden type="checkbox" id="ratingCheckbox3" name="Calificacion" value="3">
+                            <input hidden type="checkbox" id="ratingCheckbox4" name="Calificacion" value="4">
+                            <input hidden type="checkbox" id="ratingCheckbox5" name="Calificacion" value="5">
 
-                            <input type="checkbox" name="Calificacion" th:value="9" id="star2">
-                            <label for="star2" class="star-label">9</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="8" id="star3">
-                            <label for="star3" class="star-label">8</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="7" id="star4">
-                            <label for="star4"  class="star-label">7</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="6" id="star5">
-                            <label for="star5" class="star-label">6</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="5" id="star6">
-                            <label for="star6" class="star-label">5</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="4" id="star7">
-                            <label for="star7" class="star-label">4</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="3" id="star8">
-                            <label for="star8" class="star-label">3</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="2" id="star9">
-                            <label for="star9" class="star-label">2</label>
-
-                            <input type="checkbox" name="Calificacion" th:value="1" id="star10">
-                            <label for="star10" class="star-label">1</label>
+                    
+                            <!-- Estrellas -->
+                            <label for="ratingCheckbox" class="star" onclick="changeRating(1)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox2" class="star" onclick="changeRating(2)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox3" class="star" onclick="changeRating(3)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox4" class="star" onclick="changeRating(4)"><i class="bi bi-star-fill"></i></label>
+                            <label for="ratingCheckbox5" class="star" onclick="changeRating(5)"><i class="bi bi-star-fill"></i></label>
                         </div>
-                        <br>
 
                         <div class="contenedor-boton">
                             <label for="input-archivo" class="boton-estilizado">Seleccionar Archivo</label>
@@ -121,26 +108,31 @@
                 <div class="carta-content">
                     <h2 th:text="${comentario.cliente.name}"></h2>
                     <h5 th:text="${comentario.cuerpo}"></h5>
+                    <div><h5 th:text="'Valoracion: ' + ${comentario.valoracion}+ '&#9733;'"></h5></div>
                 </div>
                 <div class="carta-image">
                     <div >
                         <div >
-                            <div ><img th:src="@{/image/comentario/__${comentario.id}__}" alt="Imagen 1"></div> 
+                            <div ><img class="img-comentario" th:src="@{/image/comentario/__${comentario.id}__}" alt="Imagen Comentario"></div> 
                         </div>
+
                     </div>
                 </div>
+                    
+                
 
             </div>
 
         </div>
         <section th:replace="/fragments/footer :: section"></section>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"
         ></script>
-        <script src="img.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="/star.js"></script>
+        <script src="/img.js"></script>
     </body>
 </html>
 

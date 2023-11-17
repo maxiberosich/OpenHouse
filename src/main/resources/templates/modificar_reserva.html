@@ -45,9 +45,9 @@
                             <div class="card-body">
                                 <form th:action="@{/reserva/modificoReserva/__${reserva.id}__/__${cliente.id}__}" method="POST">
 
-                                    <input hidden th:value="${reserva.propiedad.Id}" name="propertyId">
+                                    <input hidden th:value="${reserva.propiedad.id}" name="propertyId">
                                     <input hidden th:value="${reserva.id}" name="idReserva">
-
+                                    <input hidden th:value="${fechas}" id="fechas">
 
                                     <label for="adultos">Total de Personas</label>
                                     <select id="adultos" 
@@ -78,8 +78,11 @@
                                         <option value="20">+20</option>
                                     </select>
                                     <br><br>
-
                                     
+                                    <label>
+                                        <input type="checkbox" name="eventoPrivado" id="eventoPrivado">
+                                        Utilizaré la propiedad para un evento privado.
+                                    </label>
 
                             </div>
                             <form id="reservaForm">
@@ -95,20 +98,12 @@
                                 <br>
 
                                 <input hidden th:value="${reserva.propiedad.precioBase}" id="precioBase">  
-                                 <div id="precioFinal"></div>
-
-
-
-
-
-
-
-
-
-
-
+                                <div id="precioFinal"></div>
+                                
+                                <p id="message"></p>
+                                
                                 <br>
-                                <button type="submit" class="btn btn-primary">Modificar Reserva</button>
+                                <button type="submit" class="btn btn-primary" id="submitButton">Modificar Reserva</button>
                             </form>
                         </div>
                     </div>
@@ -152,7 +147,7 @@
                                         </tr>
                                     </table>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <small class="text-body-secondary">Puntuacion</small>
+                                        <small class="text-body-secondary">Puntuación</small>
                                     </div>
                                 </div>
                             </div>

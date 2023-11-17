@@ -57,7 +57,7 @@ public class ReservationController {
             
             modelo.put("exito", "Reservacion agendada correctamente");
              System.out.println(cantPersonas);
-            return "redirect:/";
+            return "confirm.html";
         } catch (MiException ex) {
             
             modelo.put("error", ex.getMessage());
@@ -81,6 +81,7 @@ public class ReservationController {
     public String modificarReserva(@PathVariable String idReserva,@PathVariable String idCliente, ModelMap modelo){
         Reservation reserva= reservaServicio.getOne(idReserva);
         Client cliente = clienteService.getOne(idCliente);
+        modelo.addAttribute("fechas", reservaServicio.obtenerFechasGuardadas(reserva.getPropiedad().getId()));
         modelo.put("reserva", reserva);
         modelo.put("cliente", cliente);
         return "modificar_reserva.html";
@@ -103,6 +104,14 @@ public class ReservationController {
             return "modificar_reserva.html";
         }
         
+    }
+    
+    @GetMapping("eliminarReserva/{idReserva}/{idCliente}")
+    public String eliminarReserva(@PathVariable String idReserva, @PathVariable String idCliente){
+        clienteService.eliminarReserva(idCliente, idReserva);
+        reservaServicio.eliminarReserva(idReserva);
+        
+        return "cancel.html";
     }
     
     

@@ -3,18 +3,21 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col" th:each="propiedad : ${propertys}">
                 <div class="card shadow-sm">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
-                                <!-- Falta logica de como ver la foto -->
-                                <img width="100%" height="100%" th:src="@{/image/propiedad/__${propiedad.id}__}" alt="Imagen propiedad"/>                                
-                            </div>
-
-                            <!-- Agrega más imágenes según sea necesario -->
-                        </div>
-                        <div class="swiper-pagination"></div> <!-- Opcional: agregar paginación -->
-                    </div>
                     <a th:href="@{/propiedad/detalles/__${propiedad.id}__}" class="no-subrayado">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" th:each="imagen, iterStat : ${propiedad.imagenes}" th:if="${propiedad.imagenes != null and not #lists.isEmpty(propiedad.imagenes)}" >
+                                    <!-- Falta logica de como ver la foto -->
+                                    <img width="100%" height="100%" th:src="@{/image/propiedad/__${propiedad.id}__/__${iterStat.index}__}" alt="Imagen propiedad"/>                                
+                                </div>
+
+                                <!-- Agrega más imágenes según sea necesario -->
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div> 
+                        </div>
+
                         <div class="card-body">
                             <div class="content">
                                 <table class="table">
@@ -38,12 +41,12 @@
                                     <small class="text-puntuacion" th:text="'Puntuacion: ' + ${propiedad.valoracion} + '&#9733;'"></small>
 
                                 </div  > 
-<!--                                <div th:if="${session.usersession != null}" class="d-flex justify-content-between align-items-center">
-                                    <button><a th:href="@{/reserva/crear/__${propiedad.id}__}"> Reservar</a></button>
-                                </div>-->
+                                <!--                                <div th:if="${session.usersession != null}" class="d-flex justify-content-between align-items-center">
+                                                                    <button><a th:href="@{/reserva/crear/__${propiedad.id}__}"> Reservar</a></button>
+                                                                </div>-->
                             </div>
                         </div>
-                </a>
+                    </a>
                 </div>
             </div>
         </div>

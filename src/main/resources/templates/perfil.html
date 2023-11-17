@@ -4,6 +4,7 @@
         <title>Perfil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" th:href="@{/css/perfil.css}">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <div th:replace="/fragments/head :: head" ></div>
 </head>
 
@@ -95,6 +96,7 @@
         </div>
     </div>
 
+
     <div class="cartas">
         <div  th:replace='/fragments/Carta :: div'></div>
     </div>
@@ -106,6 +108,7 @@
     <div class="container">
         <footer th:replace="/fragments/footer :: footer" > </footer>
     </div>
+
 
 
     <script
@@ -120,5 +123,7 @@
                         alert('Darse de baja');
                     }
     </script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/img.js"></script>
 </body>
 </html>

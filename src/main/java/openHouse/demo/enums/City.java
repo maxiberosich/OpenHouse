@@ -1,12 +1,13 @@
 package openHouse.demo.enums;
 
 public enum City {
-    MENDOZA("mendoza"),
-    CORDOBA("cordoba"),
-    NEUQUEN("neuquen"),
-    BUENOS_AIRES("buenos aires"),
-    SANTA_FE("santa fe"),
-    SAN_JUAN("san juan");
+    SELECCIONAR("Seleccionar"),
+    MENDOZA("Mendoza"),
+    CORDOBA("Córdoba"),
+    NEUQUEN("Neuquén"),
+    BUENOS_AIRES("Buenos Aires"),
+    SANTA_FE("Santa Fe"),
+    SAN_JUAN("San Juan");
     
     
     private final String label;

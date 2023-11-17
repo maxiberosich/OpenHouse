@@ -1,14 +1,11 @@
 
 package openHouse.demo.services;
 
-import jakarta.persistence.GeneratedValue;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 import openHouse.demo.entities.Client;
@@ -18,7 +15,6 @@ import openHouse.demo.exceptions.MiException;
 import openHouse.demo.repositories.ClientRepository;
 import openHouse.demo.repositories.PropertyRepository;
 import openHouse.demo.repositories.ReservationRepository;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -127,6 +123,7 @@ public class ReservationService {
         if (respuesta.isPresent()) {
             Reservation reserva = respuesta.get();
             reserva.setAlta(Boolean.FALSE);
+            reservationRepository.save(reserva);
         }
     }
     
@@ -204,5 +201,26 @@ public class ReservationService {
        return reservationRepository.getOne(id);     
     }
     
+    public void darDeBajaReserva(String idReserva){
+        Optional<Reservation> respuesta = reservationRepository.findById(idReserva);
+        
+        if (respuesta.isPresent()) {
+            Reservation reserva= respuesta.get();
+            reserva.setAlta(false);
+            reservationRepository.save(reserva);
+        }
+    }
     
+    public List<Reservation> listaReservasActivas(String idPropietario){
+        List<Reservation> listaReservas=reservationRepository.listaReservasActivas(idPropietario);
+        List<Reservation> listaActiva=new ArrayList<>();
+        
+        
+        for (Reservation reserva : listaReservas) {
+            if (reserva.isAlta()) {
+                listaActiva.add(reserva);
+            }
+        }
+        return listaActiva;
+    }
 }

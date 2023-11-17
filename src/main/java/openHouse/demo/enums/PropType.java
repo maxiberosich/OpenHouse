@@ -1,11 +1,12 @@
 package openHouse.demo.enums;
 
 public enum PropType {
-    CASA("casa"),
-    QUINTA("quinta"), 
-    QUINCHO("quincho"),
-    DEPT("departamento");
-    
+    SELECCIONAR("Seleccionar"),
+    CASA("Casa"),
+    QUINTA("Quinta"),
+    QUINCHO("Quincho"),
+    DEPT("Departamento");
+
     private final String label;
 
     PropType(String label) {
@@ -15,6 +16,5 @@ public enum PropType {
     public String getLabel() {
         return label;
     }
-    
-    
+
 }

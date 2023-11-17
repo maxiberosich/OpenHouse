@@ -8,32 +8,28 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Id del/la reserva</th>
+                        <!-- comment<th scope="col">Id del/la reserva</th> -->
                         <th scope="col">fecha inicio</th>
                         <th scope="col">fecha fin </th>
                         <th scope="col">precio final</th>
                         <th scope="col">cant personas</th>
                         <th scope="col">ubicacion</th>
-                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
-                        <th scope="col" sec:authorize="hasRole('CLIENTE')">Modificar</th>
-                        <th scope="col" sec:authorize="hasRole('CLIENTE')">Cancelar Reserva</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" sec:authorize="hasRole('PROPIETARIO')">CANCELAR RESERVA</th>
                     </tr>
                 </thead>
                 
-                <tbody th:each="reservas : ${reserva}">
+                <tbody th:each="reservas : ${reservaLista}">
                     <tr>
-                        <td th:text="${reservas.id}"></td>
+                        <!-- comment <td th:text="${reservas.id}"></td>-->
                         <td th:text="${reservas.fechaInicio}"></td>
                         <td th:text="${reservas.fechaFin}"></td>
                         <td th:text="${reservas.precioFinal}"></td>
                         <td th:text="${reservas.cantPersonas}"></td>
                         <td th:text="${reservas.propiedad.direccion}"></td>
-                        
+                        <td th:text="${reservas.alta}"></td>
                         <td>
-                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/modificarReserva/__${reservas.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
-                        </td>
-                        <td>
-                            <a sec:authorize="hasRole('CLIENTE')" th:href="@{/reserva/eliminarReserva/__${reservas.id}__/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Cancelar</a>
+                            <a sec:authorize="hasRole('PROPIETARIO')" th:href="@{/propietario/listDeReservas/__${reservas.id}__}"><i class="fas fa-feather-alt"></i>CANCELAR</a>
                         </td>
                     </tr>
                 </tbody> 
@@ -65,3 +61,4 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
+

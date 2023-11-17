@@ -3,17 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/fragments/confirm.css" rel="stylesheet" />
-        <link href="/css/confirm.css" rel="stylesheet" />
+        <link href="/css/cancel.css" rel="stylesheet" />
+        
         <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css" />
-        <title>Reserva Confirmada!!!-Open-House</title>
+        <title>Reserva Cancelada!!!-Open-House</title>
     </head>
     <body>
         <div class="espacio"> </div>
 
         <div class="contenedor">
-            <h1>Reserva Confirmada!!!</h1>
-            <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+            <h1>Reserva Cancelada!!!</h1>
+            <a th:href="@{/lista/__${session.usersession.id}__}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
         </div>
     </body>
 
