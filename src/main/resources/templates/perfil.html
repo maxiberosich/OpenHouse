@@ -3,70 +3,65 @@
     <head>
         <title>Perfil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <div th:replace="/fragments/head :: head" ></div>
-        <link rel="stylesheet " href="/cartastyle.css">
-        <link rel="stylesheet " href="/propiedadestilo.css">
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    
+    <div th:replace="/fragments/head :: head" ></div>
+    <link rel="stylesheet " href="/cartastyle.css">
+    <link rel="stylesheet " href="/propiedadestilo.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
 </head>
 
 <body>
-        <nav th:replace="/fragments/navbar :: nav"></nav>
+    <nav th:replace="/fragments/navbar :: nav"></nav>
 
-        <div class="carta">
-            <div class="carta-image">
+    <div class="carta">
+        <div class="carta-image">
             <div class="imagen-contenedor" th:if="${session.usersession != null and session.usersession.image != null}">
                 <img class="foto" th:src="@{/image/perfil/__${session.usersession.id}__}" alt="Imagen Usuario">
-    </div>
+            </div>
         </div>
 
         <div class="carta-content ">
             <h2 class="titulo" th:text="'Hola ' + ${usuario.name}">Título de la carta</h2>
             <div class="carta-content2">
                 <div class="carta-box">
-            <table class="centrado" >
-                <tbody>
+                    <table class="centrado" >
+                        <tbody>
 
-                    <tr >
-                        <th th:text="'Nombre: '+ ${usuario.name}" ></th>
+                            <tr >
+                                <th th:text="'Nombre: '+ ${usuario.name}" ></th>
 
-                    </tr>
+                            </tr>
 
-                    <tr >
-                        <th th:text="'Email: '+ ${usuario.email}" ></th>
+                            <tr >
+                                <th th:text="'Email: '+ ${usuario.email}" ></th>
 
-                    </tr>
+                            </tr>
 
-                    <tr >
-                        <th th:text="'Celular: '+ ${usuario.phone}" ></th>
+                            <tr >
+                                <th th:text="'Celular: '+ ${usuario.phone}" ></th>
 
-                    </tr>
+                            </tr>
 
-                    <tr >
-                        <th th:text="'DNI: '+ ${usuario.Dni}" ></th>
+                            <tr >
+                                <th th:text="'DNI: '+ ${usuario.Dni}" ></th>
 
-                    </tr>
+                            </tr>
 
-                    <tr >
-                        <th th:text="'Rol: '+ ${usuario.rol}" ></th>
+                            <tr >
+                                <th th:text="'Rol: '+ ${usuario.rol}" ></th>
 
-                    </tr>
-                    <tr sec:authorize="hasRole('ROLE_PROPIETARIO')" >
-                        <th th:if= "${usuario.rol == 'PROPIETARIO'}">
-                        <th th:text="'CBU: '+ ${usuario.cbu}" >
-                        </th>
-                        </th>
-                    </tr>
+                            </tr>
+                            <tr sec:authorize="hasRole('ROLE_PROPIETARIO')" >
+                                <th th:if= "${usuario.rol == 'PROPIETARIO'}">
+                                <th th:text="'CBU: '+ ${usuario.cbu}" >
+                                </th>
+                                </th>
+                            </tr>
 
-                <th:block th:if="${usuario.rol == 'PROPIETARIO'}">
-                    <tr>
-                        <th th:text="'CBU: '+ ${usuario.cbu}" ></th>
-                    </tr>
-                </th:block>
-                </tbody>
-            </table>   
-        </div>                        
-</div>
+                        </tbody>
+                    </table>   
+                </div>                        
+            </div>
             <div class="button-container">
                 <a th:href="@{/modificarPerfil}"><button class="button modify-button m-1 "  >Modificar</button></a>
                 <button class="button delete-button" th:href="@{/admin/modificarAltaCliente/{user.id}}" onclick="darseDeBaja()">Darse de baja</button>
@@ -78,9 +73,10 @@
         </div>
     </div>
 
-
-    <h4  class="titulo">Mis propiedades</h4>
+    <div class="carta-box" sec:authorize="hasRole('ROLE_PROPIETARIO')">
+        <h4  class="titulo">Mis propiedades</h4>
         <div  th:replace='/fragments/Carta :: div'></div>
+    </div>
 
     <div class="container">
         <footer th:replace="/fragments/footer :: footer" > </footer>
@@ -95,7 +91,7 @@
 
     <script>
                     function darseDeBaja() {
-                        alert('Darse de baja');
+                        alert('¿Está seguro de que quiere darse de baja?');
                     }
     </script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
