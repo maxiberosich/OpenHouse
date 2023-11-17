@@ -3,88 +3,70 @@
     <head>
         <title>Perfil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/css/perfil.css}">
+        <div th:replace="/fragments/head :: head" ></div>
+        <link rel="stylesheet " href="/cartastyle.css">
+        <link rel="stylesheet " href="/propiedadestilo.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <div th:replace="/fragments/head :: head" ></div>
+    
 </head>
 
 <body>
-
-    <style th:replace="/fragments/style_perfil :: style"></style>
         <nav th:replace="/fragments/navbar :: nav"></nav>
 
-    <br><br>
+        <div class="carta">
+            <div class="carta-image">
+            <div class="imagen-contenedor" th:if="${session.usersession != null and session.usersession.image != null}">
+                <img class="foto" th:src="@{/image/perfil/__${session.usersession.id}__}" alt="Imagen Usuario">
+    </div>
+        </div>
 
-    <div class="container">
-        
-        <div class="card">
-            <div style="background-color:#343a40!important; margin:2px;" class="card-header d-flex align-items-center justify-content-evenly bg-danger">
-                <h4 style=" color: #f3969a!important" class="fw-bold">Perfil</h4>
-            </div>
-                    <div class="saludo">
-                    <h1 id="saludo-h1">
-                        Hola »<span class="username"style="color:#f3969ab5;" th:text="${usuario.name}"></span>« 
-                    </h1>
-                </div>
+        <div class="carta-content ">
+            <h2 class="titulo" th:text="'Hola ' + ${usuario.name}">Título de la carta</h2>
+            <div class="carta-content2">
+                <div class="carta-box">
+            <table class="centrado" >
+                <tbody>
 
-       <div class="row">
-                <div class="col">
-                    <div  id="perfil" th:if="${session.usersession != null and session.usersession.image != null}">
-                        <img th:src="@{/image/perfil/__${session.usersession.id}__}">
-                    </div>
-                </div>
+                    <tr >
+                        <th th:text="'Nombre: '+ ${usuario.name}" ></th>
 
-           <br>
-                <div class="col-md-8">
-                    <div class="card-body" style="margin-left: -200px!important;">
+                    </tr>
 
-                        <table style="border-color: #343a40!important;border-style: double!important; width: 80% ;" id="table">
-                            <tbody>
+                    <tr >
+                        <th th:text="'Email: '+ ${usuario.email}" ></th>
 
-                                <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                    <th th:text="'Nombre: '+ ${usuario.name}" scope="row"></th>
+                    </tr>
 
-                                </tr>
+                    <tr >
+                        <th th:text="'Celular: '+ ${usuario.phone}" ></th>
 
-                                <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                    <th th:text="'Email: '+ ${usuario.email}" scope="row"></th>
+                    </tr>
 
-                                </tr>
+                    <tr >
+                        <th th:text="'DNI: '+ ${usuario.Dni}" ></th>
 
-                                <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                    <th th:text="'Celular: '+ ${usuario.phone}" scope="row"></th>
+                    </tr>
 
-                                </tr>
+                    <tr >
+                        <th th:text="'Rol: '+ ${usuario.rol}" ></th>
 
-                                <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                    <th th:text="'DNI: '+ ${usuario.Dni}" scope="row"></th>
+                    </tr>
+                    <tr sec:authorize="hasRole('ROLE_PROPIETARIO')" >
+                        <th th:if= "${usuario.rol == 'PROPIETARIO'}">
+                        <th th:text="'CBU: '+ ${usuario.cbu}" >
+                        </th>
+                        </th>
+                    </tr>
 
-                                </tr>
-
-                                <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                    <th th:text="'Rol: '+ ${usuario.rol}" scope="row"></th>
-
-                                </tr>
-                                <tr sec:authorize="hasRole('ROLE_PROPIETARIO')" class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                    <th th:if= "${usuario.rol == 'PROPIETARIO'}">
-                                    <th th:text="'CBU: '+ ${usuario.cbu}" scope="row">
-                                    </th>
-                                    </th>
-                                </tr>
-
-                            <th:block th:if="${usuario.rol == 'PROPIETARIO'}">
-                                <tr class="border-top-0 border-end-0 border-start-0 border-3 border-secondary">
-                                    <th th:text="'CBU: '+ ${usuario.cbu}" scope="row"></th>
-                                </tr>
-                            </th:block>
-                            </tbody>
-                        </table>                           
-                    </div>
-
-                </div>
-
-            </div>
-
+                <th:block th:if="${usuario.rol == 'PROPIETARIO'}">
+                    <tr>
+                        <th th:text="'CBU: '+ ${usuario.cbu}" ></th>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>   
+        </div>                        
+</div>
             <div class="button-container">
                 <a th:href="@{/modificarPerfil}"><button class="button modify-button m-1 "  >Modificar</button></a>
                 <button class="button delete-button" th:href="@{/admin/modificarAltaCliente/{user.id}}" onclick="darseDeBaja()">Darse de baja</button>
@@ -97,19 +79,12 @@
     </div>
 
 
-    <div class="cartas">
+    <h4  class="titulo">Mis propiedades</h4>
         <div  th:replace='/fragments/Carta :: div'></div>
-    </div>
-
-    <br><br>
-
-
 
     <div class="container">
         <footer th:replace="/fragments/footer :: footer" > </footer>
     </div>
-
-
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

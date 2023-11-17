@@ -42,7 +42,7 @@ public class PropertyController {
 
     @PostMapping("/registrarPropiedad/{id}")
     public String registroPropiedad(@PathVariable String id, @RequestParam Double precioBase, @RequestParam String codigoPostal, @RequestParam String direccion,
-            @RequestParam String descripcion, ModelMap modelo, MultipartFile archivo, @RequestParam String ciudad,
+            @RequestParam String descripcion, ModelMap modelo, MultipartFile[] archivo, @RequestParam String ciudad,
             @RequestParam String tipoPropiedad,
             @RequestParam Integer capMaxPersonas, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaAlta,
             @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaBaja,
