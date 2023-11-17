@@ -109,6 +109,7 @@
                     <h2 th:text="${comentario.cliente.name}"></h2>
                     <h5 th:text="${comentario.cuerpo}"></h5>
                     <div><h5 th:text="'Valoracion: ' + ${comentario.valoracion}+ '&#9733;'"></h5></div>
+                    <button th:if="${session.usersession != null}" sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/admin/eliminarComentario/__${comentario.id}__}"><i class="fas fa-feather-alt"></i>Eliminar</a></button>
                 </div>
                 <div class="carta-image">
                     <div >

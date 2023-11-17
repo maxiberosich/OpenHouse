@@ -7,6 +7,7 @@ import openHouse.demo.entities.Owner;
 import openHouse.demo.entities.Property;
 import openHouse.demo.exceptions.MiException;
 import openHouse.demo.services.ClientService;
+import openHouse.demo.services.CommentService;
 import openHouse.demo.services.OwnerService;
 import openHouse.demo.services.PropertyService;
 import openHouse.demo.services.UserService;
@@ -32,6 +33,9 @@ public class AdminController {
 
     @Autowired
     private PropertyService propertyService;
+    
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/dashboard")
     public String adminPanel(ModelMap modelo) {
@@ -118,12 +122,17 @@ public class AdminController {
         }
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN','CLIENTE')")
     @GetMapping("modificarAltaCliente/{id}")
     public String cambiarAltaCliente(@PathVariable String id){
+        Client cliente = clientService.getOne(id);
         clientService.bajaCliente(id);
+        if(cliente.getRol() == cliente.getRol().CLIENTE){
+            return "inicio.html";
+        }else{
+            return "redirect:/admin/clientes";
+        }
         
-        return "redirect:/admin/clientes";
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("modificarAltaPropietario/{id}")
@@ -139,6 +148,14 @@ public class AdminController {
         clientService.elimnarClient(id);
         
         return "redirect:/admin/clientes";
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("eliminarComentario/{id}")
+    public String eliminarComentario(@PathVariable String id){
+        commentService.elimnarComment(id);
+        
+        return "redirect:/";
     }
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
