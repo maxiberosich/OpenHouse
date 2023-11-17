@@ -270,19 +270,13 @@ public class PropertyService {
         if (respuesta.isPresent()) {
 
             Property propiedad = respuesta.get();
-            System.out.println("tiene lista de comentarios :" +(!propiedad.getComentarios().isEmpty()));
-            System.out.println("probando con null :" +propiedad.getComentarios());
-            System.out.println("probando con size: " + propiedad.getComentarios().size());
             List<Comment> comentarios2 = comentarioRepositorio.buscarPorIdPropiedad(idPropiedad);
-            System.out.println("tiene lista de comentarios LISTA COMENTARIOS DE RESERVA:" +(comentarios2.isEmpty()));
-            //System.out.println("probando con null :" +comentarios2.getComentarios());
-            System.out.println("probando con size LISTA COMENTARIOS DE RESERVA: " + comentarios2.size());
             if (comentarios2.size()!=0) {
                 List<Comment> comentarios = comentarioRepositorio.buscarPorIdPropiedad(idPropiedad);
                 for (Comment object : comentarios) {
                     valorFinal = valorFinal + object.getValoracion();
                 }
-                propiedad.setValoracion(valorFinal / comentarios.size());
+                propiedad.setValoracion(Math.ceil(valorFinal / comentarios.size()));
                 propertyRepository.save(propiedad);
             }
         }

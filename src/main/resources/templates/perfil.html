@@ -69,7 +69,7 @@
 </div>
             <div class="button-container">
                 <a th:href="@{/modificarPerfil}"><button class="button modify-button m-1 "  >Modificar</button></a>
-                <button class="button delete-button" onclick="darseDeBaja()">Darse de baja</button>
+                <button class="button delete-button" th:href="@{/admin/modificarAltaCliente/{user.id}}" onclick="darseDeBaja()">Darse de baja</button>
             </div>
 
             <div  id="card-footer bg-danger ">

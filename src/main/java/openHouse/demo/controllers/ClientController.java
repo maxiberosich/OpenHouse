@@ -40,15 +40,8 @@ public class ClientController {
             clienteService.createClient(name, password, password2, email, dni, phone, birthdate, archivo);
             model.put("exito", "Cliente registrado correctamente!");
             return "redirect:/login";
-        } catch (MiException ex) {
+        } catch (MiException | IOException ex) {
 
-            model.put("error", ex.getMessage());
-            model.put("name", name);
-            model.put("email", email);
-            model.put("dni", dni);
-            model.put("phone", phone);
-            return "registrar.html";
-        } catch (IOException ex) {
             model.put("error", ex.getMessage());
             model.put("name", name);
             model.put("email", email);

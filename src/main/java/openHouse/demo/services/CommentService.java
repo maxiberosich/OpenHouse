@@ -104,5 +104,14 @@ public class CommentService {
         comentarios = commentRepository.buscarPorIdPropiedad(idPropiedad);
         return comentarios;
     }
+    
+    public void elimnarComment(String id) {
+        Optional<Comment> respuesta = commentRepository.findById(id);
+
+        if (respuesta.isPresent()) {
+            Comment comment = respuesta.get();
+            commentRepository.delete(comment);
+        }
+    }
 
 }
