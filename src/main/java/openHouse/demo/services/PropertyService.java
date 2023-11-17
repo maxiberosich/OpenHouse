@@ -44,7 +44,7 @@ public class PropertyService {
 
     @Transactional
     public void crearProperty(Double precioBase,
-            String codigoPostal, String direccion, String descripcion, String idOwner, MultipartFile archivo,
+            String codigoPostal, String direccion, String descripcion, String idOwner, MultipartFile[] archivo,
             String ciudad, String tipoPropiedad, Integer capMaxPersonas, Date fechaAlta, Date fechaBaja,
             //de aca para abajo son atributos de prestaciones.
             Integer cantidadPers, Integer cantAuto, Integer cantCuarto, Integer cantBanio,
@@ -72,8 +72,13 @@ public class PropertyService {
 
             List<Image> listaImagen = new ArrayList();
             //Hago todo en uno, guardo la imagen y la cargo en la lista para despues enviarla con la imagen
-            listaImagen.add(imageService.save(archivo));
+            if(archivo != null && archivo.length>0){
+                for (MultipartFile file : archivo) {
+                    listaImagen.add(imageService.save(file));
 
+                }
+            }
+            
             propiedad.setImagenes(listaImagen);
 
             User usuario = respuesta.get();
